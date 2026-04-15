@@ -774,10 +774,13 @@ async function handleAPI(pathname, method, body, res, rawUrl, rawBuf) {
       const mode = parsed.searchParams.get("mode") || "vector";
       const role = parsed.searchParams.get("role") || "";
       const limit = parseInt(parsed.searchParams.get("limit") || "5");
+      const agentParam = parsed.searchParams.get("agent") || "";
+      const sourceParam = parsed.searchParams.get("source") || "";
       if (!q) return res.end(JSON.stringify({ hits: [] }));
       const script = path.join(__dirname, "search_native.js");
-      const agentArg = "";  // search all agents
-      const out = execSync(`/usr/local/bin/node "${script}" ${JSON.stringify(q)} --mode ${mode} ${agentArg} --limit ${limit} --json`, { encoding: "utf8", timeout: 30000 });
+      const agentArg  = agentParam  ? `--agent ${JSON.stringify(agentParam)}`   : "";
+      const sourceArg = sourceParam ? `--source ${JSON.stringify(sourceParam)}` : "";
+      const out = execSync(`/usr/local/bin/node "${script}" ${JSON.stringify(q)} --mode ${mode} ${agentArg} ${sourceArg} --limit ${limit} --json`, { encoding: "utf8", timeout: 30000 });
       return res.end(out.trim());
     } catch (e) { return res.end(JSON.stringify({ hits: [], error: e.message })); }
   }
@@ -1193,6 +1196,7 @@ const requestHandler = async (req, res) => {
       }
     } catch {}
     res.setHeader("Content-Type", "text/html; charset=utf-8");
+    res.setHeader("Cache-Control", "no-store");
     return res.end(fs.readFileSync(path.join(__dirname, "index.html")));
   }
 

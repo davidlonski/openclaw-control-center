@@ -23,12 +23,13 @@ const EMBED_MODEL = "snowflake-arctic-embed2";
 
 // ── Args ──────────────────────────────────────────────────────────────────────
 const args  = process.argv.slice(2);
-let query   = null, limit = 5, agentFilter = null, mode = "vector", doStats = false, doJson = false;
+let query   = null, limit = 5, agentFilter = null, sourceFilter = null, mode = "vector", doStats = false, doJson = false;
 for (let i = 0; i < args.length; i++) {
   if (args[i] === "--limit"  || args[i] === "-n") { limit = parseInt(args[++i]); }
   else if (args[i] === "--agent"  || args[i] === "-a") { agentFilter = args[++i]; }
+  else if (args[i] === "--source" || args[i] === "-s") { sourceFilter = args[++i]; }
   else if (args[i] === "--mode"   || args[i] === "-m") { mode = args[++i]; }
-  else if (args[i] === "--stats"  || args[i] === "-s") { doStats = true; }
+  else if (args[i] === "--stats") { doStats = true; }
   else if (args[i] === "--json"   || args[i] === "-j") { doJson = true; }
   else if (!args[i].startsWith("-"))  { query = args[i]; }
 }
@@ -46,6 +47,8 @@ function openDb(agent) {
   try {
     const db = new DatabaseSync(dbPath, { allowExtension: true });
     sqliteVec.load(db);
+    // Verify chunks table exists — skip corrupt/empty DBs
+    db.prepare("SELECT 1 FROM chunks LIMIT 1").all();
     return db;
   } catch { return null; }
 }
@@ -112,11 +115,12 @@ async function vectorSearch(query) {
     const db = openDb(agent);
     if (!db) continue;
     try {
+      const sourceClause = sourceFilter ? `AND c.source = '${sourceFilter.replace(/'/g, "''")}'` : "";
       const rows = db.prepare(`
         SELECT c.id, c.path, c.source, c.text, c.updated_at, v.distance
         FROM chunks_vec v
         JOIN chunks c ON c.id = v.id
-        WHERE v.embedding MATCH ? AND k = ?
+        WHERE v.embedding MATCH ? AND k = ? ${sourceClause}
         ORDER BY v.distance
       `).all(vecBuf, limit);
       for (const r of rows) {
@@ -139,9 +143,10 @@ function keywordSearch(query) {
     const db = openDb(agent);
     if (!db) continue;
     try {
+      const sourceClause = sourceFilter ? `AND source = '${sourceFilter.replace(/'/g, "''")}'` : "";
       const rows = db.prepare(`
         SELECT id, path, source, text, updated_at
-        FROM chunks WHERE text LIKE ? ORDER BY updated_at DESC LIMIT ?
+        FROM chunks WHERE text LIKE ? ${sourceClause} ORDER BY updated_at DESC LIMIT ?
       `).all(`%${query}%`, limit);
       for (const r of rows) {
         hits.push({ agent, text: r.text, path: r.path, source: r.source, ts: r.updated_at, score: null });

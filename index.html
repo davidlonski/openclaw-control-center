@@ -32,7 +32,8 @@ nav::-webkit-scrollbar{display:none}
 .tab.active{color:var(--accent);border-color:var(--accent)}
 
 main{padding:12px;max-width:1400px;width:100%;margin:0 auto}
-.page{display:none}.page.active{display:block}
+.page{display:none;opacity:0;transform:translateY(4px);transition:opacity 0.12s ease,transform 0.12s ease}
+.page.active{display:block;opacity:1;transform:translateY(0)}
 
 /* ── Grid ── */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
@@ -489,6 +490,14 @@ body.compact .tab{padding:10px 10px;font-size:11px}
           <option value="vector">🧠 Vector</option>
           <option value="keyword">🔤 Keyword</option>
         </select>
+        <select id="mem-agent" style="min-width:140px">
+          <option value="">All agents</option>
+        </select>
+        <select id="mem-source" style="min-width:140px">
+          <option value="">All sources</option>
+          <option value="sessions">💬 Chat only</option>
+          <option value="memory">📝 Memory files</option>
+        </select>
         <select id="mem-role">
           <option value="">All roles</option>
           <option value="user">🧑 You</option>
@@ -634,7 +643,7 @@ let allWorkspaces = [];
 let rawLogs = "";
 let refreshTimer = setInterval(loadAll, 30000);
 let fastSessionTimer = setInterval(() => {
-  if (document.getElementById('b-agents').classList.contains('active')) {
+  if (document.getElementById('page-agents')?.classList.contains('active')) {
     loadSessionsFast();
   }
 }, 3000);
@@ -649,8 +658,20 @@ async function refreshModelLists() {
 }
 
 // ── Fetch helpers ─────────────────────────────────────────────────────────────
-async function api(path){ const r=await fetch(path); return r.json(); }
-async function apiPost(path,body={}){ const r=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}); return r.json(); }
+// ── API Cache ────────────────────────────────────────────────────────────────
+const _apiCache = {};
+const _CACHE_TTL = { default: 15000, '/api/agents': 10000, '/api/health': 8000, '/api/cron': 20000, '/api/cost': 30000, '/api/memory/stats': 20000, '/api/ollama/status': 20000, '/api/sessions': 5000 };
+function _cacheTTL(path){ return _CACHE_TTL[path] ?? _CACHE_TTL.default; }
+async function api(path, { force=false }={}){
+  const now = Date.now();
+  if(!force && _apiCache[path] && now - _apiCache[path].ts < _cacheTTL(path)) return _apiCache[path].data;
+  const r = await fetch(path);
+  const data = await r.json();
+  _apiCache[path] = { ts: now, data };
+  return data;
+}
+function apiInvalidate(path){ delete _apiCache[path]; }
+async function apiPost(path,body={}){ apiInvalidate(path); const r=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}); return r.json(); }
 
 // ── Formatters ────────────────────────────────────────────────────────────────
 function fmtCost(v){ return v!=null?'$'+v.toFixed(4):'–'; }
@@ -674,22 +695,28 @@ const AGENT_COLOR = {general:'var(--blue)',coder:'var(--green)',power:'var(--acc
 function agentBadge(id){ return`<span class="badge badge-muted">${getEmoji(id)} ${id}</span>`; }
 
 // ── Pages ─────────────────────────────────────────────────────────────────────
+const _pageVisited = {};
 function showPage(id, el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   el.classList.add('active');
-  if(id==='agents') { refreshModelLists().then(loadAgents); loadSessions(); }
-  if(id==='business') { loadBlockers(); }
-  if(id==='system') { loadLogs(); loadHealthcheck(); }
-  if(id==='gateway') loadGatewayTab();
-  if(id==='ollama') loadOllamaTab();
+  const firstVisit = !_pageVisited[id];
+  _pageVisited[id] = true;
+  // Always refresh agents + sessions (live data)
+  if(id==='agents') { refreshModelLists().then(()=>loadAgents()); loadSessions(); }
+  // Only load on first visit or after 20s since last load
+  const now = Date.now();
+  if(id==='business' && (firstVisit || now-(_pageVisited._biz||0)>20000)){ _pageVisited._biz=now; loadBlockers(); }
+  if(id==='system' && (firstVisit || now-(_pageVisited._sys||0)>15000)){ _pageVisited._sys=now; loadLogs(); loadHealthcheck(); }
+  if(id==='gateway' && (firstVisit || now-(_pageVisited._gw||0)>15000)){ _pageVisited._gw=now; loadGatewayTab(); }
+  if(id==='ollama' && (firstVisit || now-(_pageVisited._oll||0)>20000)){ _pageVisited._oll=now; loadOllamaTab(); }
   if(id==='ops') loadActivityFeed();
-  if(id==='cron') loadCronList();
-  if(id==='memory') loadMemoryStats();
-  if(id==='voice') { loadVoicePipelineStatus(); loadVoiceNotes(); }
-  if(id==='comms') { populateRelaySelects(); loadCommsLog(); }
-  if(id==='cost') loadCostTab();
+  if(id==='cron' && (firstVisit || now-(_pageVisited._cron||0)>15000)){ _pageVisited._cron=now; loadCronList(); }
+  if(id==='memory'){ _pageVisited._mem=now; loadMemoryStats(); }
+  if(id==='voice') { loadVoicePipelineStatus(); if(firstVisit) loadVoiceNotes(); }
+  if(id==='comms'){ populateRelaySelects(); loadCommsLog(); }
+  if(id==='cost' && (firstVisit || now-(_pageVisited._cost||0)>30000)){ _pageVisited._cost=now; loadCostTab(); }
 }
 
 // ── Toast ─────────────────────────────────────────────────────────────────────
@@ -1155,19 +1182,20 @@ async function loadSessions(){
     totCostToday += (v.costToday||0);
   }
   
-  if (totCostToday > 20) {
-    document.getElementById('cost-alert-card').style.display = 'block';
-    document.getElementById('cost-alert-text').textContent = `You have spent $${totCostToday.toFixed(2)} today. Your limit is $20.00.`;
-    const pct = Math.min(100, Math.round((totCostToday / 20) * 100));
-    document.getElementById('cost-alert-fill').style.width = `${pct}%`;
-    document.getElementById('cost-alert-fill').style.background = pct >= 100 ? 'var(--red)' : 'var(--yellow)';
-    const pw = document.getElementById('gw-dot');
-    if(pw && !pw.classList.contains('off')) {
-        pw.style.boxShadow = '0 0 6px var(--yellow)';
-        pw.style.background = 'var(--yellow)';
+  const alertCard = document.getElementById('cost-alert-card');
+  if (alertCard) {
+    if (totCostToday > 20) {
+      alertCard.style.display = 'block';
+      const alertText = document.getElementById('cost-alert-text');
+      if (alertText) alertText.textContent = `You have spent $${totCostToday.toFixed(2)} today. Your limit is $20.00.`;
+      const pct = Math.min(100, Math.round((totCostToday / 20) * 100));
+      const alertFill = document.getElementById('cost-alert-fill');
+      if (alertFill) { alertFill.style.width = `${pct}%`; alertFill.style.background = pct >= 100 ? 'var(--red)' : 'var(--yellow)'; }
+      const pw = document.getElementById('gw-dot');
+      if(pw && !pw.classList.contains('off')) { pw.style.boxShadow = '0 0 6px var(--yellow)'; pw.style.background = 'var(--yellow)'; }
+    } else {
+      alertCard.style.display = 'none';
     }
-  } else {
-    document.getElementById('cost-alert-card').style.display = 'none';
   }
 }
 
@@ -1718,6 +1746,14 @@ function updatePipelineDesc(){
 document.addEventListener('DOMContentLoaded',()=>{
   const sel = document.getElementById('pipeline-select');
   if(sel) sel.addEventListener('change', updatePipelineDesc);
+  // Pre-populate memory agent dropdown immediately on load
+  api('/api/memory/stats').then(r => {
+    const agentSel = document.getElementById('mem-agent');
+    if (agentSel && r.agents?.length) {
+      agentSel.innerHTML = '<option value="">All agents</option>' +
+        r.agents.map(a => `<option value="${a.agent}">${a.agent} (${a.chunks})</option>`).join('');
+    }
+  }).catch(() => {});
 });
 
 async function runPipeline(){
@@ -1880,18 +1916,29 @@ async function loadMemoryStats() {
   document.getElementById('mem-embedded').textContent = r.embedded ?? '–';
   document.getElementById('mem-sessions').textContent = r.sessions ?? '–';
   document.getElementById('mem-newest').textContent   = r.newest   || '–';
+  // Populate agent dropdown from stats
+  const sel = document.getElementById('mem-agent');
+  if (sel && r.agents?.length) {
+    const current = sel.value;
+    sel.innerHTML = '<option value="">All agents</option>' +
+      r.agents.map(a => `<option value="${a.agent}"${a.agent===current?' selected':''}>${a.agent} (${a.chunks})</option>`).join('');
+  }
 }
 
 async function memSearch() {
   const q     = document.getElementById('mem-q').value.trim();
-  if (!q) return;
+  if (!q) { document.getElementById('mem-results').innerHTML = '<div class="empty muted">Type a query above to search your chat history</div>'; return; }
   const mode  = document.getElementById('mem-mode').value;
   const role  = document.getElementById('mem-role').value;
   const limit = document.getElementById('mem-limit').value;
-  const el    = document.getElementById('mem-results');
+  const agent  = document.getElementById('mem-agent').value;
+  const source = document.getElementById('mem-source').value;
+  const el     = document.getElementById('mem-results');
   el.innerHTML = '<div class="empty"><span class="spin"></span> Searching…</div>';
 
-  const r = await api(`/api/memory/search?q=${encodeURIComponent(q)}&mode=${mode}&role=${role}&limit=${limit}`);
+  const agentParam  = agent  ? `&agent=${encodeURIComponent(agent)}`   : '';
+  const sourceParam = source ? `&source=${encodeURIComponent(source)}` : '';
+  const r = await api(`/api/memory/search?q=${encodeURIComponent(q)}&mode=${mode}&role=${role}&limit=${limit}${agentParam}${sourceParam}`);
   const hits = r.hits || [];
   if (!hits.length) { el.innerHTML = '<div class="empty">No results found</div>'; return; }
 

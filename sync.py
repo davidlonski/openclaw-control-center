@@ -67,9 +67,14 @@ def collect_new_rows():
         list(AGENTS_DIR.glob("*/sessions/*.jsonl.reset.*"))
     )
 
+    # Agents to skip (renamed/archived)
+    SKIP_AGENTS = {"main"}
+
     by_agent = {}
     for p in jsonl_files:
         agent = p.parent.parent.name
+        if agent in SKIP_AGENTS:
+            continue
         by_agent.setdefault(agent, []).append(p)
 
     all_new = {}  # agent -> list of (cid, path_key, text, ts_ms)
