@@ -1,84 +1,114 @@
-# 🦞 OpenClaw Dashboard
+# 🦞 OpenClaw Control Center
 
-Local control center for OpenClaw with audio → transcription → LLM → Notion pipeline.
+A self-hosted dashboard for your OpenClaw multi-agent system. Agents tab, memory search, cost tracking, cron, Ollama management, voice notes, gateway controls, and more.
 
-## Quick Start
+> Full docs: [DASHBOARD_DOCS.md](./DASHBOARD_DOCS.md)
+
+---
+
+## Prerequisites
+
+- [OpenClaw](https://github.com/openclaw/openclaw) installed and gateway running
+- Node.js v22+
+- `ffmpeg` (optional, for voice notes): `brew install ffmpeg`
+
+---
+
+## Quick Install
 
 ```bash
+# 1. Clone into your OpenClaw workspace
+git clone https://github.com/davidlonski/openclaw-control-center.git \
+  ~/.openclaw/workspace-general/openclaw-dashboard
+
+# 2. Install dependencies
+cd ~/.openclaw/workspace-general/openclaw-dashboard
 npm install
-npm start
+
+# 3. Start the server
+node server.js
 # → http://127.0.0.1:7891
 ```
 
-## Audio Pipeline Setup
+The dashboard reads your existing `~/.openclaw/openclaw.json` automatically — no extra config needed to get started.
 
-### 1. Prerequisites
+---
 
-- **ffmpeg** (required): `brew install ffmpeg`
-- **Node.js 18+** (with built-in fetch)
+## Authentication
 
-### 2. API Keys
-
-Create a `.env` file (or export environment variables):
+On first visit, you'll be prompted for a token. The dashboard uses your **gateway auth token** from `openclaw.json` by default, or you can set a separate `DASHBOARD_TOKEN` environment variable.
 
 ```bash
-# Required for transcription
-export OPENAI_API_KEY="sk-your-key"
-
-# Optional: Notion integration
-export NOTION_API_KEY="secret_your-token"
-export NOTION_DATABASE_ID="your-database-id"
+# Optional: set a custom dashboard token
+export DASHBOARD_TOKEN="your-token-here"
+node server.js
 ```
 
-### 3. Notion Setup (Optional)
+---
 
-1. Create a [Notion Integration](https://www.notion.so/my-integrations)
-2. Share your target database with the integration
-3. Copy the database ID from the URL: `notion.so/{workspace}/{DATABASE_ID}?v=...`
-4. Add the integration token and database ID to your env
+## Run as a background service (LaunchAgent on macOS)
+
+```bash
+# Create the LaunchAgent plist
+cat > ~/Library/LaunchAgents/ai.openclaw.dashboard.plist << 'EOF'
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>ai.openclaw.dashboard</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/local/bin/node</string>
+        <string>/Users/YOUR_USERNAME/.openclaw/workspace-general/openclaw-dashboard/server.js</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/tmp/dashboard.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/dashboard.log</string>
+    <key>WorkingDirectory</key>
+    <string>/Users/YOUR_USERNAME/.openclaw/workspace-general/openclaw-dashboard</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin</string>
+        <key>HOME</key>
+        <string>/Users/YOUR_USERNAME</string>
+    </dict>
+</dict>
+</plist>
+EOF
+
+# Replace YOUR_USERNAME, then load it
+launchctl load ~/Library/LaunchAgents/ai.openclaw.dashboard.plist
+```
+
+---
+
+## Optional Integrations
+
+| Feature | Env Var | Notes |
+|---------|---------|-------|
+| Voice transcription | `OPENAI_API_KEY` | Whisper API |
+| Notion voice notes | `NOTION_API_KEY` + `NOTION_DATABASE_ID` | Push transcripts to Notion |
+| Memory search | Ollama running at `:11434` | `snowflake-arctic-embed2` model |
+
+---
 
 ## Features
 
-### Voice Notes Tab 🎙️
-
-- **Record**: Click to start/stop browser-based audio recording
-- **Transcribe**: Automatic transcription via OpenAI Whisper API
-- **Structure**: LLM rewrites transcript into structured notes (title, bullets, summary, tags)
-- **Save**: Raw + clean transcripts saved to `data/transcripts/`
-- **Notion**: Auto-push structured notes to Notion database
-
-### API Endpoints
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/record` | POST | Upload audio blob (body: raw audio) |
-| `/api/process` | POST | Full pipeline: transcribe → rewrite → save → notion |
-| `/api/transcripts` | GET | List all saved transcripts |
-| `/api/transcript/:name` | GET | Get specific transcript content |
-| `/api/audio-config` | GET | Check pipeline configuration status |
-
-## File Structure
-
-```
-openclaw-dashboard/
-├── server.js          # Backend with audio pipeline routes
-├── index.html         # Dashboard UI
-├── data/
-│   └── transcripts/   # Saved transcripts
-│       ├── transcript_*_raw.txt    # Raw whisper output
-│       └── transcript_*_clean.json # Structured notes
-├── .env.example       # Configuration template
-└── README.md
-```
-
-## Running with env vars
-
-```bash
-OPENAI_API_KEY=sk-... NOTION_API_KEY=secret_... NOTION_DATABASE_ID=abc123 node server.js
-```
-
-Or use a process manager like pm2:
-
-```bash
-pm2 start server.js --name openclaw-dashboard
-```
+- **Agents** — live status, cost, model + workspace switcher, Discord channel routing
+- **Memory Search** — semantic + keyword search across all agent chat history, filter by agent or source
+- **Cost** — daily spend chart, per-agent breakdown
+- **Cron** — scheduled jobs, run now, enable/disable
+- **System** — healthcheck with history log
+- **Gateway** — status, config, log tail, restart/stop
+- **Ollama** — model list, pull with progress, delete
+- **Voice Notes** — record, transcribe, save to Notion
+- **Agent Comms** — send relay messages between agents, view message log
+- **Ops** — live activity feed across all agents
+- **Business** — Anti-Agent HQ integration (optional)
