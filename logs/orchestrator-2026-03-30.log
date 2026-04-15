@@ -1,0 +1,301 @@
+[2026-03-30 21:42:24] [INFO ] OpenClaw Orchestrator starting…
+[2026-03-30 21:42:24] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-03-30 21:42:24] [INFO ] Orchestrator running ✓ {"fileWatcher":"active","discordWatcher":"active","api":"http://127.0.0.1:7892"}
+[2026-03-30 21:42:24] [INFO ] Orchestrator API listening on http://127.0.0.1:7892
+[2026-03-30 21:42:24] [INFO ] Discord gateway connected
+[2026-03-30 21:42:25] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-03-30 21:43:17] [EVENT] Discord channel created {"id":"test-999","name":"coder-test","guildId":"1488172933338894368"}
+[2026-03-30 21:43:17] [INFO ] Config backup created {"bak":"/Users/Fredrick/.openclaw/openclaw.json.bak-1774906997473"}
+[2026-03-30 21:43:17] [INFO ] Config written {"path":"/Users/Fredrick/.openclaw/openclaw.json"}
+[2026-03-30 21:43:18] [INFO ] Gateway reload triggered
+[2026-03-30 21:43:18] [INFO ] Channel auto-bound {"channelId":"test-999","channelName":"coder-test","agentId":"coder"}
+[2026-03-30 21:43:19] [EVENT] File changed {"file":"openclaw.json"}
+[2026-03-30 21:43:19] [EVENT] Config file changed {"file":"/Users/Fredrick/.openclaw/openclaw.json"}
+[2026-03-30 21:43:20] [INFO ] Gateway reload triggered
+[2026-03-30 21:43:20] [INFO ] Config change handled ✓
+[2026-03-30 21:51:53] [INFO ] Received SIGTERM — shutting down
+[2026-03-30 21:51:54] [INFO ] OpenClaw Orchestrator starting…
+[2026-03-30 21:51:54] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-03-30 21:51:55] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-03-30 21:51:55] [INFO ] Orchestrator running ✓ {"fileWatcher":"active","discordWatcher":"active","api":"http://127.0.0.1:7892"}
+[2026-03-30 21:51:55] [INFO ] Orchestrator API listening on http://127.0.0.1:7892
+[2026-03-30 21:51:55] [INFO ] Discord gateway connected
+[2026-03-30 21:51:55] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-03-30 21:52:26] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 21:52:56] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 21:53:11] [INFO ] Received SIGTERM — shutting down
+[2026-03-30 21:53:12] [INFO ] OpenClaw Orchestrator starting…
+[2026-03-30 21:53:12] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-03-30 21:53:13] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-03-30 21:53:13] [INFO ] Orchestrator running ✓ {"fileWatcher":"active","discordWatcher":"active","api":"http://127.0.0.1:7892"}
+[2026-03-30 21:53:13] [INFO ] Orchestrator API listening on http://127.0.0.1:7892
+[2026-03-30 21:53:13] [INFO ] Discord gateway connected
+[2026-03-30 21:53:13] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-03-30 21:53:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 21:54:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 21:54:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 21:55:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 21:55:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 21:56:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 21:56:42] [EVENT] File changed {"file":"openclaw.json"}
+[2026-03-30 21:56:42] [EVENT] Config file changed {"file":"/Users/Fredrick/.openclaw/openclaw.json"}
+[2026-03-30 21:56:43] [INFO ] Gateway reload triggered
+[2026-03-30 21:56:43] [INFO ] Config change handled ✓
+[2026-03-30 21:56:44] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-03-30 21:56:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 21:57:14] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-03-30 21:57:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 21:57:39] [EVENT] File changed {"file":"openclaw.json"}
+[2026-03-30 21:57:40] [EVENT] File changed {"file":"openclaw.json"}
+[2026-03-30 21:57:40] [EVENT] Config file changed {"file":"/Users/Fredrick/.openclaw/openclaw.json"}
+[2026-03-30 21:57:41] [INFO ] Gateway reload triggered
+[2026-03-30 21:57:41] [INFO ] Config change handled ✓
+[2026-03-30 21:57:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 21:58:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 21:58:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 21:59:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 21:59:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 22:00:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 22:00:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 22:01:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 22:01:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 22:02:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 22:02:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 22:03:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 22:03:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 22:04:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 22:04:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 22:05:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 22:05:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 22:06:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 22:06:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 22:07:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 22:07:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 22:08:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"5 active sessions, 0 tok/min","activeSessions":5,"tokenRate":0}
+[2026-03-30 22:08:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1569 tok/min","activeSessions":7,"tokenRate":1569}
+[2026-03-30 22:09:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1570 tok/min","activeSessions":7,"tokenRate":1570}
+[2026-03-30 22:09:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1570 tok/min","activeSessions":7,"tokenRate":1570}
+[2026-03-30 22:10:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1570 tok/min","activeSessions":7,"tokenRate":1570}
+[2026-03-30 22:10:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1569 tok/min","activeSessions":7,"tokenRate":1569}
+[2026-03-30 22:11:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1570 tok/min","activeSessions":7,"tokenRate":1570}
+[2026-03-30 22:11:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1570 tok/min","activeSessions":7,"tokenRate":1570}
+[2026-03-30 22:12:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1570 tok/min","activeSessions":7,"tokenRate":1570}
+[2026-03-30 22:12:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1569 tok/min","activeSessions":7,"tokenRate":1569}
+[2026-03-30 22:13:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1569 tok/min","activeSessions":7,"tokenRate":1569}
+[2026-03-30 22:13:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1570 tok/min","activeSessions":7,"tokenRate":1570}
+[2026-03-30 22:14:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1570 tok/min","activeSessions":7,"tokenRate":1570}
+[2026-03-30 22:14:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1570 tok/min","activeSessions":7,"tokenRate":1570}
+[2026-03-30 22:15:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1569 tok/min","activeSessions":7,"tokenRate":1569}
+[2026-03-30 22:15:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1569 tok/min","activeSessions":7,"tokenRate":1569}
+[2026-03-30 22:16:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1570 tok/min","activeSessions":7,"tokenRate":1570}
+[2026-03-30 22:16:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1569 tok/min","activeSessions":7,"tokenRate":1569}
+[2026-03-30 22:17:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1569 tok/min","activeSessions":7,"tokenRate":1569}
+[2026-03-30 22:17:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 1570 tok/min","activeSessions":7,"tokenRate":1570}
+[2026-03-30 22:18:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:18:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:19:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:19:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:20:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:20:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:21:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:21:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:22:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:22:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:23:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:23:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:24:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:24:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:25:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:25:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:26:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:26:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:27:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:27:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:28:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:28:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:29:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:29:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:30:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:30:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:31:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:31:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:32:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:32:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:33:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:33:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:34:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:34:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:35:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:35:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:36:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:36:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:37:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:37:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 27 tok/min","activeSessions":7,"tokenRate":27}
+[2026-03-30 22:38:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:38:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:39:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:39:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:40:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:40:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:41:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:41:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:42:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:42:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:43:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:43:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:44:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:44:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:45:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:45:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:46:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:46:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:47:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:47:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:48:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:48:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:49:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:49:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:50:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:50:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:51:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:51:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:52:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:52:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:53:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:53:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:54:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:54:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:55:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:55:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:56:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:56:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:57:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:57:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:58:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:58:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:59:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 22:59:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 23:00:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 23:00:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 23:01:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 23:01:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 23:02:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 23:02:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 23:03:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 23:03:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 23:04:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 23:04:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 23:05:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 23:05:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 23:06:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 23:06:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 23:07:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 23:07:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"7 active sessions, 0 tok/min","activeSessions":7,"tokenRate":0}
+[2026-03-30 23:08:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:08:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:09:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:09:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:10:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:10:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:11:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:11:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:12:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:12:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:13:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:13:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:14:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:14:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:15:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:15:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:16:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:16:44] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:17:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 785 tok/min","activeSessions":8,"tokenRate":785}
+[2026-03-30 23:17:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:18:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:18:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:19:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:19:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:20:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:20:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:21:14] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:21:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:22:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:22:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:23:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:23:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:24:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:24:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:25:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:25:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:26:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:26:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:27:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:27:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:28:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:28:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:29:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:29:21] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-03-30 23:29:26] [INFO ] Discord gateway reconnecting…
+[2026-03-30 23:29:27] [INFO ] Discord gateway connected
+[2026-03-30 23:29:28] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-03-30 23:29:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:30:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:30:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:31:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:31:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:32:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:32:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:33:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:33:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:34:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:34:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:35:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:35:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:36:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:36:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:37:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:37:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:38:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:38:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:39:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:39:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:40:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:40:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:41:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:41:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:42:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:42:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:43:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:43:46] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:44:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:44:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:45:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:45:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:46:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:46:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:47:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:47:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:48:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:48:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:49:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:49:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:50:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:50:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:51:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:51:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:52:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:52:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:53:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:53:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:54:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:54:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:55:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:55:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:56:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:56:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:57:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:57:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:58:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:58:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:59:15] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}
+[2026-03-30 23:59:45] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 0 tok/min","activeSessions":8,"tokenRate":0}

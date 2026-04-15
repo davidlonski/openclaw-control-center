@@ -1,0 +1,2658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<title>🦞 OpenClaw Control Center</title>
+<style>
+:root {
+  --bg:#0d0f14; --s1:#161921; --s2:#1e2230; --s3:#252b3b;
+  --border:#2a2f40; --text:#e2e8f0; --muted:#64748b; --muted2:#94a3b8;
+  --accent:#f97316; --green:#22c55e; --yellow:#eab308;
+  --red:#ef4444; --blue:#3b82f6; --purple:#a855f7; --cyan:#06b6d4;
+  --radius:10px; --font:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono','Fira Code',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;line-height:1.6;min-height:100vh}
+
+/* ── Layout ── */
+header{background:rgba(22,25,33,0.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.05);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700}
+.logo em{color:var(--accent);font-style:normal}
+.logo small{font-size:10px;color:var(--muted);font-weight:400;margin-left:4px}
+.header-right{display:flex;align-items:center;gap:10px}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 2s infinite;flex-shrink:0}
+.pulse.off{background:var(--red);box-shadow:0 0 6px var(--red);animation:none}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+nav{background:rgba(22,25,33,0.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.05);padding:0 8px;display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+.tab{padding:10px 12px;cursor:pointer;font-size:12px;color:var(--muted);border-bottom:2px solid transparent;transition:.15s;white-space:nowrap;flex-shrink:0;min-height:44px;display:flex;align-items:center}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--accent);border-color:var(--accent)}
+
+main{padding:12px;max-width:1400px;width:100%;margin:0 auto}
+.page{display:none}.page.active{display:block}
+
+/* ── Grid ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.g1{margin-bottom:12px}
+/* grids auto-reflow at any size */
+@media(max-width:900px){.g3{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.g4{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+/* ── Cards ── */
+.card{background:rgba(22,25,33,0.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.05);border-radius:var(--radius);overflow:hidden;transition:transform 0.2s, box-shadow 0.2s;box-shadow:0 4px 6px rgba(0,0,0,0.3);}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 16px rgba(0,0,0,0.5);}
+.card-head{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.02);}
+.card-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.card-body{padding:12px 14px}
+
+/* ── Stat ── */
+.stat-val{font-size:28px;font-weight:800;line-height:1;letter-spacing:-1px;background-clip:text;-webkit-background-clip:text;color:var(--text);}
+.stat-val.accent{background-image:linear-gradient(135deg,#f97316,#fb923c);-webkit-text-fill-color:transparent;}
+.stat-val.blue{background-image:linear-gradient(135deg,#3b82f6,#60a5fa);-webkit-text-fill-color:transparent;}
+.stat-val.green{background-image:linear-gradient(135deg,#22c55e,#4ade80);-webkit-text-fill-color:transparent;}
+.stat-val.purple{background-image:linear-gradient(135deg,#a855f7,#c084fc);-webkit-text-fill-color:transparent;}
+.stat-val.yellow{background-image:linear-gradient(135deg,#eab308,#fde047);-webkit-text-fill-color:transparent;}
+.stat-label{font-size:11px;color:var(--muted);margin-top:4px}
+.stat-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.green{color:var(--green)}.yellow{color:var(--yellow)}.red{color:var(--red)}.blue{color:var(--blue)}.accent{color:var(--accent)}.purple{color:var(--purple)}
+
+/* ── Badges ── */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:500}
+.badge-green{background:rgba(34,197,94,.15);color:var(--green)}
+.badge-yellow{background:rgba(234,179,8,.15);color:var(--yellow)}
+.badge-red{background:rgba(239,68,68,.15);color:var(--red)}
+.badge-blue{background:rgba(59,130,246,.15);color:var(--blue)}
+.badge-muted{background:var(--s2);color:var(--muted)}
+.badge-purple{background:rgba(168,85,247,.15);color:var(--purple)}
+.badge-accent{background:rgba(249,115,22,.15);color:var(--accent)}
+
+/* ── Table ── */
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--border)}
+td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.02)}
+
+/* ── Buttons ── */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border-radius:6px;cursor:pointer;font-size:12px;font-family:var(--font);border:1px solid var(--border);transition:.15s;min-height:36px}
+.btn-default{background:var(--s2);color:var(--text)}.btn-default:hover{background:var(--s3)}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}.btn-primary:hover{opacity:.85}
+.btn-danger{background:rgba(239,68,68,.15);color:var(--red);border-color:rgba(239,68,68,.3)}.btn-danger:hover{background:rgba(239,68,68,.25)}
+.btn-sm{padding:6px 10px;font-size:11px;min-height:30px}
+.btn:disabled{opacity:.4;pointer-events:none}
+
+/* ── Select ── */
+select{background:var(--s2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:7px 8px;font-size:13px;cursor:pointer;font-family:var(--font);min-height:36px}
+select:focus{outline:none;border-color:var(--accent)}
+
+/* ── Progress ── */
+.prog-wrap{display:flex;align-items:center;gap:8px}
+.prog-bar{flex:1;height:5px;background:var(--s2);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;border-radius:2px;transition:width .5s}
+.prog-label{font-size:11px;color:var(--muted);white-space:nowrap}
+
+/* ── Agent Cards ── */
+.agent-card{background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:10px;transition:.2s}
+.agent-card:hover{border-color:var(--accent);box-shadow:0 0 12px rgba(249,115,22,.1)}
+.agent-card.shared{border-color:rgba(168,85,247,.3)}
+.agent-top{display:flex;align-items:center;gap:10px}
+.agent-emoji{font-size:22px}
+.agent-name{font-weight:600;font-size:14px}
+.agent-id{font-size:11px;color:var(--muted)}
+.agent-model{font-size:11px;font-family:var(--mono);color:var(--cyan);padding:5px 8px;background:var(--bg);border-radius:6px;border:1px solid var(--border);word-break:break-all}
+.agent-actions{display:flex;gap:6px;flex-wrap:wrap}
+
+/* ── Toast ── */
+#toast{position:fixed;bottom:16px;right:12px;left:12px;background:var(--s3);border:1px solid var(--border);color:var(--text);padding:12px 16px;border-radius:8px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:999}
+#toast.show{opacity:1}
+#toast.ok{border-color:var(--green);color:var(--green)}
+#toast.err{border-color:var(--red);color:var(--red)}
+
+/* ── Spinner ── */
+.spin{display:inline-block;width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:sp .7s linear infinite;vertical-align:middle}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* ── Log viewer ── */
+.log-viewer{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px;font-family:var(--mono);font-size:11px;line-height:1.7;max-height:280px;overflow-y:auto;color:#94a3b8}
+.log-error{color:var(--red)}.log-warn{color:var(--yellow)}.log-info{color:var(--blue)}
+
+/* ── Misc ── */
+.mono{font-family:var(--mono);font-size:11px}
+.muted{color:var(--muted)}
+.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:160px}
+.section-title{font-size:12px;font-weight:600;color:var(--muted2);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.empty{text-align:center;color:var(--muted);padding:24px;font-size:13px}
+.workspace-tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;background:var(--s3);border:1px solid var(--border);padding:2px 8px;border-radius:4px;color:var(--muted2);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.workspace-tag.shared{background:rgba(168,85,247,.1);border-color:rgba(168,85,247,.3);color:var(--purple)}
+
+/* ── Responsive (auto) ── */
+/* ── Compact mode (manual toggle) ── */
+body.compact header{padding:8px 12px}
+body.compact .logo small{display:none}
+body.compact #lastRefresh{display:none}
+body.compact main{padding:8px}
+body.compact .g1{margin-bottom:8px}
+body.compact .g2,body.compact .g3,body.compact .g4{grid-template-columns:1fr!important;gap:8px;margin-bottom:8px}
+body.compact .card-body{padding:10px 12px}
+body.compact .card-head{padding:8px 12px}
+body.compact table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+body.compact .stat-val{font-size:22px}
+body.compact nav{padding:0 4px}
+body.compact .tab{padding:10px 10px;font-size:11px}
+/* ── Small viewport auto-compact ── */
+@media(max-width:600px){
+  header{padding:8px 12px}
+  .logo small{display:none}
+  #lastRefresh{display:none}
+  main{padding:8px}
+  .g1{margin-bottom:8px}
+  .card-body{padding:10px 12px}
+  .card-head{padding:8px 12px}
+  table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .stat-val{font-size:22px}
+  nav{padding:0 4px}
+  .tab{padding:10px 10px;font-size:11px}
+}
+/* ── File editor modal ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal-box{background:var(--s1);border:1px solid var(--border);border-radius:10px;width:100%;max-width:760px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border);font-weight:600;font-size:14px}
+.modal-body{flex:1;overflow:auto;padding:14px 18px;display:flex;flex-direction:column;gap:10px}
+.modal-footer{padding:12px 18px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end}
+.modal-file-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:4px}
+.modal-file-tab{padding:4px 10px;border-radius:5px;font-size:11px;cursor:pointer;background:var(--s2);border:1px solid var(--border);color:var(--muted)}
+.modal-file-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.modal-editor{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--fg);font-family:var(--mono);font-size:12px;padding:10px;resize:none;min-height:340px;width:100%;box-sizing:border-box}
+  #audit-tbody tr:hover { background: rgba(255,255,255,0.02); }
+  .score-pill { padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 10px; }
+  .score-good { background: rgba(34,197,94,0.15); color: #22c55e; }
+  .score-warn { background: rgba(234,179,8,0.15); color: #eab308; }
+  .score-critical { background: rgba(239,68,68,0.15); color: #ef4444; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><em>🦞</em> OpenClaw <small>Control Center</small></div>
+  <div class="header-right">
+    <span class="muted" id="lastRefresh" style="font-size:11px">–</span>
+    <div class="pulse" id="gw-dot" title="Gateway"></div>
+    <button class="btn btn-default btn-sm" id="layout-toggle-btn" onclick="toggleLayout()" ondblclick="resetLayout()" title="Click to toggle · Double-click to auto">🖥️ Desktop</button>
+    <button class="btn btn-default" onclick="loadAll()">↻</button>
+  </div>
+</header>
+
+<nav>
+  <div class="tab" onclick="showPage('agents',this)">🤖 Agents</div>
+  <div class="tab" onclick="showPage('business',this)">💼 Business</div>
+  <div class="tab" onclick="showPage('ops',this)">🔁 Ops</div>
+  <div class="tab" onclick="showPage('cron',this)">⏱️ Cron</div>
+  <div class="tab" onclick="showPage('system',this)">⚙️ System</div>
+  <div class="tab" onclick="showPage('gateway',this)">🌐 Gateway</div>
+  <div class="tab" onclick="showPage('ollama',this)">🦙 Ollama</div>
+  <div class="tab" onclick="showPage('memory',this)">🧠 Memory</div>
+  <div class="tab" onclick="showPage('voice',this)">🎙️ Voice Notes</div>
+  <div class="tab" onclick="showPage('comms',this)">🔗 Agent Comms</div>
+  <div class="tab" onclick="showPage('cost',this)">💰 Cost</div>
+</nav>
+
+<main>
+
+<!-- ══ AGENTS PAGE ══ -->
+<div class="page active" id="page-agents">
+  <div class="g2" id="statsRow">
+    <div class="card"><div class="card-body"><div class="stat-val accent" id="s-agents">–</div><div class="stat-label">Total Agents</div></div></div>
+    <div class="card"><div class="card-body"><div class="stat-val blue" id="s-sessions">–</div><div class="stat-label">Active Sessions</div></div></div>
+  </div>
+
+  <div class="card g1" style="border-color:rgba(249,115,22,.3)">
+    <div class="card-head" style="background:rgba(249,115,22,.06)">
+      <div class="card-title">📢 Broadcast to All Agents</div>
+      <span class="badge badge-accent">Live</span>
+    </div>
+    <div class="card-body">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Send a context update to every active agent session simultaneously.</div>
+      <div style="display:flex;gap:10px">
+        <input type="text" id="broadcast-msg" placeholder='e.g. "Update your context: we just finished the dashboard refactor."'
+          onkeydown="if(event.key==='Enter')broadcastToAll()"
+          style="flex:1;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:9px 14px;font-size:13px;font-family:var(--font);outline:none"/>
+        <button class="btn btn-primary" onclick="broadcastToAll()">📢 Broadcast</button>
+      </div>
+      <div id="broadcast-result" style="margin-top:10px;font-size:12px;color:var(--muted)"></div>
+    </div>
+  </div>
+
+  <div class="section-title">Cloud Agents (Anthropic)</div>
+  <div class="g3" id="cloud-agents"></div>
+
+  <div class="section-title">Local Agents (Ollama) <span class="badge badge-purple" style="margin-left:8px">Shared Workspace</span></div>
+  <div class="g3" id="local-agents"></div>
+
+
+</div>
+
+<!-- ══ BUSINESS PAGE ══ -->
+<div class="page" id="page-business">
+
+  <!-- 🚨 Action Center -->
+  <div class="card g1" style="border-color:rgba(239,68,68,0.3)">
+    <div class="card-head" style="background:rgba(239,68,68,0.05)">
+      <div>
+        <div class="card-title" style="color:var(--red)">🚨 Action Center</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">Tasks only you can resolve</div>
+      </div>
+      <button class="btn btn-sm btn-default" onclick="showAddBlocker()">+ Add</button>
+    </div>
+    <div class="card-body">
+      <div id="add-blocker-wrap" style="display:none;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border)">
+        <input id="new-blocker-title" type="text" placeholder="What needs attention?" style="width:100%;height:36px;background:var(--s2);border:1px solid var(--accent);border-radius:6px;color:var(--text);padding:0 12px;font-size:13px;margin-bottom:8px">
+        <div style="display:flex;justify-content:flex-end;gap:8px">
+          <button class="btn btn-sm btn-default" onclick="showAddBlocker(false)">Cancel</button>
+          <button class="btn btn-sm btn-accent" onclick="submitNewBlocker()">Save</button>
+        </div>
+      </div>
+      <div id="blocker-loading" style="padding:20px;text-align:center;color:var(--muted);font-size:12px">⌛ Syncing…</div>
+      <div id="blocker-list-pending"></div>
+      <div id="blocker-resolved-header" style="display:none;margin-top:16px;font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Resolved</div>
+      <div id="blocker-list-resolved"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ CRON PAGE ══ -->
+<div class="page" id="page-cron">
+  <div class="g1">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">⏱️ Scheduled Business Routines</div>
+        <button class="btn btn-sm btn-default" onclick="loadCronList()">↻ Refresh</button>
+      </div>
+      <div class="card-body" id="cron-list-container" style="padding:0">
+        <div class="empty"><span class="spin"></span> Loading cron jobs…</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SYSTEM PAGE ══ -->
+<div class="page" id="page-system">
+
+  <!-- Health -->
+  <div class="g2">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">🩺 System Health</div>
+        <button class="btn btn-sm btn-default" onclick="loadHealthcheck()">↻ Run Now</button>
+      </div>
+      <div class="card-body" id="hc-summary"><div class="empty"><span class="spin"></span> Running healthcheck…</div></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="card-title">📋 Check Details</div></div>
+      <div class="card-body" id="hc-details"><div class="empty muted">Select a check to see details</div></div>
+    </div>
+  </div>
+  <div class="card g1" style="margin-top:12px">
+    <div class="card-head">
+      <div class="card-title">📜 Health Log</div>
+      <button class="btn btn-sm btn-default" onclick="loadHCLog()">↻</button>
+    </div>
+    <div class="card-body">
+      <div class="log-viewer" id="hc-log" style="font-family:var(--font);font-size:13px;max-height:400px">–</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ GATEWAY PAGE ══ -->
+<div class="page" id="page-gateway">
+
+  <!-- Row 1: Status + Config -->
+  <div class="g2" style="margin-bottom:16px">
+
+    <!-- Service Status card -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">🟢 Service Status</div>
+        <button class="btn btn-sm btn-default" onclick="loadGatewayTab()">↻ Refresh</button>
+      </div>
+      <div class="card-body" id="gw-status-info"><div class="empty"><span class="spin"></span></div></div>
+    </div>
+
+    <!-- Config card -->
+    <div class="card">
+      <div class="card-head"><div class="card-title">🛠 Configuration</div></div>
+      <div class="card-body" id="gw-config-info"><div class="empty"><span class="spin"></span></div></div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-head"><div class="card-title">⚡ Controls</div></div>
+    <div class="card-body" style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-default" id="gw-ctrl-soft" onclick="gatewayCtrl('soft-restart','Soft reload (SIGUSR1)?')">&#x21BA; Soft Reload</button>
+      <button class="btn btn-danger" id="gw-ctrl-restart" onclick="gatewayCtrl('stop','Stop gateway?').then(()=>new Promise(r=>setTimeout(r,1500))).then(()=>gatewayCtrl('start',null))">&#x26A1; Hard Restart</button>
+      <button class="btn btn-muted" id="gw-ctrl-stop" onclick="gatewayCtrl('stop','Stop gateway? It will restart via KeepAlive.')">&#x23F9; Stop</button>
+      <button class="btn btn-muted" id="gw-ctrl-start" onclick="gatewayCtrl('start',null)">&#x25B6; Start</button>
+      <button class="btn btn-default" onclick="apiPost('/api/reload-config').then(r=>toast(r.message,'ok'))">&#x1F504; Reload Config</button>
+    </div>
+  </div>
+
+  <!-- Row 2: Log only (cost moved to dedicated tab) -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">📜 Gateway Log</div>
+      <button class="btn btn-sm btn-default" onclick="loadGwLog()">↻</button>
+    </div>
+    <div class="card-body" style="padding:0">
+      <div id="gw-log-viewer" class="log-viewer" style="max-height:380px;font-size:11px"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ COST PAGE ══ -->
+<div class="page" id="page-cost">
+
+  <!-- Today banner -->
+  <div class="g2" style="margin-bottom:16px">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">🗓 Today's Spend</div>
+        <button class="btn btn-sm btn-default" onclick="loadCostTab()">↻ Refresh</button>
+      </div>
+      <div class="card-body" id="cost-today-info"><div class="empty"><span class="spin"></span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="card-title">📊 All-Time Totals</div></div>
+      <div class="card-body" id="cost-totals-info"><div class="empty"><span class="spin"></span></div></div>
+    </div>
+  </div>
+
+  <!-- Cost chart -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-head" style="align-items:center">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="card-title" id="cost-chart-title">📈 Cumulative Cost</div>
+        <select id="cost-chart-mode" onchange="updateCostChartMode(this.value)" style="font-size:11px;padding:2px 4px;background:var(--s2);color:var(--text);border:1px solid var(--border);border-radius:4px;outline:none;cursor:pointer">
+          <option value="cumulative">Cumulative All-Time</option>
+          <option value="daily">Spend per Day</option>
+          <option value="weekly">Spend per Week</option>
+          <option value="monthly">Spend per Month</option>
+        </select>
+      </div>
+      <span class="muted" style="font-size:11px" id="cost-chart-range"></span>
+    </div>
+    <div class="card-body" style="padding:12px 16px">
+      <canvas id="cost-chart" style="width:100%;height:180px;display:block"></canvas>
+    </div>
+  </div>
+
+  <!-- Per-agent table -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">🤖 Cost by Agent</div>
+      <span class="muted" style="font-size:11px">sorted by all-time spend</span>
+    </div>
+    <div class="card-body" style="padding:0">
+      <div id="cost-agent-table"><div class="empty"><span class="spin"></span></div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ OLLAMA PAGE ══ -->
+<div class="page" id="page-ollama">
+  <!-- Pull new model -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-head">
+      <div class="card-title">📥 Pull New Model</div>
+      <div id="ollama-status-dot" style="width:8px;height:8px;border-radius:50%;background:var(--muted);margin-left:auto"></div>
+    </div>
+    <div class="card-body">
+      <div style="display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap">
+        <input id="ollama-pull-name" type="text" placeholder="e.g. llama3.2, gemma3:4b, mistral:latest"
+          style="flex:1;min-width:220px;height:38px;background:var(--s2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:0 12px;font-size:13px;font-family:var(--font-mono)"
+          onkeydown="if(event.key==='Enter') startOllamaPull()" />
+        <button class="btn btn-accent" id="ollama-pull-btn" onclick="startOllamaPull()" style="height:38px;padding:0 18px">⬇ Pull</button>
+      </div>
+      <!-- Progress area -->
+      <div id="ollama-pull-progress" style="display:none;margin-top:14px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+          <span class="muted" style="font-size:12px" id="ollama-pull-status-text">Starting…</span>
+          <span class="muted" style="font-size:12px" id="ollama-pull-pct"></span>
+        </div>
+        <div style="height:6px;background:var(--s2);border-radius:4px;overflow:hidden">
+          <div id="ollama-pull-bar" style="height:100%;background:var(--accent);border-radius:4px;width:0%;transition:width 0.3s"></div>
+        </div>
+        <div id="ollama-pull-log" style="margin-top:10px;font-size:11px;font-family:var(--font-mono);color:var(--muted);max-height:80px;overflow:auto"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Model library -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">🦙 Installed Models</div>
+      <button class="btn btn-sm btn-default" onclick="loadOllamaTab()">↻ Refresh</button>
+    </div>
+    <div class="card-body" style="padding:0">
+      <div id="ollama-model-list"><div class="empty"><span class="spin"></span> Loading models…</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ OPS PAGE (Live Activity Feed) ══ -->
+<div class="page" id="page-ops">
+
+  <!-- Controls bar -->
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+    <div style="font-size:13px;font-weight:600">📡 Live Activity Feed</div>
+    <select id="activity-filter" onchange="renderActivityFeed()" style="font-size:12px;min-width:140px">
+      <option value="">All agents</option>
+    </select>
+    <button class="btn btn-sm btn-default" onclick="loadActivityFeed()">↻ Refresh</button>
+    <button class="btn btn-sm btn-default" id="activity-pause-btn" onclick="toggleActivityPause()">⏸ Pause</button>
+    <span id="activity-last-refreshed" class="muted" style="font-size:11px;margin-left:auto"></span>
+  </div>
+
+  <!-- Feed -->
+  <div class="card" style="overflow:hidden">
+    <div id="activity-feed" style="max-height:calc(100vh - 220px);overflow-y:auto;font-size:12px">
+      <div class="empty"><span class="spin"></span> Loading activity…</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ MEMORY PAGE ══ -->
+<div class="page" id="page-memory">
+  <div class="g4" id="mem-stats-row">
+    <div class="card"><div class="card-body"><div class="stat-val accent" id="mem-total">–</div><div class="stat-label">Total Messages</div></div></div>
+    <div class="card"><div class="card-body"><div class="stat-val green" id="mem-embedded">–</div><div class="stat-label">Indexed</div></div></div>
+    <div class="card"><div class="card-body"><div class="stat-val blue" id="mem-sessions">–</div><div class="stat-label">Sessions</div></div></div>
+    <div class="card"><div class="card-body"><div class="stat-val purple" id="mem-newest">–</div><div class="stat-label">Latest Message</div></div></div>
+  </div>
+  <div class="card g1">
+    <div class="card-head"><div class="card-title">🔍 Search Chat History</div></div>
+    <div class="card-body">
+      <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+        <input type="text" id="mem-q" placeholder='Search… e.g. "fiverr pricing" or "RAG pipeline"'
+          onkeydown="if(event.key==='Enter')memSearch()"
+          style="flex:1;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:9px 14px;font-size:14px;font-family:var(--font);outline:none;min-width:200px"/>
+        <select id="mem-mode" style="min-width:130px">
+          <option value="vector">🧠 Vector</option>
+          <option value="keyword">🔤 Keyword</option>
+        </select>
+        <select id="mem-role">
+          <option value="">All roles</option>
+          <option value="user">🧑 You</option>
+          <option value="assistant">🤖 AI</option>
+        </select>
+        <select id="mem-limit">
+          <option value="5">5 results</option>
+          <option value="10">10 results</option>
+          <option value="20">20 results</option>
+        </select>
+        <button class="btn btn-primary" onclick="memSearch()">Search</button>
+      </div>
+      <div id="mem-results"><div class="empty muted">Type a query above to search your chat history</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ AGENT COMMS PAGE ══ -->
+<div class="page" id="page-comms">
+  <div class="g2">
+    <div class="card">
+      <div class="card-head" style="background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.3)">
+        <div class="card-title">📨 Send Agent-to-Agent Message</div>
+      </div>
+      <div class="card-body">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;gap:10px">
+            <div style="flex:1">
+              <div style="font-size:11px;color:var(--muted);margin-bottom:5px">From</div>
+              <select id="relay-from" style="width:100%">
+                <option value="dashboard">🖥️ dashboard (you)</option>
+              </select>
+            </div>
+            <div style="display:flex;align-items:flex-end;padding-bottom:2px;font-size:18px;color:var(--muted)">→</div>
+            <div style="flex:1">
+              <div style="font-size:11px;color:var(--muted);margin-bottom:5px">To</div>
+              <select id="relay-to" style="width:100%"></select>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--muted);margin-bottom:5px">Message</div>
+            <textarea id="relay-msg" rows="3" placeholder="Tell the agent something, give it context, assign a task…"
+              style="width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:10px;font-family:var(--font);font-size:13px;resize:vertical"></textarea>
+          </div>
+          <button class="btn btn-primary" onclick="sendRelay()">📨 Send</button>
+          <div id="relay-result" style="font-size:12px;color:var(--muted)"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">🤖 Agent Directory</div>
+      </div>
+      <div class="card-body" id="comms-agent-directory"><div class="empty"><span class="spin"></span></div></div>
+    </div>
+  </div>
+
+  <div class="card g1">
+    <div class="card-head">
+      <div class="card-title">📋 Message Log</div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-sm btn-default" onclick="loadCommsLog()">↻ Refresh</button>
+        <button class="btn btn-sm btn-danger" onclick="clearCommsLog()">🗑 Clear</button>
+      </div>
+    </div>
+    <div class="card-body" id="comms-log" style="padding:0">
+      <div class="empty muted" style="padding:32px">No messages yet</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ VOICE NOTES PAGE ══ -->
+<div class="page" id="page-voice">
+  <div class="g2" id="voice-config-row">
+    <div class="card">
+      <div class="card-head"><div class="card-title">🎙️ Record Voice Note</div></div>
+      <div class="card-body">
+        <div id="voice-status" style="font-size:13px;color:var(--muted);margin-bottom:14px">Click Record to start</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+          <button class="btn btn-primary" id="voice-record-btn" onclick="voiceToggleRecord()">⏺ Record</button>
+          <button class="btn btn-default" id="voice-transcribe-btn" onclick="voiceTranscribe()" disabled>✦ Transcribe</button>
+        </div>
+        <div style="margin-bottom:10px">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:5px">Note title (optional):</div>
+          <input type="text" id="voice-title" placeholder="Auto-generated if empty"
+            style="width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:8px 12px;font-size:13px;font-family:var(--font)"/>
+        </div>
+        <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;color:var(--muted2)">
+          <input type="checkbox" id="voice-notion" style="accent-color:var(--accent)"/>
+          Save to Notion
+        </label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="card-title">⚙️ Pipeline Status</div></div>
+      <div class="card-body" id="voice-pipeline-status"><div class="empty"><span class="spin"></span></div></div>
+    </div>
+  </div>
+  <div class="card g1" id="voice-result-card" style="display:none">
+    <div class="card-head">
+      <div class="card-title">📝 Transcript</div>
+      <button class="btn btn-sm btn-default" onclick="voiceCopy()">Copy</button>
+    </div>
+    <div class="card-body">
+      <div id="voice-transcript" style="font-size:14px;line-height:1.8;white-space:pre-wrap;color:#cbd5e1"></div>
+    </div>
+  </div>
+  <div class="card g1">
+    <div class="card-head">
+      <div class="card-title">📋 Saved Notes</div>
+      <button class="btn btn-sm btn-default" onclick="loadVoiceNotes()">↻</button>
+    </div>
+    <div class="card-body" id="voice-notes-list"><div class="empty muted">No notes yet</div></div>
+  </div>
+</div>
+
+</main>
+
+<div id="toast"></div>
+
+<script>
+// ── Global fetch interceptor: inject credentials + auto-redirect on 401 ─────────
+(function(){
+  const _fetch = window.fetch.bind(window);
+  window.fetch = function(input, init) {
+    const url = (typeof input === 'string') ? input : (input?.url || '');
+    const isSameOrigin = url.startsWith('/') || url.startsWith(window.location.origin);
+    if (isSameOrigin) {
+      init = init || {};
+      if (!init.credentials) init.credentials = 'same-origin';
+    }
+    return _fetch(input, init).then(r => {
+      if (r.status === 401 && isSameOrigin) { window.location.href = '/login'; }
+      return r;
+    });
+  };
+})();
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let allAgents = [];
+let allChannels = [];
+let allWorkspaces = [];
+let rawLogs = "";
+let refreshTimer = setInterval(loadAll, 30000);
+let fastSessionTimer = setInterval(() => {
+  if (document.getElementById('b-agents').classList.contains('active')) {
+    loadSessionsFast();
+  }
+}, 3000);
+
+// Model lists — sourced from openclaw.json config via /api/agents
+let ALL_MODELS = [];
+let OLLAMA_MODELS = [];
+let CLOUD_MODELS  = [];
+
+async function refreshModelLists() {
+  // no-op — models now loaded as part of loadAgents via availableModels
+}
+
+// ── Fetch helpers ─────────────────────────────────────────────────────────────
+async function api(path){ const r=await fetch(path); return r.json(); }
+async function apiPost(path,body={}){ const r=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}); return r.json(); }
+
+// ── Formatters ────────────────────────────────────────────────────────────────
+function fmtCost(v){ return v!=null?'$'+v.toFixed(4):'–'; }
+function fmtAge(ts){ if(!ts)return'–'; const d=Math.round((Date.now()-ts)/1000); if(d<60)return d+'s ago'; if(d<3600)return Math.round(d/60)+'m ago'; if(d<86400)return Math.round(d/3600)+'h ago'; return Math.round(d/86400)+'d ago'; }
+function statusBadge(s){
+  if(s==='running') return`<span class="badge badge-green">● running</span>`;
+  if(s==='timeout') return`<span class="badge badge-yellow">⏱ timeout</span>`;
+  if(s==='done')    return`<span class="badge badge-muted">✓ done</span>`;
+  if(s==='error')   return`<span class="badge badge-red">✗ error</span>`;
+  return`<span class="badge badge-muted">${s||'–'}</span>`;
+}
+function progressBar(val,ctx){
+  const pct=ctx?Math.min(100,Math.round(val/ctx*100)):0;
+  const c=pct>80?'var(--red)':pct>50?'var(--yellow)':'var(--blue)';
+  return`<div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${c}"></div></div><div class="prog-label">${(val/1000).toFixed(1)}k</div></div>`;
+}
+
+const AGENT_EMOJI = {}; // populated dynamically from agent IDENTITY.md via /api/agents
+function getEmoji(agentId){ return AGENT_EMOJI[agentId] || '🤖'; }
+const AGENT_COLOR = {general:'var(--blue)',coder:'var(--green)',power:'var(--accent)','local-general':'var(--purple)','local-coder':'var(--purple)','local-power':'var(--purple)'};
+function agentBadge(id){ return`<span class="badge badge-muted">${getEmoji(id)} ${id}</span>`; }
+
+// ── Pages ─────────────────────────────────────────────────────────────────────
+function showPage(id, el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  el.classList.add('active');
+  if(id==='agents') { refreshModelLists().then(loadAgents); loadSessions(); }
+  if(id==='business') { loadBlockers(); }
+  if(id==='system') { loadLogs(); loadHealthcheck(); }
+  if(id==='gateway') loadGatewayTab();
+  if(id==='ollama') loadOllamaTab();
+  if(id==='ops') loadActivityFeed();
+  if(id==='cron') loadCronList();
+  if(id==='memory') loadMemoryStats();
+  if(id==='voice') { loadVoicePipelineStatus(); loadVoiceNotes(); }
+  if(id==='comms') { populateRelaySelects(); loadCommsLog(); }
+  if(id==='cost') loadCostTab();
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+let toastTimer;
+function toast(msg, type=''){
+  const el=document.getElementById('toast');
+  el.textContent=msg; el.className='show '+(type==='ok'?'ok':type==='err'?'err':'');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.className='',3500);
+}
+
+// ── Load: Agents ──────────────────────────────────────────────────────────────
+// ── HQ Audit Integration ──────────────────────────────────────────────────────
+// ── Action Center: Human Blockers CRUD ─────────────────────────────────────────
+async function loadBlockers() {
+  const pendingContainer = document.getElementById('blocker-list-pending');
+  const resolvedContainer = document.getElementById('blocker-list-resolved');
+  if(!pendingContainer) return;
+  
+  try {
+    const r = await fetch('/api/hq/tasks?tag=human-blocker');
+    const d = await r.json();
+    if(!d.ok) throw new Error(d.error || 'Sync failed');
+    
+    const tasks = d.data.tasks || [];
+    pendingContainer.innerHTML = '';
+    resolvedContainer.innerHTML = '';
+    document.getElementById('blocker-loading').style.display = 'none';
+    
+    const pending = tasks.filter(t => t.status !== 'completed');
+    const resolved = tasks.filter(t => t.status === 'completed');
+    
+    document.getElementById('blocker-resolved-header').style.display = resolved.length ? 'block' : 'none';
+
+    pending.forEach(t => pendingContainer.appendChild(renderBlockerRow(t)));
+    resolved.forEach(t => resolvedContainer.appendChild(renderBlockerRow(t, true)));
+    
+    if(tasks.length === 0) {
+      pendingContainer.innerHTML = '<div style="font-size:12px; color:var(--muted); text-align:center; padding:10px">No active blockers. All clear! 🌿</div>';
+    }
+  } catch (e) {
+    document.getElementById('blocker-loading').innerHTML = `<div style="color:var(--critical)">⚠ HQ Blockers Offline</div>`;
+  }
+}
+
+function renderBlockerRow(t, isResolved = false) {
+  const row = document.createElement('div');
+  row.style.cssText = `font-size: 13px; color: ${isResolved ? 'var(--muted)' : 'var(--text)'}; padding: 8px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px ${isResolved ? 'dotted' : 'solid'} var(--border)`;
+  
+  const icon = isResolved ? '✅' : (t.priority === 'critical' || t.priority === 'high' ? '🔴' : '🟡');
+  
+  row.innerHTML = `
+    <div style="display:flex; align-items:center; gap:8px">
+      <span style="font-size:11px">${icon}</span>
+      <div style="${isResolved ? 'text-decoration:line-through' : ''}">
+        <b>${t.title}</b>
+        ${t.description ? `<div style="font-size:10px; color:var(--muted)">${t.description}</div>` : ''}
+      </div>
+    </div>
+    <div style="display:flex; gap:6px">
+      ${!isResolved ? `<button class="btn btn-sm btn-default" style="font-size:10px; padding:2px 6px" onclick="updateBlockerStatus('${t.id}', 'completed')">Resolve</button>` : `<button class="btn btn-sm btn-default" style="font-size:10px; padding:2px 6px; opacity:0.5" onclick="updateBlockerStatus('${t.id}', 'pending')">Reopen</button>`}
+      <button class="btn btn-sm btn-default" style="font-size:10px; padding:2px 6px; color:var(--critical); border-color:rgba(239,68,68,0.2)" onclick="deleteBlocker('${t.id}')">✕</button>
+    </div>
+  `;
+  return row;
+}
+
+function showAddBlocker(show = true) {
+  document.getElementById('add-blocker-wrap').style.display = show ? 'block' : 'none';
+  if(show) document.getElementById('new-blocker-title').focus();
+}
+
+async function submitNewBlocker() {
+  const input = document.getElementById('new-blocker-title');
+  const title = input.value.trim();
+  if(!title) return;
+  
+  try {
+    const r = await fetch('/api/hq/tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, tags: ['human-blocker'], priority: 'high' })
+    });
+    const d = await r.json();
+    if(d.ok) {
+      input.value = '';
+      showAddBlocker(false);
+      loadBlockers();
+      toast('Blocker added!', 'ok');
+    }
+  } catch (e) { toast('Failed to add blocker', 'err'); }
+}
+
+async function updateBlockerStatus(id, status) {
+  try {
+    const r = await fetch(`/api/hq/tasks/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status })
+    });
+    const d = await r.json();
+    if(d.ok) {
+      loadBlockers();
+      toast(status === 'completed' ? 'Blocker resolved!' : 'Blocker reopened', 'ok');
+    }
+  } catch (e) { toast('Failed to update status', 'err'); }
+}
+
+async function deleteBlocker(id) {
+  if(!confirm('Delete this blocker permanently?')) return;
+  try {
+    const r = await fetch(`/api/hq/tasks/${id}`, { method: 'DELETE' });
+    const d = await r.json();
+    if(d.ok) {
+      loadBlockers();
+      toast('Blocker deleted', 'ok');
+    }
+  } catch (e) { toast('Failed to delete blocker', 'err'); }
+}
+
+async function loadAuditStats() {
+  const loading = document.getElementById('audit-loading');
+  const stats = document.getElementById('audit-stats');
+  if(!loading || !stats) return;
+  loading.style.display = 'block'; stats.style.display = 'none';
+
+  try {
+    const r = await fetch('/api/hq/audit_summary');
+    const d = await r.json();
+    if (!d.ok) throw new Error(d.error || 'HQ unreachable');
+
+    const audit = d.audit;
+    document.getElementById('total-savings').textContent = `$${audit.summary.total_potential_savings_monthly.toFixed(2)}`;
+    
+    const tbody = document.getElementById('audit-tbody');
+    tbody.innerHTML = '';
+    for (const a of audit.recent_audits) {
+      const row = document.createElement('tr');
+      row.style.borderBottom = '1px solid var(--border)';
+      
+      const scoreClass = a.score >= 90 ? 'score-good' : a.score >= 70 ? 'score-warn' : 'score-critical';
+      const savingsColor = a.savings > 0 ? '#22c55e' : 'var(--muted)';
+
+      row.innerHTML = `
+        <td style="padding:12px 0">
+          <div style="font-weight:600">${a.agent_id}</div>
+          <div style="font-size:10px; color:var(--muted)">${a.model}</div>
+        </td>
+        <td style="padding:12px 0"><span class="score-pill ${scoreClass}">${a.score}</span></td>
+        <td style="padding:12px 0; text-align:right">
+          <div style="color:${savingsColor}; font-weight:700">$${a.savings.toFixed(2)}</div>
+          <div style="font-size:10px; color:var(--muted)">Est. monthly</div>
+        </td>
+      `;
+      tbody.appendChild(row);
+    }
+    loading.style.display = 'none'; stats.style.display = 'block';
+  } catch (e) {
+    loading.innerHTML = `<div style="color:var(--critical)">⚠ HQ Statistics Offline<br><span style="font-size:11px; color:var(--muted)">${e.message}</span></div>`;
+  }
+}
+
+async function refreshAudit() {
+  const btn = document.getElementById('audit-refresh-btn');
+  const oldText = btn.textContent;
+  btn.textContent = '⌛ Syncing...'; btn.disabled = true;
+  toast('Triggering system-wide model audit...');
+
+  try {
+    const r = await fetch('/api/hq/audit_run', { method: 'POST' });
+    const d = await r.json();
+    if (d.ok) {
+      toast('Audit complete!', 'ok');
+      loadAuditStats();
+    } else {
+      toast('Audit failed: ' + (d.error || d.result?.error || 'Unknown'), 'err');
+    }
+  } catch (e) {
+    toast('HQ unreachable', 'err');
+  } finally {
+    btn.textContent = oldText; btn.disabled = false;
+  }
+}
+
+async function loadAgents(){
+  const [r] = await Promise.all([api('/api/agents'), loadChannels()]);
+  allAgents     = r.agents        || [];
+  allWorkspaces = r.workspaces    || [];
+  // Populate emoji map from live agent data
+  for (const a of allAgents) AGENT_EMOJI[a.id] = a.emoji || '🤖';
+  ALL_MODELS    = r.availableModels || [];
+  OLLAMA_MODELS = ALL_MODELS.filter(m => m.startsWith('ollama/'));
+  CLOUD_MODELS  = ALL_MODELS.filter(m => !m.startsWith('ollama/'));
+  document.getElementById('s-agents').textContent = allAgents.length;
+
+  const cloud = allAgents.filter(a=>!a.id.startsWith('local'));
+  const local  = allAgents.filter(a=>a.id.startsWith('local'));
+
+  renderAgentGrid('cloud-agents', cloud, false);
+  renderAgentGrid('local-agents', local, true);
+}
+
+function renderAgentGrid(containerId, agents, isLocal){
+  const container = document.getElementById(containerId);
+  if(!agents.length){ container.innerHTML='<div class="empty">No agents</div>'; return; }
+
+  let html = '';
+  for(const a of agents){
+    const emoji = AGENT_EMOJI[a.id] || '🤖';
+    const isDefault = a.default;
+    const ws = a.workspace?.replace(/.*\.openclaw\//,'~/.openclaw/');
+    const wsShared = ws?.includes('workspace-local') && !ws?.endsWith(a.id);
+    const modelIsOllama = a.model.startsWith('ollama/');
+
+    const sess  = sessionsByAgent[a.id];
+    const usage = usageByAgent[a.id];
+    const sessStatusRaw = sess?.status || 'idle';
+    const isRunning = sessStatusRaw === 'running';
+    const displayStatus = isRunning ? 'Running' : 'Idle';
+    const statusColor = isRunning ? 'var(--green)' : 'var(--muted)';
+    const statusDot   = isRunning ? '🟢' : '⚫';
+    const lastSeen    = sess ? fmtAge(sess.updatedAt) : (usage?.lastTs ? fmtAge(usage.lastTs) : '–');
+    const lastChannel = sess?.lastChannel || sess?.channel || '–';
+    const allTimeCost = usage ? fmtCost(usage.cost) : '–';
+    const totalSess   = usage?.sessions || 0;
+
+    html += `<div class="agent-card${isLocal?' shared':''}">
+      <div class="agent-top">
+        <div class="agent-emoji">${emoji}</div>
+        <div style="flex:1">
+          <div class="agent-name">${a.name} ${isDefault?'<span class="badge badge-accent" style="font-size:10px">default</span>':''}</div>
+          <div class="agent-id">ID: ${a.id}</div>
+        </div>
+        <span style="font-size:11px;color:${statusColor};font-weight:600">${statusDot} ${displayStatus}</span>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px">
+        ${lastSeen !== '–' ? `<span class="badge badge-muted" style="font-size:10px">🕐 ${lastSeen}</span>` : ''}
+        ${lastChannel !== '–' ? `<span class="badge badge-muted" style="font-size:10px">📡 ${lastChannel}</span>` : ''}
+        ${allTimeCost !== '–' ? `<span class="badge badge-muted" style="font-size:10px">💰 ${allTimeCost} all-time</span>` : ''}
+        ${totalSess ? `<span class="badge badge-muted" style="font-size:10px">💬 ${totalSess} sessions</span>` : ''}
+      </div>
+      <div class="agent-model">${a.model}</div>
+      <div style="display:flex;gap:6px;margin-top:2px">
+        <button class="btn btn-muted" style="font-size:11px;padding:5px 10px;flex:1" onclick="openFileModal('${a.id}')">✏️ Edit Files</button>
+        <button class="btn btn-muted" style="font-size:11px;padding:5px 10px;flex:1" onclick="openPermissionsModal('${a.id}','${a.tools?.profile||'coding'}',${JSON.stringify(a.tools?.allow||[])},${JSON.stringify(a.tools?.deny||[])})">🔐 Permissions</button>
+      </div>
+      <div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:6px">Switch model:</div>
+        <select onchange="setModel('${a.id}',this.value)" style="width:100%">
+          <optgroup label="Cloud (Anthropic)">
+            ${CLOUD_MODELS.map(m=>`<option value="${m}"${a.model===m?' selected':''}>${m.replace('anthropic/','')}</option>`).join('')}
+          </optgroup>
+          <optgroup label="Local (Ollama)">
+            ${OLLAMA_MODELS.map(m=>`<option value="${m}"${a.model===m?' selected':''}>${m.replace('ollama/','')}</option>`).join('')}
+          </optgroup>
+        </select>
+      </div>
+      <div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:6px">Workspace:</div>
+        <select onchange="setWorkspace('${a.id}',this.value)" style="width:100%">
+          ${allWorkspaces.map(w => {
+            const label = w.replace(/.*\.openclaw\//,'');
+            return `<option value="${w}"${a.workspace===w?' selected':''}>${label}</option>`;
+          }).join('')}
+        </select>
+      </div>
+      <div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:6px">📡 Discord Channels:</div>
+        ${!dashConfig.hasDiscord
+          ? `<div class="muted" style="font-size:12px">Discord not configured</div>`
+          : allChannels.filter(ch => ch.agent === a.id).length
+            ? `<div style="display:flex;flex-direction:column;gap:4px">
+                ${allChannels.filter(ch => ch.agent === a.id).map(ch =>
+                  `<div style="display:flex;align-items:center;justify-content:space-between;background:var(--s2);border-radius:6px;padding:5px 8px;font-size:12px">
+                    <span class="mono">#${ch.name}</span>
+                    <span class="badge badge-muted" style="font-size:10px">${ch.category}</span>
+                    <select onchange="setChannelAgent('${ch.id}',this.value)" style="font-size:11px;padding:2px 4px">
+                      ${allAgents.map(ag=>`<option value="${ag.id}"${ch.agent===ag.id?' selected':''}>${AGENT_EMOJI[ag.id]||'🤖'} ${ag.id}</option>`).join('')}
+                    </select>
+                  </div>`
+                ).join('')}
+              </div>`
+            : `<div class="muted" style="font-size:12px">No channels assigned</div>`
+        }
+      </div>
+    </div>`;
+  }
+  container.innerHTML = html;
+}
+
+// ── Permissions Modal ────────────────────────────────────────────────────────
+const ALL_TOOLS = [
+  { id: 'exec',            label: 'exec / process',       group: 'Runtime',  desc: 'Run shell commands, manage background processes' },
+  { id: 'code_execution',  label: 'code_execution',       group: 'Runtime',  desc: 'Run sandboxed remote Python analysis' },
+  { id: 'browser',         label: 'browser',              group: 'Runtime',  desc: 'Control a Chromium browser' },
+  { id: 'read',            label: 'read / write / edit',  group: 'Files',    desc: 'File I/O in the workspace' },
+  { id: 'apply_patch',     label: 'apply_patch',          group: 'Files',    desc: 'Multi-hunk file patches' },
+  { id: 'web_search',      label: 'web_search / x_search / web_fetch', group: 'Web', desc: 'Search the web, fetch pages' },
+  { id: 'image',           label: 'image / image_generate', group: 'Media', desc: 'Analyze or generate images' },
+  { id: 'tts',             label: 'tts',                  group: 'Media',    desc: 'Text-to-speech' },
+  { id: 'message',         label: 'message',              group: 'Messaging',desc: 'Send messages across channels' },
+  { id: 'sessions_list',   label: 'sessions_*',           group: 'Sessions', desc: 'Session management and sub-agent orchestration' },
+  { id: 'cron',            label: 'cron',                 group: 'System',   desc: 'Manage scheduled jobs' },
+  { id: 'memory_search',   label: 'memory_search',        group: 'Memory',   desc: 'Search agent memory' },
+];
+
+const PROFILE_TOOLS = {
+  coding:    ['exec','code_execution','browser','read','apply_patch','web_search','image','image_generate','cron','sessions_list','memory_search'],
+  messaging: ['message','sessions_list','memory_search'],
+  minimal:   ['session_status'],
+  full:      ['*'],
+};
+
+let _permAgent = null;
+
+function openPermissionsModal(agentId, profile, allow, deny) {
+  _permAgent = { agentId, profile, allow: [...allow], deny: [...deny] };
+  const modal = document.getElementById('perm-modal');
+  document.getElementById('perm-agent-title').textContent = agentId;
+
+  // Set profile select
+  document.getElementById('perm-profile').value = profile;
+  renderPermToggles(profile, allow, deny);
+  modal.style.display = 'flex';
+}
+
+function renderPermToggles(profile, allow, deny) {
+  const profileTools = PROFILE_TOOLS[profile] || [];
+  const hasAll = profileTools.includes('*');
+  const groups = {};
+  for (const t of ALL_TOOLS) {
+    if (!groups[t.group]) groups[t.group] = [];
+    groups[t.group].push(t);
+  }
+  let html = '';
+  for (const [group, tools] of Object.entries(groups)) {
+    html += `<div style="margin-bottom:12px"><div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:6px">${group}</div>`;
+    for (const t of tools) {
+      const inProfile = hasAll || profileTools.includes(t.id);
+      const allowed   = allow.includes(t.id);
+      const denied    = deny.includes(t.id);
+      const active    = (inProfile || allowed) && !denied;
+      html += `
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--bg);border-radius:6px;margin-bottom:4px;border:1px solid var(--border)">
+          <div>
+            <div style="font-size:12px;font-weight:600">${t.label}</div>
+            <div style="font-size:11px;color:var(--muted)">${t.desc}</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            ${!inProfile ? `<span class="badge badge-muted" style="font-size:10px">not in profile</span>` : `<span class="badge badge-green" style="font-size:10px">in profile</span>`}
+            <label class="toggle-wrap" title="${active ? 'Enabled' : 'Disabled'}">
+              <input type="checkbox" data-tool="${t.id}" ${active ? 'checked' : ''} onchange="onPermToggle('${t.id}',this.checked,'${profile}')">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>`;
+    }
+    html += '</div>';
+  }
+  document.getElementById('perm-toggles').innerHTML = html;
+}
+
+function onPermToggle(toolId, enabled, profile) {
+  const profileTools = PROFILE_TOOLS[profile] || [];
+  const inProfile = profileTools.includes('*') || profileTools.includes(toolId);
+  if (enabled) {
+    _permAgent.deny = _permAgent.deny.filter(t => t !== toolId);
+    if (!inProfile) _permAgent.allow.push(toolId);
+  } else {
+    _permAgent.allow = _permAgent.allow.filter(t => t !== toolId);
+    if (inProfile) _permAgent.deny.push(toolId);
+  }
+}
+
+function onProfileChange(profile) {
+  _permAgent.profile = profile;
+  _permAgent.allow = [];
+  _permAgent.deny = [];
+  renderPermToggles(profile, [], []);
+}
+
+async function savePermissions() {
+  const { agentId, profile, allow, deny } = _permAgent;
+  const r = await apiPost('/api/set-agent-tools', { agentId, profile, allow, deny });
+  toast(r.ok ? `✓ ${agentId} permissions saved` : '✗ ' + r.error, r.ok ? 'ok' : 'err');
+  if (r.ok) { closePermModal(); setTimeout(loadAgents, 1500); }
+}
+
+function closePermModal() {
+  document.getElementById('perm-modal').style.display = 'none';
+  _permAgent = null;
+}
+
+async function setModel(agentId, model){
+  const r = await apiPost('/api/set-agent-model', {agentId, model});
+  toast(r.ok ? `✓ ${agentId} → ${model}` : '✗ '+r.error, r.ok?'ok':'err');
+  if(r.ok) setTimeout(loadAgents, 1500);
+}
+
+async function setWorkspace(agentId, workspace){
+  const r = await apiPost('/api/set-agent-workspace', {agentId, workspace});
+  toast(r.ok ? `✓ ${agentId} workspace updated` : '✗ '+r.error, r.ok?'ok':'err');
+  if(r.ok) setTimeout(loadAgents, 1500);
+}
+
+// ── Channels — silent background fetch for agent card dropdowns ───────────────
+async function loadChannels(){
+  try {
+    const r = await api('/api/channels');
+    allChannels = r.channels || [];
+  } catch(e) { allChannels = []; }
+}
+
+async function setChannelAgent(channelId, agentId){
+  const r = await apiPost('/api/set-channel-agent', {channelId, agentId});
+  toast(r.ok ? `✓ Channel → ${agentId}` : '✗ '+r.error, r.ok?'ok':'err');
+}
+
+let sessionsByAgent = {};  // agentId -> session object
+let usageByAgent   = {};  // agentId -> { cost, input, output, sessions, lastTs }
+
+// ── Load: Fast Sessions (every 3s) ──────────────────────────────────────────
+async function loadSessionsFast(){
+  const sr = await api('/api/sessions');
+  const sessions = sr?.result?.details?.sessions || [];
+  document.getElementById('s-sessions').textContent = sessions.length;
+
+  sessionsByAgent = {};
+  for(const s of sessions){
+    const match = s.key?.match(/^agent:([^:]+):/);
+    if(match){
+      const agentId = match[1];
+      if(!sessionsByAgent[agentId] || s.status==='running') sessionsByAgent[agentId] = s;
+    }
+  }
+
+  const cloud = allAgents.filter(a=>!a.id.startsWith('local'));
+  const local  = allAgents.filter(a=>a.id.startsWith('local'));
+  if(allAgents.length){
+    renderAgentGrid('cloud-agents', cloud, false);
+    renderAgentGrid('local-agents', local, true);
+  }
+}
+
+// ── Load: Sessions (Heavy) ───────────────────────────────────────────────────
+async function loadSessions(){
+  await loadSessionsFast();
+  const ur = await api('/api/agents/usage');
+
+  // All-time usage per agent from transcripts
+  usageByAgent = ur?.usage || {};
+
+  // Re-render agent cards with updated cost data
+  const cloud = allAgents.filter(a=>!a.id.startsWith('local'));
+  const local  = allAgents.filter(a=>a.id.startsWith('local'));
+  if(allAgents.length){
+    renderAgentGrid('cloud-agents', cloud, false);
+    renderAgentGrid('local-agents', local, true);
+  }
+  
+  let totCost = 0, totCostToday = 0;
+  for(const v of Object.values(usageByAgent)) {
+    totCost += (v.cost||0);
+    totCostToday += (v.costToday||0);
+  }
+  
+  if (totCostToday > 20) {
+    document.getElementById('cost-alert-card').style.display = 'block';
+    document.getElementById('cost-alert-text').textContent = `You have spent $${totCostToday.toFixed(2)} today. Your limit is $20.00.`;
+    const pct = Math.min(100, Math.round((totCostToday / 20) * 100));
+    document.getElementById('cost-alert-fill').style.width = `${pct}%`;
+    document.getElementById('cost-alert-fill').style.background = pct >= 100 ? 'var(--red)' : 'var(--yellow)';
+    const pw = document.getElementById('gw-dot');
+    if(pw && !pw.classList.contains('off')) {
+        pw.style.boxShadow = '0 0 6px var(--yellow)';
+        pw.style.background = 'var(--yellow)';
+    }
+  } else {
+    document.getElementById('cost-alert-card').style.display = 'none';
+  }
+}
+
+// ── Load: System ──────────────────────────────────────────────────────────────
+async function loadHealth(){
+  const r = await api('/api/health');
+  document.getElementById('gw-dot').className = 'pulse'+(r.gateway?'':' off');
+
+  const u = r.usage || {};
+  document.getElementById('gw-info').innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;justify-content:space-between"><span class="muted">Status</span><span class="badge ${r.gateway?'badge-green':'badge-red'}">${r.gateway?'● online':'✗ offline'}</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Port</span><span>18789</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Mode</span><span>loopback</span></div>
+      <div style="border-top:1px solid var(--border);padding-top:10px;margin-top:4px"></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">All-time sessions</span><span>${u.sessions||0}</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">AI responses</span><span>${u.responses||0}</span></div>
+      <div style="border-top:1px solid var(--border);padding-top:10px;margin-top:2px;font-size:11px;color:var(--muted);font-weight:600">TOKEN USAGE</div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Input</span><span>${((u.input||0)/1000).toFixed(1)}k</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Output</span><span>${((u.output||0)/1000).toFixed(1)}k</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Real tokens (in+out)</span><span style="color:var(--accent);font-weight:600">${(((u.input||0)+(u.output||0))/1000).toFixed(1)}k</span></div>
+      <div style="border-top:1px solid var(--border);padding-top:10px;margin-top:2px;font-size:11px;color:var(--muted);font-weight:600">CACHE (not billed as tokens)</div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Cache read</span><span>${((u.cacheRead||0)/1e6).toFixed(2)}M</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Cache write</span><span>${((u.cacheWrite||0)/1000).toFixed(1)}k</span></div>
+      <div style="border-top:1px solid var(--border);padding-top:10px;margin-top:2px"></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Last prompt cost</span><span style="color:var(--text);font-weight:600">$${(u.lastPromptCost||0).toFixed(4)}</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Cost today</span><span style="color:var(--accent);font-weight:600;font-size:15px">$${(u.costToday||0).toFixed(4)}</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Total cost (all-time)</span><span style="color:var(--green);font-weight:600;font-size:16px">$${(u.cost||0).toFixed(2)}</span></div>
+      <div style="display:flex;justify-content:space-between;margin-top:4px"><span class="muted" style="font-size:10px">+ Cache write investment</span><span class="muted" style="font-size:10px">$${(u.cacheWriteCost||0).toFixed(2)}</span></div>
+    </div>`;
+
+  const ollamaHtml = r.ollama
+    ? `<div class="muted" style="font-size:12px">● online — <a href="#" onclick="showPage('ollama',document.querySelector('[onclick*=ollama]'));return false" style="color:var(--accent)">Open Ollama tab</a></div>`
+    : `<div class="muted" style="font-size:12px">✗ Ollama not reachable</div>`;
+  // ollama-info element removed from System tab
+  const ollamaEl = document.getElementById('ollama-info');
+  if (ollamaEl) ollamaEl.innerHTML = ollamaHtml;
+}
+
+// ── Ops: Live Activity Feed ───────────────────────────────────────────────────
+let _activityData  = [];
+let _activityTimer = null;
+let _activityPaused = false;
+
+const AGENT_COLORS = ['#f97316','#22c55e','#3b82f6','#a855f7','#ec4899','#14b8a6','#f59e0b','#ef4444','#6366f1','#84cc16','#06b6d4','#d946ef'];
+const agentColorMap = {};
+function agentColor(id) {
+  if (!agentColorMap[id]) {
+    const keys = Object.keys(agentColorMap);
+    agentColorMap[id] = AGENT_COLORS[keys.length % AGENT_COLORS.length];
+  }
+  return agentColorMap[id];
+}
+
+async function loadActivityFeed() {
+  // Clear existing auto-refresh
+  if (_activityTimer) { clearTimeout(_activityTimer); _activityTimer = null; }
+
+  try {
+    const r = await api('/api/activity');
+    if (!r.ok) return;
+    _activityData = r.events || [];
+
+    // Populate agent filter dropdown
+    const filter = document.getElementById('activity-filter');
+    if (filter) {
+      const agents = [...new Set(_activityData.map(e => e.agent))].sort();
+      const current = filter.value;
+      filter.innerHTML = '<option value="">All agents</option>' +
+        agents.map(a => `<option value="${a}"${a===current?' selected':''}>${getEmoji(a)} ${a}</option>`).join('');
+    }
+
+    renderActivityFeed();
+
+    // Update last-refreshed timestamp
+    const ts = document.getElementById('activity-last-refreshed');
+    if (ts) ts.textContent = 'Updated ' + new Date().toLocaleTimeString();
+  } catch(e) {
+    const feed = document.getElementById('activity-feed');
+    if (feed) feed.innerHTML = `<div class="empty" style="color:var(--red)">Error: ${e.message}</div>`;
+  }
+
+  // Auto-refresh every 10s unless paused
+  if (!_activityPaused) {
+    _activityTimer = setTimeout(loadActivityFeed, 10000);
+  }
+}
+
+function renderActivityFeed() {
+  const feed = document.getElementById('activity-feed');
+  if (!feed) return;
+  const filterVal = document.getElementById('activity-filter')?.value || '';
+  const events = filterVal ? _activityData.filter(e => e.agent === filterVal) : _activityData;
+
+  if (!events.length) {
+    feed.innerHTML = '<div class="empty muted">No activity yet — waiting for agents to start messaging</div>';
+    return;
+  }
+
+  const roleBadge = (role) => {
+    const map = { user:'#3b82f6', assistant:'#22c55e', toolCall:'#f97316', toolResult:'#a855f7', system:'#6b7280' };
+    const label = { user:'YOU', assistant:'AI', toolCall:'TOOL→', toolResult:'←RESULT', system:'SYS' };
+    const col = map[role] || '#6b7280';
+    return `<span style="font-size:9px;font-weight:700;color:${col};background:${col}22;padding:1px 5px;border-radius:3px;letter-spacing:.04em">${label[role]||role.toUpperCase()}</span>`;
+  };
+
+  feed.innerHTML = events.map(e => {
+    const time = e.ts ? new Date(e.ts).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'}) : '';
+    const col   = e.agent === 'system' ? '#6b7280' : agentColor(e.agent);
+    const cost  = e.cost ? `<span style="color:#f97316;font-size:10px;margin-left:6px">$${e.cost.toFixed(4)}</span>` : '';
+    const snippet = (e.snippet||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+    return `<div style="display:flex;gap:10px;padding:8px 14px;border-bottom:1px solid var(--border);align-items:flex-start">
+      <div style="width:3px;flex-shrink:0;background:${col};border-radius:2px;align-self:stretch;min-height:30px"></div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:3px">
+          <span style="font-size:11px;font-weight:700;color:${col}">${e.agent}</span>
+          ${roleBadge(e.role)}
+          <span class="muted" style="font-size:10px">${time}</span>
+          ${cost}
+        </div>
+        <div style="font-size:12px;color:var(--text);opacity:0.8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${snippet || '<span class="muted">[no content]</span>'}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleActivityPause() {
+  _activityPaused = !_activityPaused;
+  const btn = document.getElementById('activity-pause-btn');
+  if (_activityPaused) {
+    if (_activityTimer) { clearTimeout(_activityTimer); _activityTimer = null; }
+    if (btn) btn.textContent = '▶ Resume';
+  } else {
+    if (btn) btn.textContent = '⏸ Pause';
+    loadActivityFeed();
+  }
+}
+
+// ── Ollama Tab ────────────────────────────────────────────────────────────────
+// ── Gateway Tab ───────────────────────────────────────────────────────────────
+async function loadGatewayTab() {
+  await Promise.allSettled([loadGwStatus(), loadGwLog(), loadGwCost()]);
+}
+
+async function loadGwStatus() {
+  const statusEl = document.getElementById('gw-status-info');
+  const configEl = document.getElementById('gw-config-info');
+  if (!statusEl) return;
+  statusEl.innerHTML = '<div class="empty"><span class="spin"></span></div>';
+  configEl.innerHTML = '<div class="empty"><span class="spin"></span></div>';
+  try {
+    const r = await api('/api/gateway/status');
+    const s = r.status || {};
+    const svc = s.service || {};
+    const rt = svc.runtime || {};
+    const gw = s.gateway || {};
+    const cfg = r.config || {};
+
+    const isRunning = rt.status === 'running';
+    const stateColor = isRunning ? 'var(--green)' : 'var(--red)';
+    const stateDot   = isRunning ? '🟢' : '🔴';
+    const pid        = rt.pid || '–';
+    const port       = gw.port || cfg.port || 18789;
+    const bindMode   = gw.bindMode || cfg.bind || 'loopback';
+    const probeUrl   = gw.probeUrl || `ws://127.0.0.1:${port}`;
+    const logFile    = s.logFile || '~/.openclaw/logs/gateway.log';
+
+    // Uptime from launchctl (best-effort)
+    let uptimeHtml = '';
+    if (isRunning && rt.pid) uptimeHtml = `<div style="display:flex;justify-content:space-between"><span class="muted">PID</span><span class="mono">${rt.pid}</span></div>`;
+
+    statusEl.innerHTML = `<div style="display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;justify-content:space-between"><span class="muted">Status</span>
+        <span class="badge ${isRunning ? 'badge-green' : 'badge-red'}" style="font-size:12px">${stateDot} ${rt.status || 'unknown'}</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">LaunchAgent</span>
+        <span class="badge ${svc.loaded ? 'badge-green' : 'badge-red'}">${svc.loaded ? '✓ loaded' : '✗ not loaded'}</span></div>
+      ${uptimeHtml}
+      <div style="border-top:1px solid var(--border);padding-top:8px;margin-top:2px"></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Port</span><span class="mono">${port}</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Bind mode</span><span class="badge badge-muted">${bindMode}</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">WebSocket URL</span><span class="mono" style="font-size:11px">${probeUrl}</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center"><span class="muted">Log file</span><span class="mono" style="font-size:10px;color:var(--muted);max-width:55%;text-align:right;overflow:hidden;text-overflow:ellipsis">${logFile}</span></div>
+      ${r.error ? `<div style="color:var(--red);font-size:11px;margin-top:4px">⚠ ${r.error}</div>` : ''}
+    </div>`;
+
+    // Config card
+    const authMode  = cfg.auth?.mode || '–';
+    const authToken = cfg.auth?.token ? '●●●●●●●●' : '–';
+    const tsMode    = cfg.tailscale?.mode || 'off';
+    const denied    = (cfg.nodes?.denyCommands || []);
+
+    configEl.innerHTML = `<div style="display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.06em">AUTHENTICATION</div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Auth mode</span><span class="badge badge-accent">${authMode}</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Token</span><span class="mono" style="font-size:11px">${authToken}</span></div>
+      <div style="border-top:1px solid var(--border);padding-top:8px;margin-top:2px;font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.06em">NETWORK</div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Tailscale</span><span class="badge ${tsMode==='off'?'badge-muted':'badge-purple'}">${tsMode}</span></div>
+      <div style="border-top:1px solid var(--border);padding-top:8px;margin-top:2px;font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.06em">DENIED COMMANDS (${denied.length})</div>
+      ${denied.length
+        ? `<div style="display:flex;flex-wrap:wrap;gap:4px">${denied.map(d=>`<span class="badge badge-red" style="font-size:10px">${d}</span>`).join('')}</div>`
+        : '<span class="muted" style="font-size:12px">None</span>'}
+    </div>`;
+  } catch(e) {
+    statusEl.innerHTML = `<div class="empty" style="color:var(--red)">Error: ${e.message}</div>`;
+  }
+}
+
+async function loadGwLog() {
+  const el = document.getElementById('gw-log-viewer');
+  if (!el) return;
+  el.textContent = 'Loading…';
+  try {
+    const r = await api('/api/gateway/log');
+    if (!r.ok || !r.lines?.length) { el.textContent = r.error || 'No log entries'; return; }
+    el.innerHTML = r.lines.map(line => {
+      let color = 'var(--text)';
+      if (/error|crit|fail/i.test(line)) color = 'var(--red)';
+      else if (/warn/i.test(line)) color = '#f59e0b';
+      else if (/\[gateway\]/i.test(line)) color = 'var(--accent)';
+      return `<div style="color:${color};padding:1px 0">${line.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</div>`;
+    }).join('');
+    el.scrollTop = el.scrollHeight;
+  } catch(e) { el.textContent = 'Log load failed: ' + e.message; }
+}
+
+async function loadGwCost() {
+  const el = document.getElementById('gw-cost-info');
+  if (!el) return;
+  el.innerHTML = '<div class="empty"><span class="spin"></span></div>';
+  try {
+    const r = await api('/api/gateway/usage-cost');
+    const d = r.data || {};
+    const rows = r.fallback
+      ? `<div style="display:flex;justify-content:space-between"><span class="muted">All-time cost</span><span style="color:var(--green);font-weight:700">$${(d.total||0).toFixed(2)}</span></div>
+         <div style="display:flex;justify-content:space-between"><span class="muted">Today</span><span style="color:var(--accent);font-weight:600">$${(d.today||0).toFixed(4)}</span></div>
+         <div style="display:flex;justify-content:space-between"><span class="muted">Sessions</span><span>${d.sessions||0}</span></div>
+         <div class="muted" style="font-size:10px;margin-top:6px">⚠ CLI unavailable – using local aggregation</div>`
+      : Object.entries(d).filter(([k])=>typeof d[k]!=='object').map(([k,v])=>
+          `<div style="display:flex;justify-content:space-between"><span class="muted">${k}</span><span>${typeof v==='number'? (k.toLowerCase().includes('cost')||k.toLowerCase().includes('$') ? '$'+v.toFixed(4): v) : v}</span></div>`
+        ).join('');
+    el.innerHTML = `<div style="display:flex;flex-direction:column;gap:8px">${rows}</div>`;
+  } catch(e) { el.innerHTML = `<div class="empty" style="color:var(--red)">Error: ${e.message}</div>`; }
+}
+
+async function gatewayCtrl(action, confirmMsg) {
+  if (confirmMsg && !confirm(confirmMsg)) return;
+  try {
+    const method = action === 'stop' ? 'stop' : action === 'start' ? 'start' : 'soft-restart';
+    const r = await fetch(`/api/gateway/${method}`, { method: 'POST', headers: {'Content-Type':'application/json'} }).then(r=>r.json());
+    if (r.ok) {
+      toast(r.message, 'ok');
+      setTimeout(loadGwStatus, 1200);
+    } else toast(r.error || 'Failed', 'err');
+  } catch(e) { toast('Error: ' + e.message, 'err'); }
+  return true;
+}
+
+async function loadOllamaTab() {
+  const list = document.getElementById('ollama-model-list');
+  if (!list) return;
+  list.innerHTML = '<div class="empty"><span class="spin"></span> Loading models…</div>';
+  try {
+    const r = await api('/api/ollama/models');
+    if (!r.ok || !r.models?.length) {
+      list.innerHTML = r.ok
+        ? '<div class="empty muted">No models installed. Pull one above.</div>'
+        : `<div class="empty" style="color:var(--red)">${r.error || 'Ollama not reachable'}</div>`;
+      return;
+    }
+    // Sort by size descending
+    const models = r.models.sort((a,b) => b.sizeBytes - a.sizeBytes);
+    const totalGb = (models.reduce((s,m) => s + m.sizeBytes, 0) / 1e9).toFixed(1);
+    list.innerHTML = `
+      <div style="padding:10px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+        <span class="muted" style="font-size:11px">${models.length} model${models.length!==1?'s':''} installed — <strong style="color:var(--text)">${totalGb} GB</strong> total</span>
+      </div>
+      ${models.map(m => {
+        const mod = m.modifiedAt ? new Date(m.modifiedAt).toLocaleDateString() : '–';
+        return `<div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border)" id="orow-${CSS.escape(m.name)}">
+          <div style="flex:1;min-width:0">
+            <div style="font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${m.name}</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:5px">
+              <span class="badge badge-muted" style="font-size:10px">${m.family}</span>
+              <span class="badge badge-muted" style="font-size:10px">${m.params}</span>
+              <span class="badge badge-purple" style="font-size:10px">${m.quant}</span>
+              <span class="badge badge-muted" style="font-size:10px">🗄 ${m.sizeGb}</span>
+              <span class="badge badge-muted" style="font-size:10px">📅 ${mod}</span>
+            </div>
+          </div>
+          <button class="btn btn-sm btn-danger" onclick="deleteOllamaModel('${m.name.replace(/'/g,"\\'")}')">🗑 Delete</button>
+        </div>`;
+      }).join('')}
+    `;
+  } catch (e) {
+    list.innerHTML = `<div class="empty" style="color:var(--red)">Error: ${e.message}</div>`;
+  }
+}
+
+async function deleteOllamaModel(name) {
+  if (!confirm(`Delete model "${name}"?\n\nThis will remove it from Ollama. You can re-pull it later.`)) return;
+  toast(`Deleting ${name}…`);
+  try {
+    const r = await fetch('/api/ollama/delete', {
+      method: 'DELETE',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ name })
+    }).then(r => r.json());
+    if (r.ok) { toast(r.message, 'ok'); loadOllamaTab(); }
+    else toast(r.error || 'Delete failed', 'err');
+  } catch (e) { toast('Delete failed: ' + e.message, 'err'); }
+}
+
+async function startOllamaPull() {
+  const name = document.getElementById('ollama-pull-name').value.trim();
+  if (!name) { toast('Enter a model name', 'err'); return; }
+  const btn     = document.getElementById('ollama-pull-btn');
+  const progress = document.getElementById('ollama-pull-progress');
+  const bar     = document.getElementById('ollama-pull-bar');
+  const pct     = document.getElementById('ollama-pull-pct');
+  const statusT = document.getElementById('ollama-pull-status-text');
+  const log     = document.getElementById('ollama-pull-log');
+
+  btn.disabled = true; btn.textContent = '⏳ Pulling…';
+  progress.style.display = 'block';
+  bar.style.width = '0%'; pct.textContent = ''; log.textContent = '';
+  statusT.textContent = `Pulling ${name}…`;
+
+  try {
+    const resp = await fetch('/api/ollama/pull', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ name })
+    });
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buf = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += decoder.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop();
+      for (const line of lines) {
+        if (!line.trim()) continue;
+        try {
+          const e = JSON.parse(line);
+          statusT.textContent = e.status || statusT.textContent;
+          if (e.total && e.completed) {
+            const p = Math.round((e.completed / e.total) * 100);
+            bar.style.width = p + '%';
+            pct.textContent = p + '%';
+          }
+          if (e.status) { log.textContent += e.status + '\n'; log.scrollTop = log.scrollHeight; }
+        } catch {}
+      }
+    }
+    statusT.textContent = '✓ Done!'; bar.style.width = '100%'; pct.textContent = '100%';
+    toast(`Pulled ${name}`, 'ok');
+    setTimeout(() => { progress.style.display = 'none'; }, 3000);
+    loadOllamaTab();
+  } catch (e) {
+    statusT.textContent = '✗ ' + e.message;
+    toast('Pull failed: ' + e.message, 'err');
+  } finally {
+    btn.disabled = false; btn.textContent = '⬇ Pull';
+  }
+}
+
+async function loadLogs(){
+  try{
+    const today=new Date().toISOString().slice(0,10);
+    const r=await fetch('/api/sessions'); // piggyback check — logs via exec not directly exposed
+    const logEl=document.getElementById('log-viewer');
+    // Use exec via gateway to tail logs
+    const res=await fetch('/api/sessions'); // placeholder — real log loading below
+    // Actually: just show a status message since logs need exec tool
+    if(!rawLogs){
+      logEl.innerHTML='<span class="muted">Log streaming not available via HTTP. Run: tail -f /tmp/openclaw/openclaw-'+today+'.log</span>';
+    }
+  } catch{}
+}
+
+function filterLogs(){
+  const f=document.getElementById('log-filter').value.toLowerCase();
+  const lines=rawLogs.split('\n');
+  const viewer=document.getElementById('log-viewer');
+  let html='';
+  for(const l of lines.slice(-150)){
+    if(f&&!l.toLowerCase().includes(f)) continue;
+    const esc=l.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    let cls='';
+    if(/error|ERR/i.test(l)) cls='log-error';
+    else if(/warn|WARN/i.test(l)) cls='log-warn';
+    else if(/info|INFO/i.test(l)) cls='log-info';
+    html+=`<span class="${cls}">${esc}</span>\n`;
+  }
+  viewer.innerHTML=html||'<span class="muted">No matches</span>';
+  viewer.scrollTop=viewer.scrollHeight;
+}
+
+// ── Load all ──────────────────────────────────────────────────────────────────
+let dashConfig = {};
+async function loadDashConfig(){
+  try { dashConfig = await api('/api/config'); } catch { dashConfig = {}; }
+}
+
+async function loadAll(){
+  await Promise.all([refreshModelLists(), loadDashConfig()]);
+  document.getElementById('lastRefresh').textContent='Refreshing…';
+  await loadAgents();
+  await Promise.allSettled([loadSessions(), loadHealth()]);
+
+  document.getElementById('lastRefresh').textContent='Updated '+new Date().toLocaleTimeString();
+}
+
+// ── Orchestrator ──────────────────────────────────────────────────────────────
+const ORCH = '/api/orch';
+
+async function loadOrchestrator(){
+  // Status
+  try{
+    const s = await fetch(ORCH+'/status').then(r=>r.json());
+    document.getElementById('orch-status').innerHTML=`
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between"><span class="muted">Status</span><span class="badge ${s.ok?'badge-green':'badge-red'}">${s.ok?'● running':'✗ offline'}</span></div>
+        <div style="display:flex;justify-content:space-between"><span class="muted">PID</span><span>${s.pid}</span></div>
+        <div style="display:flex;justify-content:space-between"><span class="muted">Uptime</span><span>${Math.floor(s.uptime/60)}m ${s.uptime%60}s</span></div>
+        <div style="display:flex;justify-content:space-between"><span class="muted">Gateway</span><span class="badge ${s.gatewayAlive?'badge-green':'badge-red'}">${s.gatewayAlive?'● alive':'✗ down'}</span></div>
+        <div style="display:flex;justify-content:space-between"><span class="muted">Events logged</span><span>${s.eventCount}</span></div>
+        <div style="display:flex;justify-content:space-between"><span class="muted">API</span><span class="mono muted">proxied via :7891</span></div>
+      </div>`;
+  } catch {
+    document.getElementById('orch-status').innerHTML='<div class="empty red">Orchestrator not reachable</div>';
+  }
+
+  // Events
+  try{
+    const e = await fetch(ORCH+'/events?limit=50').then(r=>r.json());
+    const events = (e.events||[]).reverse();
+    if(!events.length){ document.getElementById('orch-events').innerHTML='<div class="empty">No events yet</div>'; return; }
+
+    const COLOR = {config_change:'var(--blue)',permission_change:'var(--yellow)',channel_create:'var(--green)',channel_delete:'var(--red)',channel_update:'var(--muted)',self_heal:'var(--accent)',manual_trigger:'var(--purple)'};
+    let html='<table><thead><tr><th>Time</th><th>Event</th><th>Details</th></tr></thead><tbody>';
+    for(const ev of events){
+      const time = ev.ts ? new Date(ev.ts).toLocaleTimeString() : '–';
+      const color = COLOR[ev.type]||'var(--muted)';
+      const {ts,type,...rest} = ev;
+      const detail = Object.entries(rest).map(([k,v])=>`${k}: ${v}`).join(' · ');
+      html+=`<tr><td class="muted mono" style="font-size:11px">${time}</td><td><span style="color:${color};font-size:12px;font-weight:500">${type}</span></td><td class="muted" style="font-size:12px">${detail}</td></tr>`;
+    }
+    html+='</tbody></table>';
+    document.getElementById('orch-events').innerHTML=html;
+  } catch {}
+}
+
+async function orchTrigger(action, type){
+  try{
+    let r;
+    if(action==='simulate') r=await fetch(ORCH+'/trigger/simulate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'channel_'+type.replace('channel_','')})}).then(x=>x.json());
+    else r=await fetch(ORCH+`/trigger/${action}`,{method:'POST'}).then(x=>x.json());
+    toast(r.message||'Done','ok');
+    setTimeout(loadOrchestrator,1000);
+  } catch(e){ toast('Orchestrator not reachable','err'); }
+}
+
+// ── Router page ───────────────────────────────────────────────────────────────
+function loadRouterPage(){
+  // Populate agent select
+  const sel = document.getElementById('route-agent');
+  sel.innerHTML = '<option value="">No agent context</option>' +
+    allAgents.map(a=>`<option value="${a.id}">${getEmoji(a.id)} ${a.id}</option>`).join('');
+  loadLoad();
+}
+
+async function loadLoad(){
+  try{
+    const r = await fetch(ORCH+'/load').then(x=>x.json());
+    const snap = r.snapshot || {};
+    const load = r.load || {};
+    const COLOR = {low:'badge-green',medium:'badge-yellow',high:'badge-red'};
+    document.getElementById('load-panel').innerHTML=`
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between"><span class="muted">Load level</span><span class="badge ${COLOR[load.level]||'badge-muted'}">${load.level||'–'}</span></div>
+        <div style="display:flex;justify-content:space-between"><span class="muted">Active sessions</span><span>${snap.activeSessions||0}</span></div>
+        <div style="display:flex;justify-content:space-between"><span class="muted">Token rate</span><span>${snap.tokenRate||0} tok/min</span></div>
+        <div style="display:flex;justify-content:space-between"><span class="muted">Prefer local?</span><span class="badge ${load.preferLocal?'badge-purple':'badge-muted'}">${load.preferLocal?'yes':'no'}</span></div>
+        <div style="display:flex;justify-content:space-between"><span class="muted">Reason</span><span class="muted" style="font-size:12px">${load.reason||'–'}</span></div>
+        <div style="border-top:1px solid var(--border);padding-top:10px;font-size:12px;color:var(--muted);font-weight:600;margin-top:4px">Context fill by agent:</div>
+        ${Object.entries(snap.agentLoad||{}).map(([id,pct])=>`
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:3px"><span class="muted">${id}</span><span style="font-size:11px">${pct}%</span></div>
+            <div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${pct>70?'var(--red)':pct>40?'var(--yellow)':'var(--blue)'}"></div></div>
+          </div>`).join('')||'<span class="muted">No active sessions</span>'}
+      </div>`;
+  } catch { document.getElementById('load-panel').innerHTML='<div class="empty muted">Load monitor not reachable</div>'; }
+}
+
+async function classifyPrompt(){
+  const prompt = document.getElementById('route-prompt').value.trim();
+  const agentId = document.getElementById('route-agent').value;
+  if(!prompt){ toast('Enter a prompt first','err'); return; }
+
+  const r = await fetch(ORCH+'/route',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt,agentId:agentId||null})}).then(x=>x.json()).catch(()=>null);
+  if(!r){ document.getElementById('route-result').innerHTML='<div class="empty red">Orchestrator not reachable</div>'; return; }
+
+  const scoreColor = r.score>=70?'var(--red)':r.score>=35?'var(--yellow)':'var(--green)';
+  const tierBadge = r.recommended.tier==='cloud'?'badge-blue':r.recommended.tier==='medium'?'badge-yellow':'badge-purple';
+  document.getElementById('route-result').innerHTML=`
+    <div style="display:flex;flex-direction:column;gap:10px;padding:12px;background:var(--bg);border-radius:8px;border:1px solid var(--border)">
+      <div style="display:flex;justify-content:space-between"><span class="muted">Complexity score</span><span style="font-size:20px;font-weight:700;color:${scoreColor}">${r.score}/100</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Recommended tier</span><span class="badge ${tierBadge}">${r.recommended.tier}</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Recommended model</span><span class="mono" style="font-size:12px;color:var(--cyan)">${r.recommended.model}</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Matched rule</span><span class="badge badge-muted">${r.ruleMatch.rule}</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Rule reason</span><span class="muted" style="font-size:12px">${r.ruleMatch.reason}</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Prompt length</span><span>${r.promptLen} chars</span></div>
+    </div>`;
+}
+
+// ── Pipelines page ────────────────────────────────────────────────────────────
+let pipelinesData = [];
+
+async function loadPipelinesPage(){
+  try{
+    const r = await fetch(ORCH+'/pipelines').then(x=>x.json());
+    pipelinesData = r.pipelines||[];
+    const sel = document.getElementById('pipeline-select');
+    sel.innerHTML = pipelinesData.map(p=>`<option value="${p.id}">${p.id} — ${p.description}</option>`).join('');
+    updatePipelineDesc();
+
+    let html='';
+    for(const p of pipelinesData){
+      html+=`<div style="padding:12px 0;border-bottom:1px solid var(--border);last-child:border-none">
+        <div style="font-weight:600;font-size:13px">${p.id}</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">${p.description}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">${p.steps} steps</div>
+      </div>`;
+    }
+    document.getElementById('pipelines-list').innerHTML=html||'<div class="empty">No pipelines</div>';
+  } catch { document.getElementById('pipelines-list').innerHTML='<div class="empty muted">Orchestrator not reachable</div>'; }
+}
+
+function updatePipelineDesc(){
+  const id = document.getElementById('pipeline-select').value;
+  const p = pipelinesData.find(x=>x.id===id);
+  document.getElementById('pipeline-desc').textContent = p ? `${p.steps} steps: ${p.description}` : '–';
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const sel = document.getElementById('pipeline-select');
+  if(sel) sel.addEventListener('change', updatePipelineDesc);
+});
+
+async function runPipeline(){
+  const pipelineId = document.getElementById('pipeline-select').value;
+  const prompt = document.getElementById('pipeline-prompt').value.trim();
+  if(!prompt){ toast('Enter a prompt first','err'); return; }
+
+  const statusEl = document.getElementById('pipeline-status');
+  statusEl.innerHTML='<span class="badge badge-yellow">⏳ Starting pipeline…</span>';
+
+  try{
+    const r = await fetch(ORCH+'/pipeline/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pipelineId,prompt})}).then(x=>x.json());
+    if(r.ok){
+      statusEl.innerHTML=`<div class="badge badge-green" style="padding:8px 12px">✓ ${r.message}</div>`;
+      toast('Pipeline started','ok');
+    } else {
+      statusEl.innerHTML=`<div class="badge badge-red">✗ ${r.error}</div>`;
+    }
+  } catch { statusEl.innerHTML='<div class="badge badge-red">✗ Orchestrator not reachable</div>'; }
+}
+
+// ── Healthcheck ───────────────────────────────────────────────────────────────
+let hcChecksCache = [];
+
+async function loadHealthcheck() {
+  document.getElementById('hc-summary').innerHTML = '<div class="empty"><span class="spin"></span> Running…</div>';
+  document.getElementById('hc-details').innerHTML = '<div class="empty muted">Click a check row to see details</div>';
+  const r = await api('/api/healthcheck');
+  if (!r.ok || !r.result) {
+    document.getElementById('hc-summary').innerHTML = `<div class="empty" style="color:var(--red)">✗ ${r.error || 'Failed to run healthcheck'}</div>`;
+    return;
+  }
+  const res = r.result;
+  const overall = res.overall || 'UNKNOWN';
+  const overallColor = overall === 'OK' ? 'var(--green)' : overall === 'WARN' ? 'var(--yellow)' : 'var(--red)';
+  // checks is an ARRAY [{name, status, detail, value}, ...]
+  const checks = Array.isArray(res.checks) ? res.checks : [];
+  hcChecksCache = checks;
+
+  const STATUS_BADGE = { ok:'badge-green', warn:'badge-yellow', crit:'badge-red', error:'badge-red' };
+
+  const showSyncBtn = (overall === 'WARN' || overall === 'CRIT') && !!dashConfig.syncScript;
+  let sumHtml = `<div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;flex-wrap:wrap">
+    <div style="font-size:36px;font-weight:800;color:${overallColor}">${overall}</div>
+    <div>
+      <div class="muted" style="font-size:12px">Last run: ${new Date().toLocaleTimeString()}</div>
+      <div class="muted" style="font-size:11px">${res.counts?.ok||0} OK · ${res.counts?.warn||0} WARN · ${res.counts?.crit||0} CRIT</div>
+    </div>
+    ${showSyncBtn ? `<button class="btn btn-sm" style="background:var(--yellow);color:#000;margin-left:auto" onclick="syncRepo()" id="sync-repo-btn">⟳ Sync Repo</button>` : ''}
+  </div>`;
+
+  checks.forEach((chk, idx) => {
+    const status = (chk.status || 'ok').toLowerCase();
+    const badge  = STATUS_BADGE[status] || 'badge-muted';
+    const detail = chk.detail || '';
+    sumHtml += `<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:.15s" onmouseover="this.style.background='rgba(255,255,255,.03)'" onmouseout="this.style.background=''" onclick="showHCDetail(${idx})">
+      <span style="font-size:13px">${chk.name}</span>
+      <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;max-width:60%;text-align:right">
+        ${detail ? `<span class="muted" style="font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:240px">${detail}</span>` : ''}
+        <span class="badge ${badge}" style="flex-shrink:0">${status.toUpperCase()}</span>
+      </div>
+    </div>`;
+  });
+
+  document.getElementById('hc-summary').innerHTML = sumHtml;
+  loadHCLog();
+}
+
+async function syncRepo() {
+  const btn = document.getElementById('sync-repo-btn');
+  if (btn) { btn.disabled = true; btn.textContent = '⟳ Syncing…'; }
+  try {
+    const r = await apiPost('/api/sync-repo');
+    if (r.ok) {
+      if (btn) { btn.textContent = '✓ Synced'; btn.style.background = 'var(--green)'; btn.style.color = '#fff'; }
+    } else {
+      if (btn) { btn.textContent = '✗ Failed'; btn.style.background = 'var(--red)'; btn.style.color = '#fff'; btn.disabled = false; }
+      console.error('Sync failed:', r.error, r.output);
+    }
+  } catch (e) {
+    if (btn) { btn.textContent = '✗ Error'; btn.style.background = 'var(--red)'; btn.style.color = '#fff'; btn.disabled = false; }
+    console.error('Sync error:', e);
+  }
+}
+
+function showHCDetail(idx) {
+  const chk = hcChecksCache[idx];
+  if (!chk) return;
+  let html = `<div style="font-weight:600;font-size:14px;margin-bottom:14px;color:var(--text)">${chk.name}</div>`;
+  for (const [k, v] of Object.entries(chk)) {
+    const display = typeof v === 'object' ? JSON.stringify(v) : String(v);
+    const color = k === 'status' ? (v==='ok'?'var(--green)':v==='warn'?'var(--yellow)':'var(--red)') : 'var(--text)';
+    html += `<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--border);gap:12px">
+      <span class="muted" style="flex-shrink:0">${k}</span>
+      <span style="font-size:12px;font-family:var(--mono);color:${color};text-align:right;overflow-wrap:anywhere">${display}</span>
+    </div>`;
+  }
+  document.getElementById('hc-details').innerHTML = html;
+}
+
+async function loadHCLog() {
+  const r = await api('/api/healthcheck/log');
+  const el = document.getElementById('hc-log');
+  if (!el) return;
+  const log = r.log || '';
+  if (!log.trim() || log.includes('No log file')) {
+    el.innerHTML = '<span class="muted">No log yet — click "Run Now" to generate one.</span>';
+    return;
+  }
+
+  // Parse all JSON runs out of the log file (each run is a JSON block)
+  const runs = [];
+  const regex = /\{[\s\S]*?"overall"[\s\S]*?\n\}/g;
+  let match;
+  while ((match = regex.exec(log)) !== null) {
+    try { runs.push(JSON.parse(match[0])); } catch {}
+  }
+
+  if (!runs.length) {
+    el.innerHTML = `<span class="muted">${log.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</span>`;
+    return;
+  }
+
+  const STATUS_COLOR = { ok:'var(--green)', warn:'var(--yellow)', crit:'var(--red)', error:'var(--red)' };
+  const STATUS_ICON  = { ok:'✓', warn:'⚠', crit:'✗', error:'✗' };
+
+  let html = '';
+  for (const run of runs.reverse()) {
+    const ts = run.ts ? new Date(run.ts).toLocaleString() : '–';
+    const overallColor = STATUS_COLOR[(run.overall||'').toLowerCase()] || 'var(--muted)';
+    const checks = Array.isArray(run.checks) ? run.checks : [];
+    html += `<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="font-weight:700;font-size:14px;color:${overallColor}">${run.overall||'?'}</span>
+        <span class="muted" style="font-size:11px">${ts}</span>
+        <span class="muted" style="font-size:11px">${run.counts?.ok||0} OK · ${run.counts?.warn||0} WARN · ${run.counts?.crit||0} CRIT</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:3px">`;
+    for (const c of checks) {
+      const s = (c.status||'ok').toLowerCase();
+      const color = STATUS_COLOR[s] || 'var(--muted)';
+      const icon  = STATUS_ICON[s]  || '?';
+      html += `<div style="display:flex;align-items:baseline;gap:8px;font-size:12px;padding:2px 0">
+        <span style="color:${color};font-weight:700;width:12px;flex-shrink:0">${icon}</span>
+        <span style="width:110px;flex-shrink:0;color:var(--muted2)">${c.name}</span>
+        <span style="color:${s==='ok'?'var(--muted)':'var(--text)'}">${c.detail||''}</span>
+      </div>`;
+    }
+    html += `</div></div>`;
+  }
+
+  el.innerHTML = html;
+  el.scrollTop = 0;
+}
+
+// ── Memory Search ─────────────────────────────────────────────────────────────
+async function loadMemoryStats() {
+  const r = await api('/api/memory/stats');
+  document.getElementById('mem-total').textContent    = r.total    ?? '–';
+  document.getElementById('mem-embedded').textContent = r.embedded ?? '–';
+  document.getElementById('mem-sessions').textContent = r.sessions ?? '–';
+  document.getElementById('mem-newest').textContent   = r.newest   || '–';
+}
+
+async function memSearch() {
+  const q     = document.getElementById('mem-q').value.trim();
+  if (!q) return;
+  const mode  = document.getElementById('mem-mode').value;
+  const role  = document.getElementById('mem-role').value;
+  const limit = document.getElementById('mem-limit').value;
+  const el    = document.getElementById('mem-results');
+  el.innerHTML = '<div class="empty"><span class="spin"></span> Searching…</div>';
+
+  const r = await api(`/api/memory/search?q=${encodeURIComponent(q)}&mode=${mode}&role=${role}&limit=${limit}`);
+  const hits = r.hits || [];
+  if (!hits.length) { el.innerHTML = '<div class="empty">No results found</div>'; return; }
+
+  el.innerHTML = hits.map((h, i) => {
+    // Native memory format: { agent, text, path, source, ts, score }
+    const text      = (h.text || h.content || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    const agent     = h.agent || '';
+    const source    = h.source || '';
+    const score     = h.score != null ? `<span class="badge badge-accent">${Math.round(h.score * 100)}% match</span>` : '';
+    const isChat    = source === 'chat';
+    const isMemory  = source === 'memory';
+    const sourceLabel = isChat ? '💬 Chat' : isMemory ? '📝 Memory' : source;
+    const sourceColor = isChat ? 'var(--blue)' : isMemory ? 'var(--green)' : 'var(--accent)';
+    // Extract role from text prefix if available [USER @ ...] or [ASSISTANT @ ...]
+    const roleMatch = text.match(/^\[([A-Z]+) @/);
+    const role = roleMatch ? roleMatch[1].toLowerCase() : '';
+    const roleLabel = role === 'user' ? '🧑 You' : role === 'assistant' ? '🤖 AI' : sourceLabel;
+    const roleColor = role === 'user' ? 'var(--blue)' : role === 'assistant' ? 'var(--green)' : sourceColor;
+    // Format timestamp
+    let dateStr = '–';
+    if (h.ts) { try { const t = h.ts > 1e12 ? h.ts : h.ts * 1000; dateStr = new Date(t).toLocaleString(); } catch {} }
+    const path = h.path || '';
+    return `<div class="card" style="margin-bottom:12px;padding:0">
+      <div class="card-body">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px">
+          <span style="font-weight:600;font-size:13px;color:${roleColor}">${roleLabel}</span>
+          <div style="display:flex;gap:8px;align-items:center">
+            ${score}
+            <span class="badge badge-muted">${dateStr}</span>
+          </div>
+        </div>
+        <div class="muted" style="font-size:11px;margin-bottom:8px">🤖 ${agent}${path ? ' · 📄 '+path : ''}</div>
+        <div style="font-size:13px;line-height:1.7;white-space:pre-wrap;color:#cbd5e1">${text}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── Voice Notes ───────────────────────────────────────────────────────────────
+let voiceRecorder = null;
+let voiceChunks   = [];
+let voiceBlob     = null;
+let voiceAudioPath = null;
+
+async function voiceToggleRecord() {
+  const btn = document.getElementById('voice-record-btn');
+  const tBtn = document.getElementById('voice-transcribe-btn');
+  const status = document.getElementById('voice-status');
+
+  if (voiceRecorder && voiceRecorder.state === 'recording') {
+    voiceRecorder.stop();
+    btn.textContent = '⏺ Record';
+    btn.className = 'btn btn-primary';
+    status.textContent = 'Processing…';
+    return;
+  }
+
+  voiceChunks = []; voiceBlob = null; voiceAudioPath = null;
+  tBtn.disabled = true;
+
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
+    // Pick best supported mimeType across browsers
+    const mimeType = ['audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus','audio/mp4','audio/wav']
+      .find(t => MediaRecorder.isTypeSupported(t)) || '';
+    voiceRecorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
+    const blobType = mimeType || 'audio/webm';
+    voiceRecorder.ondataavailable = e => { if (e.data.size > 0) voiceChunks.push(e.data); };
+    voiceRecorder.onstop = async () => {
+      stream.getTracks().forEach(t => t.stop());
+      voiceBlob = new Blob(voiceChunks, { type: blobType });
+      status.textContent = `Recorded ${(voiceBlob.size / 1024).toFixed(1)} KB — ready to transcribe`;
+      tBtn.disabled = false;
+      // Upload to server
+      const r = await fetch('/api/record', { method: 'POST', headers: { 'Content-Type': blobType }, body: voiceBlob });
+      const j = await r.json();
+      if (j.ok) voiceAudioPath = j.audioPath;
+    };
+    voiceRecorder.start();
+    btn.textContent = '⏹ Stop';
+    btn.className = 'btn btn-danger';
+    status.innerHTML = '<span style="color:var(--red)">● Recording…</span>';
+  } catch (e) {
+    status.textContent = '✗ Microphone access denied: ' + e.message;
+  }
+}
+
+async function voiceTranscribe() {
+  if (!voiceAudioPath) { toast('No recording to transcribe', 'err'); return; }
+  const tBtn = document.getElementById('voice-transcribe-btn');
+  const status = document.getElementById('voice-status');
+  tBtn.disabled = true;
+  status.textContent = 'Transcribing locally with mlx-whisper…';
+
+  const title      = document.getElementById('voice-title').value.trim();
+  const saveNotion = document.getElementById('voice-notion').checked;
+
+  const r = await fetch('/api/transcribe', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ audioPath: voiceAudioPath, saveNotion, title })
+  }).then(x => x.json()).catch(e => ({ ok: false, error: e.message }));
+
+  if (r.ok) {
+    document.getElementById('voice-transcript').textContent = r.transcript;
+    document.getElementById('voice-result-card').style.display = '';
+    status.textContent = r.notionSaved ? '✓ Saved to Notion' : '✓ Transcribed';
+    document.getElementById('voice-title').value = '';
+    voiceAudioPath = null;
+    loadVoiceNotes();
+    toast('Transcription complete', 'ok');
+  } else {
+    status.textContent = '✗ ' + (r.error || 'Transcription failed');
+    toast(r.error || 'Transcription failed', 'err');
+    tBtn.disabled = false;
+  }
+}
+
+function voiceCopy() {
+  const text = document.getElementById('voice-transcript').textContent;
+  navigator.clipboard.writeText(text).then(() => toast('Copied!', 'ok'));
+}
+
+async function loadVoicePipelineStatus() {
+  const r = await api('/api/audio-config');
+  const el = document.getElementById('voice-pipeline-status');
+  const badge = (ok, label) => `<span class="badge ${ok ? 'badge-green' : 'badge-red'}">${ok ? '✓' : '✗'} ${label}</span>`;
+  el.innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;justify-content:space-between"><span class="muted">mlx-whisper (local)</span>${badge(r.localWhisper, r.localWhisper ? 'Ready' : 'Not installed')}</div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">OpenAI Whisper (fallback)</span>${badge(r.openai, r.openai ? 'API key set' : 'No key')}</div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Notion</span>${badge(r.notion, r.notion ? 'Configured' : 'Not configured')}</div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">ffmpeg</span>${badge(r.ffmpeg, r.ffmpeg ? 'Installed' : 'Not found')}</div>
+      ${!r.localWhisper && !r.openai ? '<div style="font-size:11px;color:var(--yellow);margin-top:4px">⚠ No transcription backend available</div>' : ''}
+    </div>`;
+}
+
+async function loadVoiceNotes() {
+  const r = await api('/api/transcripts');
+  const notes = r.notes || [];
+  const el = document.getElementById('voice-notes-list');
+  if (!notes.length) { el.innerHTML = '<div class="empty muted">No notes yet — record something!</div>'; return; }
+  el.innerHTML = notes.map(n => `
+    <div style="padding:14px 0;border-bottom:1px solid var(--border)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <span style="font-weight:600;font-size:13px">${n.title || 'Untitled'}</span>
+        <div style="display:flex;gap:6px;align-items:center">
+          ${n.notionSaved ? '<span class="badge badge-purple">Notion</span>' : ''}
+          <span class="badge badge-muted">${n.createdAt ? new Date(n.createdAt).toLocaleString() : ''}</span>
+        </div>
+      </div>
+      <div style="font-size:13px;color:#94a3b8;line-height:1.7">${(n.transcript||'').slice(0,300)}${n.transcript?.length > 300 ? '…' : ''}</div>
+    </div>`).join('');
+}
+
+// ── Layout Toggle ─────────────────────────────────────────────────────────────
+function applyLayout(compact) {
+  const btn = document.getElementById('layout-toggle-btn');
+  if (compact) {
+    document.body.classList.add('compact');
+    btn.textContent = '📱 Compact';
+    btn.title = 'Switch to desktop layout';
+  } else {
+    document.body.classList.remove('compact');
+    btn.textContent = '🖥️ Desktop';
+    btn.title = 'Switch to compact layout';
+  }
+  localStorage.setItem('oc-layout', compact ? 'compact' : 'desktop');
+}
+
+function toggleLayout() {
+  applyLayout(!document.body.classList.contains('compact'));
+}
+
+function resetLayout() {
+  localStorage.removeItem('oc-layout');
+  applyLayout(window.innerWidth <= 900);
+  toast('Layout set to auto-detect', 'ok');
+}
+
+// Apply saved layout on load
+(function() {
+  const saved = localStorage.getItem('oc-layout');
+  if (!saved) {
+    applyLayout(window.innerWidth <= 900);
+  } else {
+    applyLayout(saved === 'compact');
+  }
+})();
+
+// ── Cron & HQ ─────────────────────────────────────────────────────────────────
+async function loadCronList() {
+  const el = document.getElementById('cron-list-container');
+  try {
+    const r = await api('/api/cron');
+    const jobs = r.jobs || [];
+    if (!jobs.length) { el.innerHTML = '<div class="empty muted">No scheduled routines configured</div>'; return; }
+    
+    el.innerHTML = '<table style="margin:0"><thead><tr><th>Name</th><th>Agent</th><th>Schedule</th><th>Last Run</th><th>Manual</th></tr></thead><tbody>' + 
+      jobs.map(j => {
+        const lastRunDt = j.state?.lastRunAtMs ? new Date(j.state.lastRunAtMs) : null;
+        const lastRunTxt = lastRunDt ? lastRunDt.toLocaleTimeString() + ' — ' + lastRunDt.toLocaleDateString() : 'Never';
+        const errors = j.state?.consecutiveErrors || 0;
+        const statusBadge = !j.enabled ? '<span class="badge badge-muted">paused</span>' 
+          : errors > 0 ? `<span class="badge badge-red">${errors} fails</span>` 
+          : '<span class="badge badge-green">live</span>';
+          
+        return `<tr>
+          <td style="font-weight:600; font-size:13px">${j.name} ${statusBadge}</td>
+          <td><span class="badge badge-muted">${getEmoji(j.agentId||j.agent)} ${j.agentId||j.agent||'–'}</span></td>
+          <td class="muted" style="font-size:12px">${j.schedule?.kind==='cron' ? j.schedule.expr : j.schedule?.everyMs ? 'Every '+Math.round(j.schedule.everyMs/60000)+'m' : j.schedule?.at ? 'At '+new Date(j.schedule.at).toLocaleString() : '?'}</td>
+          <td class="muted" style="font-size:12px">${lastRunTxt}</td>
+          <td><button class="btn btn-sm btn-default" onclick="runCronJob('${j.id}')">▶ Run</button></td>
+        </tr>`;
+      }).join('') + '</tbody></table>';
+  } catch (e) {
+    el.innerHTML = '<div class="empty" style="color:var(--red)">Failed to load scheduled jobs</div>';
+  }
+}
+
+async function runCronJob(jobId) {
+  toast(`Triggering job: ${jobId}`, 'ok');
+  await apiPost('/api/cron/run', { jobId });
+  setTimeout(loadCronList, 2000);
+}
+
+async function loadHQInfo() {
+  const el = document.getElementById('hq-info');
+  try {
+    const health = await api('/api/hq/health');
+    const overview = await api('/api/hq/overview');
+    
+    if (!health.ok || !health.health || health.health.status !== 'online') {
+      el.innerHTML = `<div class="empty"><div style="color:var(--red); font-weight:600; margin-bottom:8px">HQ Backend Untraceable</div><div class="muted">Check if FastAPI is running on port 8000</div></div>`;
+      return;
+    }
+    
+    const o = overview.overview || {};
+    el.innerHTML = `
+      <div style="display:flex; justify-content:space-between; margin-bottom:12px">
+        <span class="muted">Status</span>
+        <span class="badge badge-green">● online</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:12px">
+        <span class="muted">Storage Path</span>
+        <span class="mono muted" style="font-size:11px">${health.health.db_path || '–'}</span>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:16px;">
+        <div style="background:var(--s2); border-radius:6px; padding:10px; text-align:center">
+          <div style="font-size:20px; font-weight:700; color:var(--text)">${o.total_businesses || 0}</div>
+          <div style="font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px">Businesses</div>
+        </div>
+        <div style="background:var(--s2); border-radius:6px; padding:10px; text-align:center">
+          <div style="font-size:20px; font-weight:700; color:var(--text)">${o.total_runs || 0}</div>
+          <div style="font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px">Total Runs</div>
+        </div>
+        <div style="background:var(--s2); border-radius:6px; padding:10px; text-align:center; border:1px solid rgba(249,115,22,0.3)">
+          <div style="font-size:20px; font-weight:700; color:var(--accent)">$${(o.total_revenue || 0).toFixed(2)}</div>
+          <div style="font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px">Total Revenue</div>
+        </div>
+      </div>
+    `;
+    
+    // Also inject business cards into agents page if any agents are business agents
+    const businesses = o.businesses || {};
+    document.querySelectorAll('.agent-card').forEach(card => {
+      const idEl = card.querySelector('.agent-id');
+      if (!idEl) return;
+      const agentId = idEl.textContent.replace('ID: ', '');
+      const bData = businesses[agentId];
+      if (bData && !card.querySelector('.biz-card')) {
+        const div = document.createElement('div');
+        div.className = 'biz-card';
+        div.style = "background:rgba(249,115,22,0.06); border:1px solid rgba(249,115,22,0.3); border-radius:6px; padding:8px 10px; margin-top:8px;";
+        div.innerHTML = `
+          <div style="font-size:10px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px">Business Stats</div>
+          <div style="display:flex; justify-content:space-between; font-size:12px">
+            <span class="muted">Runs: ${bData.runs}</span>
+            <span style="font-weight:600; color:var(--text)">Revenue: $${bData.revenue.toFixed(2)}</span>
+          </div>`;
+        card.querySelector('.agent-actions').parentElement.after(div);
+      }
+    });
+
+  } catch (e) {
+    el.innerHTML = '<div class="empty muted">Integration Error</div>';
+  }
+}
+
+
+
+// Re-check on resize if no manual preference set
+window.addEventListener('resize', () => {
+  if (!localStorage.getItem('oc-layout')) {
+    applyLayout(window.innerWidth <= 900);
+  }
+});
+
+// ── Broadcast ─────────────────────────────────────────────────────────────────
+async function broadcastToAll() {
+  const msg = document.getElementById('broadcast-msg').value.trim();
+  if (!msg) { toast('Enter a message to broadcast', 'err'); return; }
+  const resultEl = document.getElementById('broadcast-result');
+  resultEl.innerHTML = '<span class="spin"></span> Sending…';
+  const r = await apiPost('/api/broadcast', { message: msg }).catch(e => ({ ok: false, error: e.message }));
+  if (r.ok) {
+    const ok  = r.results.filter(x => x.ok).length;
+    const fail = r.results.filter(x => !x.ok).length;
+    resultEl.innerHTML = `<span style="color:var(--green)">✓ Sent to ${ok} session${ok!==1?'s':''}</span>${fail ? ` <span style="color:var(--red)">· ${fail} failed</span>` : ''}`;
+    document.getElementById('broadcast-msg').value = '';
+    toast(`Broadcast sent to ${ok} agent${ok!==1?'s':''}`, 'ok');
+  } else {
+    resultEl.innerHTML = `<span style="color:var(--red)">✗ ${r.error || 'Failed'}</span>`;
+    toast('Broadcast failed', 'err');
+  }
+}
+
+let currentCostData = [];
+let currentCostMode = 'cumulative';
+
+function updateCostChartMode(mode) {
+  currentCostMode = mode;
+  document.getElementById('cost-chart-title').innerHTML = 
+    mode === 'cumulative' ? '📈 Cumulative Cost' :
+    mode === 'daily' ? '📊 Daily Spend' :
+    mode === 'weekly' ? '📊 Weekly Spend' : '📊 Monthly Spend';
+  if (currentCostData.length) drawCostChart(currentCostData, mode);
+}
+
+// ── Cost Tab ──────────────────────────────────────────────────────────────────
+async function loadCostTab() {
+  document.getElementById('cost-today-info').innerHTML  = '<div class="empty"><span class="spin"></span></div>';
+  document.getElementById('cost-totals-info').innerHTML = '<div class="empty"><span class="spin"></span></div>';
+  document.getElementById('cost-agent-table').innerHTML = '<div class="empty"><span class="spin"></span></div>';
+
+  let r;
+  try { r = await api('/api/cost'); } catch(e) {
+    document.getElementById('cost-today-info').innerHTML = `<div class="empty" style="color:var(--red)">Error: ${e.message}</div>`;
+    return;
+  }
+  if (!r.ok) { document.getElementById('cost-today-info').innerHTML = `<div class="empty" style="color:var(--red)">${r.error}</div>`; return; }
+
+  const { agents, cumulative, totals, timezone, today } = r;
+
+  // ── Today card ──────────────────────────────────────────────────────────────
+  const todayFmt = new Date(today + 'T12:00:00').toLocaleDateString(undefined, { weekday:'long', month:'long', day:'numeric' });
+  const topToday = agents.filter(a => a.costToday > 0).slice(0, 4).map(a =>
+    `<div style="display:flex;justify-content:space-between;padding:3px 0">
+       <span class="muted" style="font-size:12px">${a.id}</span>
+       <span style="font-size:12px;color:var(--accent);font-weight:600">$${a.costToday.toFixed(4)}</span>
+     </div>`).join('');
+  document.getElementById('cost-today-info').innerHTML = `
+    <div style="text-align:center;padding-bottom:12px;border-bottom:1px solid var(--border);margin-bottom:12px">
+      <div style="font-size:11px;color:var(--muted);margin-bottom:4px">${todayFmt} · ${timezone}</div>
+      <div style="font-size:32px;font-weight:800;color:var(--accent)">$${totals.costToday.toFixed(4)}</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:2px">spent today</div>
+    </div>
+    ${topToday || '<div class="muted" style="font-size:12px">No spend today yet</div>'}`;
+
+  // ── Totals card ─────────────────────────────────────────────────────────────
+  document.getElementById('cost-totals-info').innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="text-align:center;padding-bottom:12px;border-bottom:1px solid var(--border)">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Total API cost (all-time)</div>
+        <div style="font-size:32px;font-weight:800;color:var(--green)">$${totals.cost.toFixed(2)}</div>
+      </div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Recent prompt cost</span><span style="color:var(--accent)">$${(totals.lastPromptCost || 0).toFixed(4)}</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Cache write investment</span><span>$${totals.cacheWriteTotal.toFixed(2)}</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Active sessions</span><span>${totals.sessions}</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Active agents</span><span>${agents.filter(a=>a.cost>0).length}</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="muted">Days tracked</span><span>${cumulative.length}</span></div>
+    </div>`;
+
+  // ── Cost chart ────────────────────────────────────────────────────────
+  currentCostData = cumulative;
+  drawCostChart(currentCostData, currentCostMode);
+
+  // ── Agent table ─────────────────────────────────────────────────────────────
+  const maxCost = agents[0]?.cost || 1;
+  const agentRows = agents.map(a => {
+    const barPct = Math.round((a.cost / maxCost) * 100);
+    const lastSeen = a.lastTs ? fmtAge(a.lastTs) : '–';
+    const isLocal = a.id.startsWith('local-');
+    return `<div style="padding:12px 16px;border-bottom:1px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <span style="font-weight:600;font-size:13px;min-width:130px">${a.id}${isLocal?'<span class="badge badge-purple" style="font-size:9px;margin-left:6px">local</span>':''}</span>
+        <div style="flex:1;height:6px;background:var(--s2);border-radius:3px;overflow:hidden">
+          <div style="height:100%;width:${barPct}%;background:${barPct>70?'var(--accent)':'var(--green)'};border-radius:3px;transition:width 0.5s"></div>
+        </div>
+        <span style="font-weight:700;min-width:60px;text-align:right;color:${a.cost>0?'var(--text)':'var(--muted)'}">$${a.cost.toFixed(4)}</span>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        ${a.costToday>0?`<span class="badge badge-accent" style="font-size:10px">Today: $${a.costToday.toFixed(4)}</span>`:''}
+        <span class="badge badge-muted" style="font-size:10px">In: ${((a.input||0)/1000).toFixed(1)}k</span>
+        <span class="badge badge-muted" style="font-size:10px">Out: ${((a.output||0)/1000).toFixed(1)}k</span>
+        <span class="badge badge-muted" style="font-size:10px">${a.sessions} sessions</span>
+        ${lastSeen!=='–'?`<span class="badge badge-muted" style="font-size:10px">Last: ${lastSeen}</span>`:''}
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('cost-agent-table').innerHTML = agentRows || '<div class="empty muted">No data</div>';
+}
+
+function drawCostChart(data, mode = 'cumulative') {
+  const canvas = document.getElementById('cost-chart');
+  if (!canvas || !data.length) return;
+  
+  let chartData = [];
+  if (mode === 'cumulative') {
+    chartData = data.map(d => ({ label: d.day.slice(5), value: d.cumulative }));
+  } else if (mode === 'daily') {
+    chartData = data.map(d => ({ label: d.day.slice(5), value: d.cost }));
+  } else if (mode === 'monthly') {
+    const buckets = {};
+    data.forEach(d => {
+      const ym = d.day.slice(0, 7);
+      buckets[ym] = (buckets[ym] || 0) + d.cost;
+    });
+    chartData = Object.keys(buckets).sort().map(k => ({ label: k, value: buckets[k] }));
+  } else if (mode === 'weekly') {
+    const buckets = {};
+    data.forEach(d => {
+      const date = new Date(d.day + 'T12:00:00');
+      const day = date.getDay();
+      const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+      const mon = new Date(date.getTime());
+      mon.setDate(diff);
+      const k = mon.toISOString().slice(0, 10);
+      buckets[k] = (buckets[k] || 0) + d.cost;
+    });
+    chartData = Object.keys(buckets).sort().map(k => ({ label: k.slice(5) + ' (Wk)', value: buckets[k] }));
+  }
+
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.offsetWidth || 800;
+  const H = 180;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  const PAD = { t: 24, r: 16, b: 36, l: 56 };
+  const chartW = W - PAD.l - PAD.r;
+  const chartH = H - PAD.t - PAD.b;
+  const maxVal = Math.max(...chartData.map(d => d.value), 0.001) * 1.08;
+  const n = chartData.length;
+
+  const xPos = i => PAD.l + (n === 1 ? chartW / 2 : (i / (n - 1)) * chartW);
+  const yPos = v => PAD.t + chartH - (v / maxVal) * chartH;
+
+  // Grid lines
+  ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = PAD.t + (chartH / 4) * i;
+    ctx.beginPath(); ctx.moveTo(PAD.l, y); ctx.lineTo(PAD.l + chartW, y); ctx.stroke();
+    const val = maxVal - (maxVal / 4) * i;
+    ctx.fillStyle = 'rgba(255,255,255,0.35)';
+    ctx.font = '9px sans-serif';
+    ctx.textAlign = 'right';
+    if(val >= 100) ctx.fillText('$' + Math.round(val), PAD.l - 6, y + 3);
+    else ctx.fillText('$' + val.toFixed(2), PAD.l - 6, y + 3);
+  }
+
+  if (mode === 'cumulative') {
+    // Gradient fill
+    const grad = ctx.createLinearGradient(0, PAD.t, 0, PAD.t + chartH);
+    grad.addColorStop(0, 'rgba(249,115,22,0.35)');
+    grad.addColorStop(1, 'rgba(249,115,22,0.02)');
+    ctx.beginPath();
+    ctx.moveTo(xPos(0), yPos(0));
+    chartData.forEach((d, i) => ctx.lineTo(xPos(i), yPos(d.value)));
+    ctx.lineTo(xPos(n - 1), PAD.t + chartH);
+    ctx.lineTo(xPos(0), PAD.t + chartH);
+    ctx.closePath();
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    // Line
+    ctx.beginPath();
+    ctx.strokeStyle = '#f97316';
+    ctx.lineWidth = 2;
+    ctx.lineJoin = 'round';
+    chartData.forEach((d, i) => i === 0 ? ctx.moveTo(xPos(i), yPos(d.value)) : ctx.lineTo(xPos(i), yPos(d.value)));
+    ctx.stroke();
+
+    // Points
+    const step = Math.max(1, Math.ceil(n / 12));
+    chartData.forEach((d, i) => {
+      ctx.beginPath();
+      ctx.arc(xPos(i), yPos(d.value), 3, 0, Math.PI * 2);
+      ctx.fillStyle = '#f97316';
+      ctx.fill();
+    });
+  } else {
+    // Bar chart
+    const maxBarW = mode === 'monthly' ? 50 : mode === 'weekly' ? 30 : 15;
+    const barW = Math.max(8, Math.min(maxBarW, (chartW / (n||1)) * 0.7));
+    chartData.forEach((d, i) => {
+      const h = (d.value / maxVal) * chartH;
+      const x = (n === 1) ? PAD.l + chartW/2 : PAD.l + (i * chartW) / (n - 1 || 1);
+      
+      // Gradient for bars
+      const bGrad = ctx.createLinearGradient(0, PAD.t + chartH - h, 0, PAD.t + chartH);
+      bGrad.addColorStop(0, '#f97316');
+      bGrad.addColorStop(1, 'rgba(249,115,22,0.6)');
+      ctx.fillStyle = bGrad;
+      
+      // Rounded bar top
+      ctx.beginPath();
+      const r = Math.min(4, barW/2, h);
+      ctx.moveTo(x - barW/2, PAD.t + chartH);
+      ctx.lineTo(x - barW/2, PAD.t + chartH - h + r);
+      ctx.quadraticCurveTo(x - barW/2, PAD.t + chartH - h, x - barW/2 + r, PAD.t + chartH - h);
+      ctx.lineTo(x + barW/2 - r, PAD.t + chartH - h);
+      ctx.quadraticCurveTo(x + barW/2, PAD.t + chartH - h, x + barW/2, PAD.t + chartH - h + r);
+      ctx.lineTo(x + barW/2, PAD.t + chartH);
+      ctx.fill();
+
+      // Show cost number on top of bar if it's high enough and there aren't too many bars
+      if (n <= 20 && d.value > 0) {
+        ctx.fillStyle = 'rgba(255,255,255,0.8)';
+        ctx.font = '9px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('$' + (d.value>10?Math.round(d.value):d.value.toFixed(2)), x, PAD.t + chartH - h - 5);
+      }
+    });
+  }
+
+  // X-axis Labels
+  const step = Math.max(1, Math.ceil(n / 10));
+  chartData.forEach((d, i) => {
+    if (i === 0 || i === n - 1 || i % step === 0) {
+      ctx.fillStyle = 'rgba(255,255,255,0.5)';
+      ctx.font = '9px sans-serif';
+      ctx.textAlign = 'center';
+      const x = (n === 1) ? PAD.l + chartW/2 : PAD.l + (i * chartW) / (n - 1 || 1);
+      ctx.fillText(d.label, x, H - PAD.b + 14);
+    }
+  });
+
+  // Chart range label
+  const rangeEl = document.getElementById('cost-chart-range');
+  if (rangeEl && data.length > 0) rangeEl.textContent = `${data[0].day} → ${data[data.length-1].day}`;
+}
+
+// ── Agent Comms ───────────────────────────────────────────────────────────────
+function populateRelaySelects() {
+  const agents = allAgents.map(a => `<option value="${a.id}">${getEmoji(a.id)} ${a.id}</option>`).join('');
+  document.getElementById('relay-from').innerHTML = `<option value="dashboard">🖥️ dashboard (you)</option>${agents}`;
+  document.getElementById('relay-to').innerHTML   = agents || '<option value="">No agents</option>';
+
+  // Agent directory
+  const dir = document.getElementById('comms-agent-directory');
+  if (!allAgents.length) { dir.innerHTML = '<div class="empty">No agents</div>'; return; }
+  dir.innerHTML = allAgents.map(a => `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)">
+      <div>
+        <span style="font-size:15px;margin-right:8px">${getEmoji(a.id)}</span>
+        <span style="font-weight:600;font-size:13px">${a.id}</span>
+        <span class="mono muted" style="font-size:11px;margin-left:8px">agent:${a.id}:main</span>
+      </div>
+      <button class="btn btn-sm btn-default" onclick="quickRelay('${a.id}')">Message →</button>
+    </div>`).join('');
+}
+
+function quickRelay(agentId) {
+  document.getElementById('relay-to').value = agentId;
+  document.getElementById('relay-msg').focus();
+}
+
+async function sendRelay() {
+  const from = document.getElementById('relay-from').value;
+  const to   = document.getElementById('relay-to').value;
+  const msg  = document.getElementById('relay-msg').value.trim();
+  const resultEl = document.getElementById('relay-result');
+  if (!to || !msg) { toast('Select a recipient and enter a message', 'err'); return; }
+  resultEl.innerHTML = '<span class="spin"></span> Sending…';
+  const r = await apiPost('/api/relay', { from, to, message: msg }).catch(e => ({ ok: false, error: e.message }));
+  if (r.ok) {
+    resultEl.innerHTML = `<span style="color:var(--green)">✓ Delivered to ${to}</span>`;
+    document.getElementById('relay-msg').value = '';
+    toast(`Message sent to ${to}`, 'ok');
+    setTimeout(loadCommsLog, 500);
+  } else {
+    resultEl.innerHTML = `<span style="color:var(--red)">✗ ${r.error || 'Failed'}</span>`;
+    toast('Send failed', 'err');
+  }
+}
+
+async function loadCommsLog() {
+  const r = await api('/api/comms?limit=200');
+  const msgs = (r.messages || []).reverse();
+  const el = document.getElementById('comms-log');
+  if (!msgs.length) { el.innerHTML = '<div class="empty muted" style="padding:32px">No messages yet</div>'; return; }
+
+  const AGENT_COLOR_MAP = {
+    general: 'var(--blue)', coder: 'var(--green)', power: 'var(--accent)',
+    'local-general': 'var(--purple)', 'local-coder': 'var(--purple)', 'local-power': 'var(--purple)',
+    dashboard: 'var(--cyan)'
+  };
+
+  el.innerHTML = `<table><thead><tr><th>Time</th><th>From</th><th>To</th><th>Message</th><th>Status</th></tr></thead><tbody>` +
+    msgs.map(m => {
+      const time = new Date(m.ts).toLocaleTimeString();
+      const fromColor = AGENT_COLOR_MAP[m.from] || 'var(--muted2)';
+      const toColor   = AGENT_COLOR_MAP[m.to]   || 'var(--muted2)';
+      const statusBadge = m.status === 'sent'
+        ? '<span class="badge badge-green">✓ sent</span>'
+        : '<span class="badge badge-red">✗ failed</span>';
+      const esc = (m.message||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      return `<tr>
+        <td class="mono muted" style="font-size:11px;white-space:nowrap">${time}</td>
+        <td><span style="color:${fromColor};font-weight:600;font-size:12px">${getEmoji(m.from)} ${m.from}</span></td>
+        <td><span style="color:${toColor};font-weight:600;font-size:12px">${getEmoji(m.to)} ${m.to}</span></td>
+        <td style="font-size:13px;max-width:500px;overflow-wrap:anywhere">${esc}</td>
+        <td>${statusBadge}</td>
+      </tr>`;
+    }).join('') + `</tbody></table>`;
+}
+
+async function clearCommsLog() {
+  if (!confirm('Clear the entire agent comms log?')) return;
+  await fetch('/api/comms', { method: 'DELETE' });
+  loadCommsLog();
+  toast('Log cleared', 'ok');
+}
+
+
+
+loadAll();
+</script>
+<!-- ── File Editor Modal ── -->
+<div class="modal-overlay" id="file-modal" style="display:none" onclick="if(event.target===this)closeFileModal()">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span id="modal-title">Edit Files</span>
+      <button class="btn btn-muted" onclick="closeFileModal()" style="padding:4px 10px;font-size:12px">✕ Close</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-file-tabs" id="modal-file-tabs"></div>
+      <textarea class="modal-editor" id="modal-editor" spellcheck="false"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-muted" onclick="closeFileModal()">Cancel</button>
+      <button class="btn btn-accent" onclick="saveFile()">💾 Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const EDITABLE_FILES = ["MEMORY.md","USER.md","SOUL.md","AGENTS.md","IDENTITY.md","TOOLS.md","HEARTBEAT.md","learnings.md"];
+let modalAgentId = null;
+let modalFile    = null;
+let modalDirty   = false;
+
+async function openFileModal(agentId) {
+  modalAgentId = agentId;
+  modalFile    = EDITABLE_FILES[0];
+  document.getElementById('modal-title').textContent = `✏️ Edit — ${agentId}`;
+  document.getElementById('file-modal').style.display = 'flex';
+  renderFileTabs();
+  await loadFileContent();
+}
+
+function renderFileTabs() {
+  const tabs = document.getElementById('modal-file-tabs');
+  tabs.innerHTML = EDITABLE_FILES.map(f =>
+    `<div class="modal-file-tab${f===modalFile?' active':''}" onclick="switchFile('${f}')">${f}</div>`
+  ).join('');
+}
+
+async function switchFile(file) {
+  if (modalDirty) {
+    if (!confirm('You have unsaved changes. Switch anyway?')) return;
+  }
+  modalFile = file;
+  modalDirty = false;
+  renderFileTabs();
+  await loadFileContent();
+}
+
+async function loadFileContent() {
+  const editor = document.getElementById('modal-editor');
+  editor.value = 'Loading…';
+  try {
+    const r = await api(`/api/agent-file?agentId=${encodeURIComponent(modalAgentId)}&file=${encodeURIComponent(modalFile)}`);
+    editor.value = r.content || '';
+    modalDirty = false;
+    editor.oninput = () => { modalDirty = true; };
+  } catch(e) {
+    editor.value = 'Error loading file.';
+  }
+}
+
+async function saveFile() {
+  const content = document.getElementById('modal-editor').value;
+  const r = await apiPost('/api/agent-file', { agentId: modalAgentId, file: modalFile, content });
+  if (r.ok) {
+    toast(`✓ Saved ${modalFile}`, 'ok');
+    modalDirty = false;
+  } else {
+    toast('✗ ' + (r.error || 'Save failed'), 'err');
+  }
+}
+
+function closeFileModal() {
+  if (modalDirty && !confirm('You have unsaved changes. Close anyway?')) return;
+  document.getElementById('file-modal').style.display = 'none';
+  modalAgentId = null;
+  modalFile    = null;
+  modalDirty   = false;
+}
+
+// Ctrl+S / Cmd+S to save while modal is open
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 's' && modalAgentId) {
+    e.preventDefault();
+    saveFile();
+  }
+  if (e.key === 'Escape' && modalAgentId) closeFileModal();
+});
+</script>
+<!-- ── Permissions Modal ──────────────────────────────────────────────────── -->
+<div class="modal-overlay" id="perm-modal" style="display:none" onclick="if(event.target===this)closePermModal()">
+  <div class="modal-box" style="max-width:540px">
+    <div class="modal-header">
+      <span>🔐 Permissions — <span id="perm-agent-title" style="color:var(--accent)"></span></span>
+      <button class="btn btn-muted" style="padding:4px 10px;font-size:12px" onclick="closePermModal()">✕</button>
+    </div>
+    <div class="modal-body" style="gap:0">
+      <div style="margin-bottom:14px">
+        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:6px">Tool Profile</div>
+        <select id="perm-profile" onchange="onProfileChange(this.value)" style="width:100%;margin-bottom:4px">
+          <option value="coding">coding — exec, files, web, sessions, memory</option>
+          <option value="messaging">messaging — message, sessions, memory only</option>
+          <option value="minimal">minimal — session_status only</option>
+          <option value="full">full — no restrictions</option>
+        </select>
+        <div style="font-size:11px;color:var(--muted)">Changing profile resets individual overrides below.</div>
+      </div>
+      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Individual Tools</div>
+      <div id="perm-toggles"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-muted" onclick="closePermModal()">Cancel</button>
+      <button class="btn btn-default" onclick="savePermissions()">Save & Reload Gateway</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.toggle-wrap{position:relative;display:inline-block;width:36px;height:20px;cursor:pointer}
+.toggle-wrap input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;inset:0;background:var(--border);border-radius:20px;transition:.2s}
+.toggle-slider:before{content:"";position:absolute;width:14px;height:14px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}
+.toggle-wrap input:checked+.toggle-slider{background:var(--accent)}
+.toggle-wrap input:checked+.toggle-slider:before{transform:translateX(16px)}
+</style>
+
+</body>
+</html>

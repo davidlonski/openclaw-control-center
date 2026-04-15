@@ -1,0 +1,262 @@
+[2026-04-09 00:11:05] [WARN ] Discord requested reconnect
+[2026-04-09 00:11:05] [INFO ] Discord gateway reconnecting…
+[2026-04-09 00:11:05] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 00:11:05] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-09 00:11:05] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 00:11:10] [INFO ] Discord gateway reconnecting…
+[2026-04-09 00:11:10] [ERROR] Uncaught exception {"err":"WebSocket is not open: readyState 0 (CONNECTING)","stack":"Error: WebSocket is not open: readyState 0 (CONNECTING)\n    at WebSocket.send (/usr/local/lib/node_modules/openclaw/node_modules/ws/lib/websocket.js:451:13)\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 00:11:10] [INFO ] Discord gateway connected
+[2026-04-09 00:11:11] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 00:11:15] [INFO ] Discord gateway reconnecting…
+[2026-04-09 00:11:15] [INFO ] Discord gateway connected
+[2026-04-09 00:11:15] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 00:12:11] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-09 00:12:11] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 00:12:14] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 00:12:14] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 00:12:14] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 00:12:16] [INFO ] Discord gateway reconnecting…
+[2026-04-09 00:12:16] [INFO ] Discord gateway connected
+[2026-04-09 00:12:18] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 00:29:16] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 00:29:21] [INFO ] Discord gateway reconnecting…
+[2026-04-09 00:29:21] [INFO ] Discord gateway connected
+[2026-04-09 00:29:21] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 02:01:47] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 02:01:52] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 02:01:52] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 02:01:52] [INFO ] Discord gateway reconnecting…
+[2026-04-09 02:01:52] [INFO ] Discord gateway connected
+[2026-04-09 02:01:53] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 03:02:41] [WARN ] Discord requested reconnect
+[2026-04-09 03:02:41] [INFO ] Discord gateway reconnecting…
+[2026-04-09 03:02:41] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 03:02:41] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-09 03:02:41] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 03:02:41] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 03:02:45] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 03:02:45] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 03:02:45] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 03:02:46] [INFO ] Discord gateway reconnecting…
+[2026-04-09 03:02:46] [INFO ] Discord gateway connected
+[2026-04-09 03:02:46] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 03:02:51] [INFO ] Discord gateway reconnecting…
+[2026-04-09 03:02:51] [INFO ] Discord gateway connected
+[2026-04-09 03:02:52] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 03:03:47] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-09 03:03:47] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 03:03:48] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 03:03:48] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 03:03:52] [INFO ] Discord gateway reconnecting…
+[2026-04-09 03:03:52] [INFO ] Discord gateway connected
+[2026-04-09 03:03:52] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 03:50:24] [WARN ] Discord requested reconnect
+[2026-04-09 03:50:24] [INFO ] Discord gateway reconnecting…
+[2026-04-09 03:50:24] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 03:50:24] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-09 03:50:24] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 03:50:29] [INFO ] Discord gateway reconnecting…
+[2026-04-09 03:50:29] [INFO ] Discord gateway connected
+[2026-04-09 03:50:29] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 03:50:34] [INFO ] Discord gateway reconnecting…
+[2026-04-09 03:50:34] [INFO ] Discord gateway connected
+[2026-04-09 03:50:34] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 03:51:29] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-09 03:51:29] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 03:51:30] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 03:51:34] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 03:51:34] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 03:51:34] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 03:51:34] [INFO ] Discord gateway reconnecting…
+[2026-04-09 03:51:35] [INFO ] Discord gateway connected
+[2026-04-09 03:51:35] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 05:11:55] [WARN ] Discord requested reconnect
+[2026-04-09 05:11:55] [INFO ] Discord gateway reconnecting…
+[2026-04-09 05:11:55] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 05:11:55] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-09 05:11:55] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 05:11:56] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 05:12:00] [INFO ] Discord gateway reconnecting…
+[2026-04-09 05:12:00] [INFO ] Discord gateway connected
+[2026-04-09 05:12:01] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 05:12:05] [INFO ] Discord gateway reconnecting…
+[2026-04-09 05:12:05] [INFO ] Discord gateway connected
+[2026-04-09 05:12:06] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 05:13:01] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-09 05:13:01] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 05:13:04] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 05:13:04] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 05:13:06] [INFO ] Discord gateway reconnecting…
+[2026-04-09 05:13:06] [INFO ] Discord gateway connected
+[2026-04-09 05:13:07] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 06:22:29] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 06:22:31] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 06:22:31] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 06:22:34] [INFO ] Discord gateway reconnecting…
+[2026-04-09 06:22:34] [INFO ] Discord gateway connected
+[2026-04-09 06:22:34] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 08:52:20] [WARN ] Discord requested reconnect
+[2026-04-09 08:52:20] [INFO ] Discord gateway reconnecting…
+[2026-04-09 08:52:20] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 08:52:20] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-09 08:52:20] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 08:52:24] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 08:52:24] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 08:52:25] [INFO ] Discord gateway reconnecting…
+[2026-04-09 08:52:26] [INFO ] Discord gateway connected
+[2026-04-09 08:52:26] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 08:52:30] [INFO ] Discord gateway reconnecting…
+[2026-04-09 08:52:31] [INFO ] Discord gateway connected
+[2026-04-09 08:52:31] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 08:53:26] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-09 08:53:26] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 08:53:27] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 08:53:27] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 08:53:31] [INFO ] Discord gateway reconnecting…
+[2026-04-09 08:53:31] [INFO ] Discord gateway connected
+[2026-04-09 08:53:32] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 10:06:29] [WARN ] Discord requested reconnect
+[2026-04-09 10:06:29] [INFO ] Discord gateway reconnecting…
+[2026-04-09 10:06:29] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 10:06:29] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-09 10:06:29] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 10:06:34] [INFO ] Discord gateway reconnecting…
+[2026-04-09 10:06:34] [INFO ] Discord gateway connected
+[2026-04-09 10:06:35] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 10:06:39] [INFO ] Discord gateway reconnecting…
+[2026-04-09 10:06:39] [INFO ] Discord gateway connected
+[2026-04-09 10:06:40] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 10:07:35] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-09 10:07:35] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 10:07:35] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 10:07:39] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 10:07:39] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 10:07:39] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 10:07:39] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 10:07:40] [INFO ] Discord gateway reconnecting…
+[2026-04-09 10:07:40] [INFO ] Discord gateway connected
+[2026-04-09 10:07:40] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 10:39:28] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 10:39:33] [INFO ] Discord gateway reconnecting…
+[2026-04-09 10:39:33] [INFO ] Discord gateway connected
+[2026-04-09 10:39:33] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 13:49:04] [WARN ] Discord requested reconnect
+[2026-04-09 13:49:04] [INFO ] Discord gateway reconnecting…
+[2026-04-09 13:49:04] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 13:49:04] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-09 13:49:04] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 13:49:06] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 13:49:06] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 13:49:09] [INFO ] Discord gateway reconnecting…
+[2026-04-09 13:49:09] [INFO ] Discord gateway connected
+[2026-04-09 13:49:10] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 13:49:14] [INFO ] Discord gateway reconnecting…
+[2026-04-09 13:49:14] [INFO ] Discord gateway connected
+[2026-04-09 13:49:14] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 13:50:10] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-09 13:50:10] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 13:50:10] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 13:50:13] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 13:50:15] [INFO ] Discord gateway reconnecting…
+[2026-04-09 13:50:15] [INFO ] Discord gateway connected
+[2026-04-09 13:50:15] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 16:50:50] [WARN ] Discord requested reconnect
+[2026-04-09 16:50:50] [INFO ] Discord gateway reconnecting…
+[2026-04-09 16:50:50] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 16:50:50] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-09 16:50:50] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 16:50:52] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 16:50:52] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 16:50:52] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 16:50:52] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 16:50:55] [INFO ] Discord gateway reconnecting…
+[2026-04-09 16:50:55] [INFO ] Discord gateway connected
+[2026-04-09 16:50:55] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 16:51:00] [INFO ] Discord gateway reconnecting…
+[2026-04-09 16:51:00] [INFO ] Discord gateway connected
+[2026-04-09 16:51:00] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 16:51:55] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-09 16:51:55] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 16:51:55] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 16:51:55] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 16:51:55] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 16:51:55] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 16:51:59] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 16:51:59] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 16:52:00] [INFO ] Discord gateway reconnecting…
+[2026-04-09 16:52:00] [INFO ] Discord gateway connected
+[2026-04-09 16:52:01] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 18:49:35] [WARN ] Discord requested reconnect
+[2026-04-09 18:49:35] [INFO ] Discord gateway reconnecting…
+[2026-04-09 18:49:35] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 18:49:35] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-09 18:49:35] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 18:49:37] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 18:49:40] [INFO ] Discord gateway reconnecting…
+[2026-04-09 18:49:40] [INFO ] Discord gateway connected
+[2026-04-09 18:49:40] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 18:49:45] [INFO ] Discord gateway reconnecting…
+[2026-04-09 18:49:45] [INFO ] Discord gateway connected
+[2026-04-09 18:49:46] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 18:50:41] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-09 18:50:41] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 18:50:41] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 18:50:46] [INFO ] Discord gateway reconnecting…
+[2026-04-09 18:50:46] [INFO ] Discord gateway connected
+[2026-04-09 18:50:47] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 19:01:38] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 19:01:41] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 19:01:45] [INFO ] Discord gateway reconnecting…
+[2026-04-09 19:01:45] [INFO ] Discord gateway connected
+[2026-04-09 19:01:45] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 20:02:37] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 20:02:41] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 20:02:41] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 20:02:41] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 20:02:41] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 20:02:42] [INFO ] Discord gateway reconnecting…
+[2026-04-09 20:02:42] [INFO ] Discord gateway connected
+[2026-04-09 20:02:42] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 21:38:46] [WARN ] Discord requested reconnect
+[2026-04-09 21:38:46] [INFO ] Discord gateway reconnecting…
+[2026-04-09 21:38:46] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 21:38:46] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-09 21:38:46] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 21:38:49] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 21:38:51] [INFO ] Discord gateway reconnecting…
+[2026-04-09 21:38:52] [INFO ] Discord gateway connected
+[2026-04-09 21:38:52] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 21:38:56] [INFO ] Discord gateway reconnecting…
+[2026-04-09 21:38:56] [ERROR] Uncaught exception {"err":"WebSocket is not open: readyState 0 (CONNECTING)","stack":"Error: WebSocket is not open: readyState 0 (CONNECTING)\n    at WebSocket.send (/usr/local/lib/node_modules/openclaw/node_modules/ws/lib/websocket.js:451:13)\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 21:38:56] [ERROR] Uncaught exception {"err":"WebSocket is not open: readyState 0 (CONNECTING)","stack":"Error: WebSocket is not open: readyState 0 (CONNECTING)\n    at WebSocket.send (/usr/local/lib/node_modules/openclaw/node_modules/ws/lib/websocket.js:451:13)\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 21:38:56] [ERROR] Uncaught exception {"err":"WebSocket is not open: readyState 0 (CONNECTING)","stack":"Error: WebSocket is not open: readyState 0 (CONNECTING)\n    at WebSocket.send (/usr/local/lib/node_modules/openclaw/node_modules/ws/lib/websocket.js:451:13)\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 21:38:56] [ERROR] Uncaught exception {"err":"WebSocket is not open: readyState 0 (CONNECTING)","stack":"Error: WebSocket is not open: readyState 0 (CONNECTING)\n    at WebSocket.send (/usr/local/lib/node_modules/openclaw/node_modules/ws/lib/websocket.js:451:13)\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 21:38:57] [INFO ] Discord gateway connected
+[2026-04-09 21:38:57] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 21:39:52] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-09 21:39:52] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 21:39:57] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 21:39:57] [INFO ] Discord gateway reconnecting…
+[2026-04-09 21:39:57] [INFO ] Discord gateway connected
+[2026-04-09 21:39:58] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 23:56:29] [WARN ] Discord requested reconnect
+[2026-04-09 23:56:29] [INFO ] Discord gateway reconnecting…
+[2026-04-09 23:56:29] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 23:56:29] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-09 23:56:29] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 23:56:31] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 23:56:31] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 23:56:31] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 23:56:34] [INFO ] Discord gateway reconnecting…
+[2026-04-09 23:56:34] [ERROR] Uncaught exception {"err":"WebSocket is not open: readyState 0 (CONNECTING)","stack":"Error: WebSocket is not open: readyState 0 (CONNECTING)\n    at WebSocket.send (/usr/local/lib/node_modules/openclaw/node_modules/ws/lib/websocket.js:451:13)\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 23:56:35] [INFO ] Discord gateway connected
+[2026-04-09 23:56:35] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 23:56:39] [INFO ] Discord gateway reconnecting…
+[2026-04-09 23:56:40] [INFO ] Discord gateway connected
+[2026-04-09 23:56:40] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-09 23:57:35] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-09 23:57:35] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-09 23:57:38] [ERROR] Uncaught exception {"err":"Cannot read properties of null (reading 'send')","stack":"TypeError: Cannot read properties of null (reading 'send')\n    at Timeout._onTimeout (/Users/Fredrick/.openclaw/workspace-general/openclaw-dashboard/watchers/discordWatcher.js:54:16)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+[2026-04-09 23:57:40] [INFO ] Discord gateway reconnecting…
+[2026-04-09 23:57:40] [INFO ] Discord gateway connected
+[2026-04-09 23:57:41] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}

@@ -1,0 +1,96 @@
+{
+  "name": "OpenClaw Bridge",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "openclaw-bridge",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "openclaw-bridge"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ ok: true, message: 'Workflow received, processing...' }) }}",
+        "options": {}
+      },
+      "id": "immediate-ack",
+      "name": "Acknowledge Immediately",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [460, 200]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.task }}",
+              "rightValue": "",
+              "operator": { "type": "string", "operation": "notEmpty" }
+            }
+          ]
+        }
+      },
+      "id": "check-task",
+      "name": "Check Task Type",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [460, 380]
+    },
+    {
+      "parameters": {
+        "jsCode": "// ── OpenClaw Bridge — Main Logic ──────────────────────────────────\n// $json contains the payload sent by the agent + _openclaw metadata\n//\n// Available:\n//   $json.task         — what the agent wants done\n//   $json.data         — any structured data the agent passed\n//   $json._openclaw    — { agentId, sessionKey, callbackUrl, ts }\n//\n// This node is where YOU add your automation logic.\n// When done, return { result, summary, _openclaw } and the\n// next node will POST it back to OpenClaw.\n\nconst task      = $json.task || 'unknown';\nconst data      = $json.data || {};\nconst _openclaw = $json._openclaw || {};\n\n// ── Add your logic here ───────────────────────────────────────────\n// Example: process items, call an API, transform data, etc.\nconst result = `Task received: ${task}. Data: ${JSON.stringify(data)}`;\nconst summary = `Completed task: ${task}`;\n// ─────────────────────────────────────────────────────────────────\n\nreturn [{ json: { result, summary, _openclaw } }];"
+      },
+      "id": "process-task",
+      "name": "Process Task",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 380]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json._openclaw.callbackUrl }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ result: $json.result, summary: $json.summary, _openclaw: $json._openclaw }) }}",
+        "options": {}
+      },
+      "id": "callback-openclaw",
+      "name": "Callback to OpenClaw",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 380]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          { "node": "Acknowledge Immediately", "type": "main", "index": 0 },
+          { "node": "Check Task Type", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Check Task Type": {
+      "main": [
+        [{ "node": "Process Task", "type": "main", "index": 0 }],
+        []
+      ]
+    },
+    "Process Task": {
+      "main": [[{ "node": "Callback to OpenClaw", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "meta": { "description": "OpenClaw ↔ n8n bridge. Receives tasks from agents, processes them, sends results back via callback." }
+}

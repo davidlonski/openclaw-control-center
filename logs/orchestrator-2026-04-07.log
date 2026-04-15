@@ -1,0 +1,475 @@
+[2026-04-07 00:19:23] [WARN ] Discord requested reconnect
+[2026-04-07 00:19:23] [INFO ] Discord gateway reconnecting…
+[2026-04-07 00:19:23] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 00:19:23] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-07 00:19:23] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 00:19:28] [INFO ] Discord gateway reconnecting…
+[2026-04-07 00:19:28] [INFO ] Discord gateway connected
+[2026-04-07 00:19:29] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 00:19:33] [INFO ] Discord gateway reconnecting…
+[2026-04-07 00:19:33] [INFO ] Discord gateway connected
+[2026-04-07 00:19:34] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 00:20:29] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-07 00:20:29] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 00:20:34] [INFO ] Discord gateway reconnecting…
+[2026-04-07 00:20:34] [INFO ] Discord gateway connected
+[2026-04-07 00:20:34] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 02:52:17] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 02:52:22] [INFO ] Discord gateway reconnecting…
+[2026-04-07 02:52:23] [INFO ] Discord gateway connected
+[2026-04-07 02:52:23] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 05:37:24] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 05:37:50] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 05:38:20] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 05:38:50] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 05:38:51] [EVENT] File changed {"file":"openclaw.json"}
+[2026-04-07 05:38:52] [EVENT] Config file changed {"file":"/Users/Fredrick/.openclaw/openclaw.json"}
+[2026-04-07 05:38:52] [WARN ] Gateway reload failed {"err":"Command failed: openclaw gateway reload 2>/dev/null || kill -USR1 $(pgrep -f 'openclaw.*gateway') 2>/dev/null || true"}
+[2026-04-07 05:38:52] [INFO ] Config change handled ✓
+[2026-04-07 05:38:52] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 13:09:51] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 13:09:51] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 13:09:53] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 13:09:53] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-07 13:09:53] [INFO ] Discord gateway connected
+[2026-04-07 13:09:53] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 13:10:05] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 13:10:05] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 13:10:05] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:10:05] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 13:10:05] [ERROR] Uncaught exception {"err":"listen EADDRINUSE: address already in use 127.0.0.1:7891","stack":"Error: listen EADDRINUSE: address already in use 127.0.0.1:7891\n    at Server.setupListenHandle [as _listen2] (node:net:1948:16)\n    at listenInCluster (node:net:2005:12)\n    at node:net:2214:7\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)"}
+[2026-04-07 13:10:06] [INFO ] Discord gateway connected
+[2026-04-07 13:10:06] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 13:10:35] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:11:05] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:11:35] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:12:05] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:12:25] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 13:12:26] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 13:12:26] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 13:12:26] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:12:26] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 13:12:26] [ERROR] Uncaught exception {"err":"listen EADDRINUSE: address already in use 127.0.0.1:7891","stack":"Error: listen EADDRINUSE: address already in use 127.0.0.1:7891\n    at Server.setupListenHandle [as _listen2] (node:net:1948:16)\n    at listenInCluster (node:net:2005:12)\n    at node:net:2214:7\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)"}
+[2026-04-07 13:12:26] [INFO ] Discord gateway connected
+[2026-04-07 13:12:26] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 13:12:56] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:13:26] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:13:34] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 13:13:34] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 13:13:34] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 13:13:34] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:13:34] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 13:13:34] [ERROR] Uncaught exception {"err":"listen EADDRINUSE: address already in use 127.0.0.1:7891","stack":"Error: listen EADDRINUSE: address already in use 127.0.0.1:7891\n    at Server.setupListenHandle [as _listen2] (node:net:1948:16)\n    at listenInCluster (node:net:2005:12)\n    at node:net:2214:7\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)"}
+[2026-04-07 13:13:34] [INFO ] Discord gateway connected
+[2026-04-07 13:13:34] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 13:14:04] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:14:34] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:14:45] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 13:14:45] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 13:14:45] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 13:14:45] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 13:14:45] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:14:45] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 13:14:45] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-07 13:14:45] [INFO ] Discord gateway connected
+[2026-04-07 13:14:46] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 13:15:15] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:15:16] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 13:15:16] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 13:15:16] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 13:15:16] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:15:16] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 13:15:16] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-07 13:15:17] [INFO ] Discord gateway connected
+[2026-04-07 13:15:17] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 13:15:46] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:16:16] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:16:46] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:17:16] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:17:46] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:18:16] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:18:46] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:19:16] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:19:46] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:20:16] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:20:46] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:21:16] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:21:46] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:22:16] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:22:46] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:23:16] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:23:46] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:24:16] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:24:46] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:25:16] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:25:46] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:26:16] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:26:46] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:27:16] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:27:46] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:28:16] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:28:46] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:29:16] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:29:46] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:30:16] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:30:46] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:31:16] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:31:46] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:31:56] [EVENT] File changed {"file":"openclaw.json"}
+[2026-04-07 13:31:56] [EVENT] Config file changed {"file":"/Users/Fredrick/.openclaw/openclaw.json"}
+[2026-04-07 13:31:56] [INFO ] Gateway reload triggered
+[2026-04-07 13:31:56] [INFO ] Config change handled ✓
+[2026-04-07 13:32:18] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:32:48] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:33:18] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:33:31] [EVENT] File changed {"file":"openclaw.json"}
+[2026-04-07 13:33:32] [EVENT] Config file changed {"file":"/Users/Fredrick/.openclaw/openclaw.json"}
+[2026-04-07 13:33:32] [INFO ] Gateway reload triggered
+[2026-04-07 13:33:32] [INFO ] Config change handled ✓
+[2026-04-07 13:33:48] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:34:18] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:34:48] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:35:18] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:35:48] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:35:48] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:36:18] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:36:48] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:37:18] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:37:48] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:38:18] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:38:48] [WARN ] Load monitor snapshot failed {"err":"Command failed: openclaw status --json 2>/dev/null"}
+[2026-04-07 13:38:50] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 13:38:50] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 13:38:50] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 13:38:50] [WARN ] Load monitor snapshot failed {"err":"Command failed: /usr/local/bin/openclaw status --json 2>/dev/null"}
+[2026-04-07 13:38:50] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 13:38:50] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-07 13:38:50] [INFO ] Discord gateway connected
+[2026-04-07 13:38:54] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 13:39:02] [WARN ] Load monitor snapshot failed {"err":"Command failed: /usr/local/bin/openclaw status --json 2>/dev/null"}
+[2026-04-07 13:39:09] [WARN ] Load monitor snapshot failed {"err":"Command failed: /usr/local/bin/openclaw status --json 2>/dev/null"}
+[2026-04-07 13:39:20] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 13:39:20] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 13:39:20] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 13:39:22] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 13:39:22] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-07 13:39:22] [INFO ] Discord gateway connected
+[2026-04-07 13:39:23] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 13:41:24] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"10 active sessions, 10857 tok/min","activeSessions":10,"tokenRate":10857}
+[2026-04-07 13:41:54] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"10 active sessions, 8717 tok/min","activeSessions":10,"tokenRate":8717}
+[2026-04-07 13:42:25] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"10 active sessions, 7277 tok/min","activeSessions":10,"tokenRate":7277}
+[2026-04-07 13:42:55] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"10 active sessions, 6246 tok/min","activeSessions":10,"tokenRate":6246}
+[2026-04-07 13:43:24] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"10 active sessions, 5477 tok/min","activeSessions":10,"tokenRate":5477}
+[2026-04-07 13:43:55] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"10 active sessions, 5022 tok/min","activeSessions":10,"tokenRate":5022}
+[2026-04-07 14:20:28] [WARN ] Discord requested reconnect
+[2026-04-07 14:20:28] [INFO ] Discord gateway reconnecting…
+[2026-04-07 14:20:28] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 14:20:28] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-07 14:20:28] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 14:20:33] [INFO ] Discord gateway reconnecting…
+[2026-04-07 14:20:34] [INFO ] Discord gateway connected
+[2026-04-07 14:20:34] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 14:20:38] [INFO ] Discord gateway reconnecting…
+[2026-04-07 14:20:39] [INFO ] Discord gateway connected
+[2026-04-07 14:20:39] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 14:21:34] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-07 14:21:34] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 14:21:39] [INFO ] Discord gateway reconnecting…
+[2026-04-07 14:21:39] [INFO ] Discord gateway connected
+[2026-04-07 14:21:40] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 14:29:35] [EVENT] File changed {"file":"openclaw.json"}
+[2026-04-07 14:29:36] [EVENT] Config file changed {"file":"/Users/Fredrick/.openclaw/openclaw.json"}
+[2026-04-07 14:29:37] [WARN ] Gateway reload failed {"err":"Command failed: openclaw gateway reload 2>/dev/null || kill -USR1 $(pgrep -f 'openclaw.*gateway') 2>/dev/null || true"}
+[2026-04-07 14:29:37] [INFO ] Config change handled ✓
+[2026-04-07 14:34:57] [EVENT] File changed {"file":"openclaw.json"}
+[2026-04-07 14:34:58] [EVENT] Config file changed {"file":"/Users/Fredrick/.openclaw/openclaw.json"}
+[2026-04-07 14:34:58] [WARN ] Gateway reload failed {"err":"Command failed: openclaw gateway reload 2>/dev/null || kill -USR1 $(pgrep -f 'openclaw.*gateway') 2>/dev/null || true"}
+[2026-04-07 14:34:58] [INFO ] Config change handled ✓
+[2026-04-07 14:42:27] [WARN ] Discord requested reconnect
+[2026-04-07 14:42:27] [INFO ] Discord gateway reconnecting…
+[2026-04-07 14:42:27] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 14:42:27] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-07 14:42:27] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 14:42:32] [INFO ] Discord gateway reconnecting…
+[2026-04-07 14:42:33] [INFO ] Discord gateway connected
+[2026-04-07 14:42:33] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 14:42:37] [INFO ] Discord gateway reconnecting…
+[2026-04-07 14:42:38] [INFO ] Discord gateway connected
+[2026-04-07 14:42:40] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 14:43:33] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-07 14:43:33] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 14:43:38] [INFO ] Discord gateway reconnecting…
+[2026-04-07 14:43:38] [INFO ] Discord gateway connected
+[2026-04-07 14:43:39] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 16:05:31] [WARN ] Discord requested reconnect
+[2026-04-07 16:05:31] [INFO ] Discord gateway reconnecting…
+[2026-04-07 16:05:31] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 16:05:31] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-07 16:05:31] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 16:05:36] [INFO ] Discord gateway reconnecting…
+[2026-04-07 16:05:36] [INFO ] Discord gateway connected
+[2026-04-07 16:05:37] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 16:05:41] [INFO ] Discord gateway reconnecting…
+[2026-04-07 16:05:41] [INFO ] Discord gateway connected
+[2026-04-07 16:05:42] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 16:06:37] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-07 16:06:37] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 16:06:42] [INFO ] Discord gateway reconnecting…
+[2026-04-07 16:06:42] [INFO ] Discord gateway connected
+[2026-04-07 16:06:42] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 16:15:59] [EVENT] File changed {"file":"openclaw.json"}
+[2026-04-07 16:16:00] [EVENT] Config file changed {"file":"/Users/Fredrick/.openclaw/openclaw.json"}
+[2026-04-07 16:16:01] [INFO ] Gateway reload triggered
+[2026-04-07 16:16:01] [INFO ] Config change handled ✓
+[2026-04-07 16:22:01] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 16:23:22] [WARN ] Gateway not responding {"consecutiveFailures":1}
+[2026-04-07 16:24:20] [INFO ] Gateway recovered
+[2026-04-07 16:27:20] [EVENT] File changed {"file":"openclaw.json"}
+[2026-04-07 16:27:20] [EVENT] Config file changed {"file":"/Users/Fredrick/.openclaw/openclaw.json"}
+[2026-04-07 16:27:21] [INFO ] Gateway reload triggered
+[2026-04-07 16:27:21] [INFO ] Config change handled ✓
+[2026-04-07 17:11:23] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 17:11:28] [INFO ] Discord gateway reconnecting…
+[2026-04-07 17:11:28] [INFO ] Discord gateway connected
+[2026-04-07 17:11:28] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 17:14:13] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 17:14:18] [INFO ] Discord gateway reconnecting…
+[2026-04-07 17:14:18] [INFO ] Discord gateway connected
+[2026-04-07 17:14:18] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 18:11:32] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:12:01] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:12:31] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:13:01] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:13:33] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:14:01] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:14:24] [WARN ] Gateway not responding {"consecutiveFailures":1}
+[2026-04-07 18:14:32] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:15:02] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:15:23] [INFO ] Gateway recovered
+[2026-04-07 18:15:32] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:16:02] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:17:32] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:18:02] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:18:32] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:19:03] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:19:32] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:20:04] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:20:33] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:22:03] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:25:03] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:26:33] [EVENT] File changed {"file":"openclaw.json"}
+[2026-04-07 18:26:34] [EVENT] Config file changed {"file":"/Users/Fredrick/.openclaw/openclaw.json"}
+[2026-04-07 18:26:34] [INFO ] Gateway reload triggered
+[2026-04-07 18:26:34] [INFO ] Config change handled ✓
+[2026-04-07 18:26:51] [EVENT] File changed {"file":"openclaw.json"}
+[2026-04-07 18:26:51] [EVENT] Config file changed {"file":"/Users/Fredrick/.openclaw/openclaw.json"}
+[2026-04-07 18:26:52] [INFO ] Gateway reload triggered
+[2026-04-07 18:26:52] [INFO ] Config change handled ✓
+[2026-04-07 18:29:03] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:54:09] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 18:54:09] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 18:54:09] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 18:54:11] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 18:54:11] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-07 18:54:11] [INFO ] Discord gateway connected
+[2026-04-07 18:54:12] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 18:54:43] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 18674 tok/min","activeSessions":8,"tokenRate":18674}
+[2026-04-07 18:55:13] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 9647 tok/min","activeSessions":8,"tokenRate":9647}
+[2026-04-07 18:55:43] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 6512 tok/min","activeSessions":8,"tokenRate":6512}
+[2026-04-07 18:57:50] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:58:19] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 18:59:19] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 19:07:18] [EVENT] File changed {"file":"openclaw.json"}
+[2026-04-07 19:07:19] [EVENT] Config file changed {"file":"/Users/Fredrick/.openclaw/openclaw.json"}
+[2026-04-07 19:07:20] [INFO ] Gateway reload triggered
+[2026-04-07 19:07:20] [INFO ] Config change handled ✓
+[2026-04-07 19:19:05] [EVENT] File changed {"file":"openclaw.json"}
+[2026-04-07 19:19:06] [EVENT] Config file changed {"file":"/Users/Fredrick/.openclaw/openclaw.json"}
+[2026-04-07 19:19:06] [INFO ] Gateway reload triggered
+[2026-04-07 19:19:06] [INFO ] Config change handled ✓
+[2026-04-07 20:17:58] [EVENT] File changed {"file":"permissions.json"}
+[2026-04-07 20:17:59] [EVENT] Permissions file changed
+[2026-04-07 20:17:59] [INFO ] Permissions reloaded {"domains":["global","global/scripts","global/documentation","global/templates","global/notes","global/knowledge-base","general","coding","ideas","projects","business"],"summary":"global:[\"*\"], global/scripts:[\"*\"], global/documentation:[\"*\"], global/templates:[\"*\"], global/notes:[\"*\"], global/knowledge-base:[\"*\"], general:[\"general\",\"power\",\"local-general\"], coding:[\"coder\",\"local-coder\",\"power\"], ideas:[\"general\",\"power\",\"gumroad-builder\"], projects:[\"coder\",\"power\",\"fiverr-builder\",\"gumroad-builder\"], business:[\"fiverr-builder\",\"gumroad-builder\",\"affiliate-tracker\",\"power\",\"automation\"]"}
+[2026-04-07 20:17:59] [INFO ] Permission change handled ✓
+[2026-04-07 20:44:17] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 20:44:17] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 20:44:19] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 20:44:19] [ERROR] Uncaught exception {"err":"listen EADDRINUSE: address already in use 127.0.0.1:7891","stack":"Error: listen EADDRINUSE: address already in use 127.0.0.1:7891\n    at Server.setupListenHandle [as _listen2] (node:net:1948:16)\n    at listenInCluster (node:net:2005:12)\n    at node:net:2214:7\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)"}
+[2026-04-07 20:44:20] [INFO ] Discord gateway connected
+[2026-04-07 20:44:20] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 20:44:25] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 20:44:25] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 20:44:25] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 20:44:25] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 20:44:27] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 20:44:27] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 20:44:27] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-07 20:44:27] [ERROR] Uncaught exception {"err":"listen EADDRINUSE: address already in use 127.0.0.1:7891","stack":"Error: listen EADDRINUSE: address already in use 127.0.0.1:7891\n    at Server.setupListenHandle [as _listen2] (node:net:1948:16)\n    at listenInCluster (node:net:2005:12)\n    at node:net:2214:7\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)"}
+[2026-04-07 20:44:27] [INFO ] Discord gateway connected
+[2026-04-07 20:44:27] [INFO ] Discord gateway connected
+[2026-04-07 20:44:28] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 20:44:28] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 20:44:29] [INFO ] Received SIGINT — shutting down
+[2026-04-07 20:46:20] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 20:46:20] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 20:46:22] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 20:46:22] [ERROR] Uncaught exception {"err":"listen EADDRINUSE: address already in use 127.0.0.1:7891","stack":"Error: listen EADDRINUSE: address already in use 127.0.0.1:7891\n    at Server.setupListenHandle [as _listen2] (node:net:1948:16)\n    at listenInCluster (node:net:2005:12)\n    at node:net:2214:7\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)"}
+[2026-04-07 20:46:22] [INFO ] Discord gateway connected
+[2026-04-07 20:46:23] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 20:56:28] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 20:56:28] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 20:56:28] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 20:56:28] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 20:56:30] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 20:56:30] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-07 20:56:30] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 20:56:30] [ERROR] Uncaught exception {"err":"listen EADDRINUSE: address already in use 127.0.0.1:7891","stack":"Error: listen EADDRINUSE: address already in use 127.0.0.1:7891\n    at Server.setupListenHandle [as _listen2] (node:net:1948:16)\n    at listenInCluster (node:net:2005:12)\n    at node:net:2214:7\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)"}
+[2026-04-07 20:56:31] [INFO ] Discord gateway connected
+[2026-04-07 20:56:31] [INFO ] Discord gateway connected
+[2026-04-07 20:56:31] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 20:56:33] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 22:04:59] [WARN ] Discord requested reconnect
+[2026-04-07 22:04:59] [INFO ] Discord gateway reconnecting…
+[2026-04-07 22:04:59] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 22:04:59] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-07 22:04:59] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 22:05:05] [INFO ] Discord gateway reconnecting…
+[2026-04-07 22:05:05] [INFO ] Discord gateway connected
+[2026-04-07 22:05:05] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 22:05:09] [INFO ] Discord gateway reconnecting…
+[2026-04-07 22:05:09] [INFO ] Discord gateway connected
+[2026-04-07 22:05:11] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 22:06:05] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-07 22:06:05] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 22:06:10] [INFO ] Discord gateway reconnecting…
+[2026-04-07 22:06:11] [INFO ] Discord gateway connected
+[2026-04-07 22:06:12] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 22:08:11] [WARN ] Discord requested reconnect
+[2026-04-07 22:08:11] [INFO ] Discord gateway reconnecting…
+[2026-04-07 22:08:11] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 22:08:11] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-07 22:08:11] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 22:08:16] [INFO ] Discord gateway reconnecting…
+[2026-04-07 22:08:16] [INFO ] Discord gateway connected
+[2026-04-07 22:08:17] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 22:08:22] [INFO ] Discord gateway reconnecting…
+[2026-04-07 22:08:22] [INFO ] Discord gateway connected
+[2026-04-07 22:08:23] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 22:09:17] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-07 22:09:17] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-07 22:09:22] [INFO ] Discord gateway reconnecting…
+[2026-04-07 22:09:22] [INFO ] Discord gateway connected
+[2026-04-07 22:09:25] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 22:35:28] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 22:40:44] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 22:43:28] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 22:43:37] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 22:43:37] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 22:43:37] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 22:43:44] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 22:43:44] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 22:43:44] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 22:43:44] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 22:43:52] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 22:43:52] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-07 22:43:52] [INFO ] Discord gateway connected
+[2026-04-07 22:43:52] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 22:44:30] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 22:45:00] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 22:45:44] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 22:45:44] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 22:45:44] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 22:45:46] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 22:45:46] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 22:45:52] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 22:45:52] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 22:45:52] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-07 22:45:52] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 22:45:52] [ERROR] Uncaught exception {"err":"listen EADDRINUSE: address already in use 127.0.0.1:7891","stack":"Error: listen EADDRINUSE: address already in use 127.0.0.1:7891\n    at Server.setupListenHandle [as _listen2] (node:net:1948:16)\n    at listenInCluster (node:net:2005:12)\n    at node:net:2214:7\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)"}
+[2026-04-07 22:45:52] [INFO ] Discord gateway connected
+[2026-04-07 22:45:52] [INFO ] Discord gateway connected
+[2026-04-07 22:45:53] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 22:45:53] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 22:46:30] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 22:46:30] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 22:46:35] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 22:46:35] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-07 22:46:35] [INFO ] Discord gateway connected
+[2026-04-07 22:46:36] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 22:53:13] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 22:53:17] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 22:53:17] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 22:53:17] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 22:53:25] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 22:53:25] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-07 22:53:25] [INFO ] Discord gateway connected
+[2026-04-07 22:53:26] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 22:56:42] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 22:56:42] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 22:56:42] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 22:56:42] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 22:56:49] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 22:56:49] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-07 22:56:49] [INFO ] Discord gateway connected
+[2026-04-07 22:56:50] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 22:57:23] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"9 active sessions, 5187 tok/min","activeSessions":9,"tokenRate":5187}
+[2026-04-07 22:59:30] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 23:00:07] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 23:00:08] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 23:00:08] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 23:00:16] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 23:00:16] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 23:00:16] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-07 23:00:16] [INFO ] Discord gateway connected
+[2026-04-07 23:00:16] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 23:02:54] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 23:02:55] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 23:02:55] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 23:02:55] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 23:02:58] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 23:02:58] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-07 23:02:59] [INFO ] Discord gateway connected
+[2026-04-07 23:02:59] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 23:08:06] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 23:08:37] [WARN ] Load monitor snapshot failed {"err":"spawnSync /bin/sh ETIMEDOUT"}
+[2026-04-07 23:44:49] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 23:44:49] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 23:44:49] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 23:44:51] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 23:44:51] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 23:44:51] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 23:44:51] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-07 23:44:51] [INFO ] Discord gateway connected
+[2026-04-07 23:44:52] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 23:44:53] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 23:44:53] [ERROR] Uncaught exception {"err":"listen EADDRINUSE: address already in use 127.0.0.1:7891","stack":"Error: listen EADDRINUSE: address already in use 127.0.0.1:7891\n    at Server.setupListenHandle [as _listen2] (node:net:1948:16)\n    at listenInCluster (node:net:2005:12)\n    at node:net:2214:7\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)"}
+[2026-04-07 23:44:53] [INFO ] Discord gateway connected
+[2026-04-07 23:44:54] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 23:48:08] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 23:48:29] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 23:48:29] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 23:48:31] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 23:48:31] [INFO ] OpenClaw Control Center HTTP → http://127.0.0.1:7891 (redirects to HTTPS)
+[2026-04-07 23:48:31] [INFO ] OpenClaw Control Center → https://127.0.0.1:7892
+[2026-04-07 23:48:31] [INFO ] Discord gateway connected
+[2026-04-07 23:48:32] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 23:48:35] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 23:48:35] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 23:48:37] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 23:48:37] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 23:48:39] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 23:48:39] [INFO ] OpenClaw Control Center HTTP → http://127.0.0.1:7891 (redirects to HTTPS)
+[2026-04-07 23:48:39] [INFO ] OpenClaw Control Center → https://127.0.0.1:7892
+[2026-04-07 23:48:39] [INFO ] Discord gateway connected
+[2026-04-07 23:48:39] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 23:49:11] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"9 active sessions, 9755 tok/min","activeSessions":9,"tokenRate":9755}
+[2026-04-07 23:49:41] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"9 active sessions, 5055 tok/min","activeSessions":9,"tokenRate":5055}
+[2026-04-07 23:52:17] [INFO ] Received SIGTERM — shutting down
+[2026-04-07 23:52:17] [INFO ] OpenClaw Control Center starting…
+[2026-04-07 23:52:17] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-07 23:52:20] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-07 23:52:20] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-07 23:52:20] [INFO ] OpenClaw Control Center HTTPS → https://127.0.0.1:7892
+[2026-04-07 23:52:20] [INFO ] Discord gateway connected
+[2026-04-07 23:52:20] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-07 23:52:52] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"9 active sessions, 7947 tok/min","activeSessions":9,"tokenRate":7947}

@@ -1,0 +1,25 @@
+[2026-04-15 00:43:56] [INFO ] Received SIGTERM — shutting down
+[2026-04-15 00:50:48] [INFO ] OpenClaw Control Center starting…
+[2026-04-15 00:50:48] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-15 00:50:52] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-15 00:50:52] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-15 00:50:52] [INFO ] Discord gateway connected
+[2026-04-15 00:50:53] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-15 01:00:21] [INFO ] Received SIGTERM — shutting down
+[2026-04-15 01:00:21] [INFO ] OpenClaw Control Center starting…
+[2026-04-15 01:00:21] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-15 01:00:23] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-15 01:00:23] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-15 01:00:23] [INFO ] Discord gateway connected
+[2026-04-15 01:00:24] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-15 01:39:34] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-15 01:39:39] [INFO ] Discord gateway reconnecting…
+[2026-04-15 01:39:40] [INFO ] Discord gateway connected
+[2026-04-15 01:39:40] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-15 02:39:39] [INFO ] Received SIGTERM — shutting down
+[2026-04-15 02:39:39] [INFO ] OpenClaw Control Center starting…
+[2026-04-15 02:39:39] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-15 02:39:40] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-15 02:39:40] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-15 02:39:40] [INFO ] Discord gateway connected
+[2026-04-15 02:39:41] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}

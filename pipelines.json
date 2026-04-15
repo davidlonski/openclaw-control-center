@@ -1,0 +1,201 @@
+{
+  "_comment": "Pipeline and routing config for the OpenClaw orchestrator.",
+  "routing": {
+    "_comment": "Smart model routing rules. Evaluated in order \u2014 first match wins.",
+    "enabled": true,
+    "rules": [
+      {
+        "name": "force-local",
+        "description": "User explicitly wants local/offline",
+        "match": {
+          "keywords": [
+            "local:",
+            "offline:",
+            "private:"
+          ]
+        },
+        "model": "ollama/gemma4:e4b",
+        "agent": "local-general"
+      },
+      {
+        "name": "force-cloud",
+        "description": "User explicitly wants cloud/smart",
+        "match": {
+          "keywords": [
+            "cloud:",
+            "smart:",
+            "best:"
+          ]
+        },
+        "model": "anthropic/claude-sonnet-4-6",
+        "agent": null
+      },
+      {
+        "name": "code-complex",
+        "description": "Complex code tasks \u2192 cloud coder",
+        "match": {
+          "keywords": [
+            "architect",
+            "refactor",
+            "design pattern",
+            "optimize",
+            "performance",
+            "security audit"
+          ],
+          "agentIs": [
+            "coder",
+            "local-coder"
+          ],
+          "minLength": 200
+        },
+        "model": "anthropic/claude-sonnet-4-6",
+        "agent": "coder"
+      },
+      {
+        "name": "code-simple",
+        "description": "Simple code tasks \u2192 local coder",
+        "match": {
+          "keywords": [
+            "fix",
+            "typo",
+            "rename",
+            "format",
+            "snippet",
+            "example"
+          ],
+          "agentIs": [
+            "coder",
+            "local-coder"
+          ],
+          "maxLength": 150
+        },
+        "model": "ollama/qwen2.5:14b",
+        "agent": "local-coder"
+      },
+      {
+        "name": "heavy-analysis",
+        "description": "Long, analytical prompts \u2192 cloud",
+        "match": {
+          "minLength": 500
+        },
+        "model": "anthropic/claude-sonnet-4-6",
+        "agent": null
+      },
+      {
+        "name": "quick-question",
+        "description": "Short simple questions \u2192 local",
+        "match": {
+          "maxLength": 80,
+          "agentIs": [
+            "general",
+            "local-general"
+          ]
+        },
+        "model": "ollama/gemma4:e4b",
+        "agent": "local-general"
+      }
+    ],
+    "thresholds": {
+      "simpleMaxChars": 100,
+      "complexMinChars": 400,
+      "localModels": [
+        "ollama/gemma4:e4b",
+        "ollama/qwen2.5:14b",
+        "ollama/gemma4:31b"
+      ],
+      "cloudModels": [
+        "anthropic/claude-sonnet-4-6"
+      ]
+    }
+  },
+  "pipelines": {
+    "_comment": "Multi-agent workflows. Each step receives the output of the previous step.",
+    "build-feature": {
+      "description": "Full feature pipeline: interpret \u2192 code \u2192 review",
+      "steps": [
+        {
+          "agent": "general",
+          "role": "interpreter",
+          "instruction": "You are step 1 of 3 in a build-feature pipeline. Interpret the user request and write a clear technical specification: what needs to be built, inputs, outputs, edge cases. Be concise. Your output will be passed to the coder agent.",
+          "outputKey": "spec"
+        },
+        {
+          "agent": "coder",
+          "role": "implementer",
+          "instruction": "You are step 2 of 3 in a build-feature pipeline. Using the spec below, write the complete implementation. Include all code, no placeholders.\n\nSPEC:\n{spec}",
+          "outputKey": "code"
+        },
+        {
+          "agent": "power",
+          "role": "reviewer",
+          "instruction": "You are step 3 of 3 in a build-feature pipeline. Review the code below for correctness, edge cases, and improvements. Output: final reviewed code + a short list of any issues fixed.\n\nCODE:\n{code}",
+          "outputKey": "result"
+        }
+      ]
+    },
+    "research-and-summarize": {
+      "description": "Research a topic and produce a structured summary",
+      "steps": [
+        {
+          "agent": "general",
+          "role": "researcher",
+          "instruction": "You are step 1 of 2. Research the following topic and collect key facts, perspectives, and open questions. Be thorough.",
+          "outputKey": "research"
+        },
+        {
+          "agent": "general",
+          "role": "summarizer",
+          "instruction": "You are step 2 of 2. Condense the research below into a clean, structured summary with: key facts, main takeaways, and 3 follow-up questions.\n\nRESEARCH:\n{research}",
+          "outputKey": "result"
+        }
+      ]
+    },
+    "debug-and-fix": {
+      "description": "Diagnose a bug then fix it",
+      "steps": [
+        {
+          "agent": "coder",
+          "role": "debugger",
+          "instruction": "You are step 1 of 2. Diagnose the bug in the code/error below. Identify root cause and explain it clearly. Do not fix yet.",
+          "outputKey": "diagnosis"
+        },
+        {
+          "agent": "coder",
+          "role": "fixer",
+          "instruction": "You are step 2 of 2. Fix the bug. Use the diagnosis below as context. Output the complete fixed code only.\n\nDIAGNOSIS:\n{diagnosis}",
+          "outputKey": "result"
+        }
+      ]
+    },
+    "local-first": {
+      "description": "Try local model first, escalate to cloud if result is poor",
+      "steps": [
+        {
+          "agent": "local-general",
+          "role": "first-pass",
+          "instruction": "Answer the following question as best you can. If you are not confident or the question requires deep reasoning, end your response with the tag: [ESCALATE]",
+          "outputKey": "localResult",
+          "escalateOnTag": "[ESCALATE]"
+        },
+        {
+          "agent": "general",
+          "role": "escalation",
+          "instruction": "The local model flagged this as needing escalation. Please provide a thorough answer to the original question.",
+          "outputKey": "result",
+          "condition": "escalated"
+        }
+      ]
+    }
+  },
+  "scaling": {
+    "_comment": "Load monitoring thresholds. Scaling here means model routing \u2014 not process spawning.",
+    "enabled": true,
+    "monitorIntervalMs": 30000,
+    "thresholds": {
+      "highLoadTokensPerMin": 5000,
+      "highLoadActiveSessions": 15,
+      "contextWarningPct": 70,
+      "preferLocalBelowLoad": true
+    }
+  }
+}

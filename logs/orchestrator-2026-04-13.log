@@ -1,0 +1,176 @@
+[2026-04-13 00:32:52] [INFO ] Received SIGTERM — shutting down
+[2026-04-13 00:32:53] [INFO ] OpenClaw Control Center starting…
+[2026-04-13 00:32:53] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-13 00:32:55] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-13 00:32:55] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-13 00:32:56] [INFO ] Discord gateway connected
+[2026-04-13 00:32:56] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 00:41:24] [INFO ] Received SIGTERM — shutting down
+[2026-04-13 00:41:25] [INFO ] OpenClaw Control Center starting…
+[2026-04-13 00:41:25] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-13 00:41:27] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-13 00:41:27] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-13 00:41:27] [INFO ] Discord gateway connected
+[2026-04-13 00:41:28] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 00:55:26] [INFO ] Received SIGTERM — shutting down
+[2026-04-13 00:55:27] [INFO ] OpenClaw Control Center starting…
+[2026-04-13 00:55:27] [INFO ] File watcher started {"watching":["openclaw.json","permissions.json"]}
+[2026-04-13 00:55:29] [INFO ] Load monitor started {"intervalMs":30000}
+[2026-04-13 00:55:29] [INFO ] OpenClaw Control Center → http://127.0.0.1:7891
+[2026-04-13 00:55:29] [INFO ] Discord gateway connected
+[2026-04-13 00:55:29] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 03:30:38] [WARN ] Discord requested reconnect
+[2026-04-13 03:30:38] [INFO ] Discord gateway reconnecting…
+[2026-04-13 03:30:38] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 03:30:38] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-13 03:30:38] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 03:30:43] [INFO ] Discord gateway reconnecting…
+[2026-04-13 03:30:44] [INFO ] Discord gateway connected
+[2026-04-13 03:30:44] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 03:30:48] [INFO ] Discord gateway reconnecting…
+[2026-04-13 03:30:49] [INFO ] Discord gateway connected
+[2026-04-13 03:30:50] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 03:31:44] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-13 03:31:44] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 03:31:49] [INFO ] Discord gateway reconnecting…
+[2026-04-13 03:31:49] [INFO ] Discord gateway connected
+[2026-04-13 03:31:50] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 05:45:17] [WARN ] Discord requested reconnect
+[2026-04-13 05:45:17] [INFO ] Discord gateway reconnecting…
+[2026-04-13 05:45:17] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 05:45:17] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-13 05:45:17] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 05:45:22] [INFO ] Discord gateway reconnecting…
+[2026-04-13 05:45:22] [INFO ] Discord gateway connected
+[2026-04-13 05:45:22] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 05:45:27] [INFO ] Discord gateway reconnecting…
+[2026-04-13 05:45:27] [INFO ] Discord gateway connected
+[2026-04-13 05:45:27] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 05:46:22] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-13 05:46:22] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 05:46:27] [INFO ] Discord gateway reconnecting…
+[2026-04-13 05:46:28] [INFO ] Discord gateway connected
+[2026-04-13 05:46:28] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 07:04:46] [WARN ] Discord requested reconnect
+[2026-04-13 07:04:46] [INFO ] Discord gateway reconnecting…
+[2026-04-13 07:04:46] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 07:04:46] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-13 07:04:46] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 07:04:51] [INFO ] Discord gateway reconnecting…
+[2026-04-13 07:04:52] [INFO ] Discord gateway connected
+[2026-04-13 07:04:52] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 07:04:56] [INFO ] Discord gateway reconnecting…
+[2026-04-13 07:04:57] [INFO ] Discord gateway connected
+[2026-04-13 07:04:57] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 07:05:52] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-13 07:05:52] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 07:05:57] [INFO ] Discord gateway reconnecting…
+[2026-04-13 07:05:57] [INFO ] Discord gateway connected
+[2026-04-13 07:05:58] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 09:39:04] [WARN ] Discord requested reconnect
+[2026-04-13 09:39:04] [INFO ] Discord gateway reconnecting…
+[2026-04-13 09:39:04] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 09:39:04] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-13 09:39:04] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 09:39:09] [INFO ] Discord gateway reconnecting…
+[2026-04-13 09:39:09] [INFO ] Discord gateway connected
+[2026-04-13 09:39:11] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 09:39:14] [INFO ] Discord gateway reconnecting…
+[2026-04-13 09:39:14] [INFO ] Discord gateway connected
+[2026-04-13 09:39:15] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 09:40:10] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-13 09:40:10] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 09:40:15] [INFO ] Discord gateway reconnecting…
+[2026-04-13 09:40:15] [INFO ] Discord gateway connected
+[2026-04-13 09:40:15] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 11:53:03] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 11:53:08] [INFO ] Discord gateway reconnecting…
+[2026-04-13 11:53:08] [INFO ] Discord gateway connected
+[2026-04-13 11:53:08] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 13:33:49] [WARN ] Discord requested reconnect
+[2026-04-13 13:33:49] [INFO ] Discord gateway reconnecting…
+[2026-04-13 13:33:49] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 13:33:49] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-13 13:33:49] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 13:33:54] [INFO ] Discord gateway reconnecting…
+[2026-04-13 13:33:55] [INFO ] Discord gateway connected
+[2026-04-13 13:33:55] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 13:33:59] [INFO ] Discord gateway reconnecting…
+[2026-04-13 13:34:00] [INFO ] Discord gateway connected
+[2026-04-13 13:34:00] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 13:34:55] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-13 13:34:55] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 13:35:00] [INFO ] Discord gateway reconnecting…
+[2026-04-13 13:35:00] [INFO ] Discord gateway connected
+[2026-04-13 13:35:03] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 14:10:48] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 14:10:53] [INFO ] Discord gateway reconnecting…
+[2026-04-13 14:10:53] [INFO ] Discord gateway connected
+[2026-04-13 14:10:54] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 14:51:53] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 14:51:58] [INFO ] Discord gateway reconnecting…
+[2026-04-13 14:51:58] [INFO ] Discord gateway connected
+[2026-04-13 14:51:59] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 15:31:11] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 15:31:16] [INFO ] Discord gateway reconnecting…
+[2026-04-13 15:31:16] [INFO ] Discord gateway connected
+[2026-04-13 15:31:16] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 18:09:34] [WARN ] Discord requested reconnect
+[2026-04-13 18:09:34] [INFO ] Discord gateway reconnecting…
+[2026-04-13 18:09:34] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 18:09:34] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-13 18:09:34] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 18:09:39] [INFO ] Discord gateway reconnecting…
+[2026-04-13 18:09:39] [INFO ] Discord gateway connected
+[2026-04-13 18:09:39] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 18:09:44] [INFO ] Discord gateway reconnecting…
+[2026-04-13 18:09:44] [INFO ] Discord gateway connected
+[2026-04-13 18:09:45] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 18:10:39] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-13 18:10:39] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 18:10:44] [INFO ] Discord gateway reconnecting…
+[2026-04-13 18:10:45] [INFO ] Discord gateway connected
+[2026-04-13 18:10:45] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 21:29:32] [WARN ] Gateway not responding {"consecutiveFailures":1}
+[2026-04-13 21:30:30] [INFO ] Gateway recovered
+[2026-04-13 21:32:30] [WARN ] Gateway not responding {"consecutiveFailures":1}
+[2026-04-13 21:33:30] [INFO ] Gateway recovered
+[2026-04-13 21:34:32] [WARN ] Gateway not responding {"consecutiveFailures":1}
+[2026-04-13 21:35:30] [INFO ] Gateway recovered
+[2026-04-13 21:50:31] [WARN ] Discord requested reconnect
+[2026-04-13 21:50:31] [INFO ] Discord gateway reconnecting…
+[2026-04-13 21:50:31] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 21:50:31] [ERROR] Discord WS error {"err":"WebSocket was closed before the connection was established"}
+[2026-04-13 21:50:31] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 21:50:36] [INFO ] Discord gateway reconnecting…
+[2026-04-13 21:50:36] [INFO ] Discord gateway connected
+[2026-04-13 21:50:37] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 21:50:41] [INFO ] Discord gateway reconnecting…
+[2026-04-13 21:50:41] [INFO ] Discord gateway connected
+[2026-04-13 21:50:42] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 21:51:37] [WARN ] Discord gateway disconnected {"code":1000}
+[2026-04-13 21:51:37] [WARN ] Discord gateway disconnected {"code":1006}
+[2026-04-13 21:51:42] [INFO ] Discord gateway reconnecting…
+[2026-04-13 21:51:42] [INFO ] Discord gateway connected
+[2026-04-13 21:51:42] [INFO ] Discord gateway ready {"bot":"Fredrick-bot"}
+[2026-04-13 21:57:30] [WARN ] Gateway not responding {"consecutiveFailures":1}
+[2026-04-13 21:58:30] [INFO ] Gateway recovered
+[2026-04-13 22:09:05] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 5222 tok/min","activeSessions":8,"tokenRate":5222}
+[2026-04-13 22:09:35] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 7319 tok/min","activeSessions":8,"tokenRate":7319}
+[2026-04-13 22:10:05] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 7097 tok/min","activeSessions":8,"tokenRate":7097}
+[2026-04-13 22:10:35] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 6000 tok/min","activeSessions":8,"tokenRate":6000}
+[2026-04-13 22:11:05] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 6000 tok/min","activeSessions":8,"tokenRate":6000}
+[2026-04-13 22:11:35] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 5999 tok/min","activeSessions":8,"tokenRate":5999}
+[2026-04-13 22:12:05] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 5920 tok/min","activeSessions":8,"tokenRate":5920}
+[2026-04-13 22:12:35] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 6411 tok/min","activeSessions":8,"tokenRate":6411}
+[2026-04-13 22:13:05] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 6413 tok/min","activeSessions":8,"tokenRate":6413}
+[2026-04-13 22:13:35] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 6409 tok/min","activeSessions":8,"tokenRate":6409}
+[2026-04-13 22:14:05] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 6426 tok/min","activeSessions":8,"tokenRate":6426}
+[2026-04-13 22:14:35] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 6425 tok/min","activeSessions":8,"tokenRate":6425}
+[2026-04-13 22:15:05] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 8266 tok/min","activeSessions":8,"tokenRate":8266}
+[2026-04-13 22:15:36] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 8318 tok/min","activeSessions":8,"tokenRate":8318}
+[2026-04-13 22:16:06] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 10629 tok/min","activeSessions":8,"tokenRate":10629}
+[2026-04-13 22:16:35] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 6520 tok/min","activeSessions":8,"tokenRate":6520}
+[2026-04-13 22:17:05] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 6469 tok/min","activeSessions":8,"tokenRate":6469}
+[2026-04-13 22:17:35] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 6475 tok/min","activeSessions":8,"tokenRate":6475}
+[2026-04-13 22:18:05] [WARN ] High load detected {"level":"high","preferLocal":false,"reason":"8 active sessions, 6475 tok/min","activeSessions":8,"tokenRate":6475}

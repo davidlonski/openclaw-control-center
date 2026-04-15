@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenClaw — Setup</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0f1117;--s1:#1a1d27;--s2:#1e2130;--border:#2a2d3e;--fg:#e2e8f0;--muted:#64748b;--accent:#f97316;--green:#22c55e;--red:#f87171;--cyan:#22d3ee;--mono:'JetBrains Mono',monospace}
+body{background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.container{width:100%;max-width:600px;display:flex;flex-direction:column;gap:24px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo h1{font-size:24px;font-weight:800}
+.logo p{font-size:13px;color:var(--muted);margin-top:3px}
+.card{background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:16px}
+.card h2{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px}
+.step{display:flex;gap:14px;align-items:flex-start}
+.step-num{background:var(--accent);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:2px}
+.step-num.done{background:var(--green)}
+.step-body{flex:1}
+.step-title{font-size:14px;font-weight:600;margin-bottom:4px}
+.step-desc{font-size:12px;color:var(--muted);line-height:1.6}
+code{background:var(--s2);border:1px solid var(--border);border-radius:4px;padding:2px 6px;font-family:var(--mono);font-size:11px;color:var(--cyan)}
+.btn{background:var(--accent);border:none;border-radius:8px;color:#fff;cursor:pointer;font-size:13px;font-weight:600;padding:10px 20px;text-decoration:none;display:inline-block}
+.btn:hover{opacity:.9}
+.btn-muted{background:var(--s2);border:1px solid var(--border);color:var(--fg)}
+.status-row{display:flex;align-items:center;justify-content:space-between;font-size:13px;padding:8px 0;border-bottom:1px solid var(--border)}
+.status-row:last-child{border-bottom:none}
+.badge{padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600}
+.badge-green{background:rgba(34,197,94,.15);color:var(--green)}
+.badge-red{background:rgba(248,113,113,.15);color:var(--red)}
+.badge-muted{background:var(--s2);color:var(--muted);border:1px solid var(--border)}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="logo">
+    <span style="font-size:36px">🦞</span>
+    <div>
+      <h1>OpenClaw Control Center</h1>
+      <p>Let's get your dashboard configured.</p>
+    </div>
+  </div>
+
+  <!-- Status check -->
+  <div class="card">
+    <h2>📊 System Status</h2>
+    <div id="status-list"><div style="color:var(--muted);font-size:13px">Checking…</div></div>
+  </div>
+
+  <!-- Steps -->
+  <div class="card">
+    <h2>🚀 Setup Checklist</h2>
+
+    <div class="step">
+      <div class="step-num" id="step1-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Install OpenClaw</div>
+        <div class="step-desc">
+          Install via npm: <code>npm install -g openclaw</code><br>
+          Then run: <code>openclaw onboard</code> to configure your first agent and gateway.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num" id="step2-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Start the Gateway</div>
+        <div class="step-desc">
+          Run: <code>openclaw gateway start</code><br>
+          Or set it up to auto-start: <code>openclaw gateway install-service</code>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num" id="step3-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Configure at least one agent</div>
+        <div class="step-desc">
+          Edit <code>~/.openclaw/openclaw.json</code> and add an agent to <code>agents.list</code>.<br>
+          Or use: <code>openclaw agents add</code>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num" id="step4-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Discord (optional)</div>
+        <div class="step-desc">
+          Add a Discord bot token to <code>channels.discord.accounts.default.token</code> in your config.<br>
+          Create a bot at <a href="https://discord.com/developers/applications" target="_blank" style="color:var(--accent)">discord.com/developers</a>.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num" id="step5-num">5</div>
+      <div class="step-body">
+        <div class="step-title">Run the install script (macOS)</div>
+        <div class="step-desc">
+          Sets up LaunchAgents for auto-start on boot:<br>
+          <code>bash /path/to/Fredrick-CLAW/install.sh</code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:10px">
+    <a href="/" class="btn">→ Open Dashboard</a>
+    <button class="btn btn-muted" onclick="checkStatus()">↻ Re-check</button>
+  </div>
+</div>
+
+<script>
+async function checkStatus() {
+  try {
+    const r = await fetch('/api/setup/check').then(r => r.json());
+    const items = [
+      { label: 'openclaw.json found',   ok: r.ok },
+      { label: 'Gateway token set',     ok: r.hasGatewayToken },
+      { label: `Agents configured (${r.agentCount || 0})`, ok: r.hasAgents },
+      { label: 'Discord connected',     ok: r.hasDiscord, optional: true },
+    ];
+    document.getElementById('status-list').innerHTML = items.map(item => `
+      <div class="status-row">
+        <span>${item.label}${item.optional ? ' <span style="color:var(--muted);font-size:11px">(optional)</span>' : ''}</span>
+        <span class="badge ${item.ok ? 'badge-green' : item.optional ? 'badge-muted' : 'badge-red'}">${item.ok ? '✓ OK' : item.optional ? '— not set' : '✗ Missing'}</span>
+      </div>`).join('');
+
+    // Update step indicators
+    if (r.ok)             { document.getElementById('step1-num').className = 'step-num done'; document.getElementById('step1-num').textContent = '✓'; }
+    if (r.hasGatewayToken){ document.getElementById('step2-num').className = 'step-num done'; document.getElementById('step2-num').textContent = '✓'; }
+    if (r.hasAgents)      { document.getElementById('step3-num').className = 'step-num done'; document.getElementById('step3-num').textContent = '✓'; }
+    if (r.hasDiscord)     { document.getElementById('step4-num').className = 'step-num done'; document.getElementById('step4-num').textContent = '✓'; }
+
+    if (r.ready) {
+      document.querySelector('.btn').style.background = 'var(--green)';
+      document.querySelector('.btn').textContent = '✓ Ready — Open Dashboard';
+    }
+  } catch(e) {
+    document.getElementById('status-list').innerHTML = '<div style="color:var(--red);font-size:13px">Could not reach server. Is it running?</div>';
+  }
+}
+checkStatus();
+</script>
+</body>
+</html>
