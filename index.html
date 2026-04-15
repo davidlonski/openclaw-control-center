@@ -179,6 +179,15 @@ body.compact .tab{padding:10px 10px;font-size:11px}
 </head>
 <body>
 
+<!-- ── Setup Banner ── -->
+<div id="setup-banner" style="display:none;background:var(--s2);border-bottom:1px solid var(--border);padding:10px 20px;font-size:12px">
+  <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+    <span style="font-weight:600;color:var(--yellow)">⚙️ Optional services not detected:</span>
+    <span id="setup-items" style="display:flex;gap:8px;flex-wrap:wrap"></span>
+    <button onclick="document.getElementById('setup-banner').style.display='none'" style="margin-left:auto;background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px">✕</button>
+  </div>
+</div>
+
 <header>
   <div class="logo"><em>🦞</em> OpenClaw <small>Control Center</small></div>
   <div class="header-right">
@@ -1746,6 +1755,32 @@ function updatePipelineDesc(){
 document.addEventListener('DOMContentLoaded',()=>{
   const sel = document.getElementById('pipeline-select');
   if(sel) sel.addEventListener('change', updatePipelineDesc);
+
+  // ── Setup banner: check optional services ──
+  Promise.allSettled([
+    fetch('/api/agents/usage').then(r=>r.json()).then(r=>({ key:'ollama', ok: true })).catch(()=>({ key:'ollama', ok:false })),
+    fetch('/api/ollama/status').then(r=>r.json()).then(r=>({ key:'ollama', ok: r.ollama })),
+    fetch('/api/n8n/status').then(r=>r.json()).then(r=>({ key:'n8n', ok: r.ok })),
+    fetch('/api/audio-config').then(r=>r.json()).then(r=>({ key:'ffmpeg', ok: r.ffmpeg })),
+    fetch('/api/audio-config').then(r=>r.json()).then(r=>({ key:'openai', ok: r.openai })),
+  ]).then(results => {
+    const checks = {};
+    results.forEach(r => { if(r.status==='fulfilled') checks[r.value.key] = r.value.ok; });
+    const missing = [];
+    if(!checks.ollama) missing.push({ label: '🦙 Ollama', msg: 'Memory vector search disabled', url: 'https://ollama.com' });
+    if(!checks.n8n)    missing.push({ label: '⚡ n8n', msg: 'Workflow automation unavailable', url: 'https://n8n.io' });
+    if(!checks.ffmpeg) missing.push({ label: '🎧 ffmpeg', msg: 'Voice notes need ffmpeg', url: 'https://ffmpeg.org' });
+    if(!checks.openai) missing.push({ label: '🔑 OpenAI key', msg: 'Voice transcription disabled', url: 'https://platform.openai.com' });
+    if(missing.length) {
+      const banner = document.getElementById('setup-banner');
+      const items  = document.getElementById('setup-items');
+      items.innerHTML = missing.map(m =>
+        `<a href="${m.url}" target="_blank" title="${m.msg}" style="display:inline-flex;align-items:center;gap:4px;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:3px 8px;color:var(--text);text-decoration:none;font-size:11px">${m.label} <span class="muted">↗</span></a>`
+      ).join('');
+      banner.style.display = 'block';
+    }
+  });
+
   // Pre-populate memory agent dropdown immediately on load
   api('/api/memory/stats').then(r => {
     const agentSel = document.getElementById('mem-agent');
