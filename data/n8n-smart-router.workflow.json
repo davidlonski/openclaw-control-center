@@ -1,0 +1,107 @@
+{
+  "name": "Smart Model Router",
+  "description": "Routes prompts to Haiku or Sonnet based on complexity classification using local Ollama",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "smart-router",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "smart-router"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ ok: true, message: 'Classifying and routing...' }) }}",
+        "options": {}
+      },
+      "id": "immediate-ack",
+      "name": "Acknowledge Immediately",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [460, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:7891/api/classify",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ prompt: $json.message || $json.prompt || '' }) }}",
+        "options": {}
+      },
+      "id": "classify-prompt",
+      "name": "Classify Prompt Complexity",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 380]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract the complexity and chosen model from classifier\nconst classifyResult = $json;\nconst complexity = classifyResult.complexity || 'complex';\nconst chosenModel = classifyResult.model || 'anthropic/claude-sonnet-4-6';\nconst agentForModel = chosenModel.includes('haiku') ? 'automation' : 'fredrick';\n\nreturn [{\n  json: {\n    complexity,\n    chosenModel,\n    agentForModel,\n    prompt: $json.prompt || $input.all()[0].json.message || '',\n    sessionKey: $input.all()[0].json._openclaw?.sessionKey || $input.all()[0].json.sessionKey || ''\n  }\n}];"
+      },
+      "id": "extract-routing",
+      "name": "Extract Routing Decision",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 380]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:18789/tools/invoke",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "bearerToken",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  tool: 'sessions_send',\n  args: {\n    sessionKey: $json.sessionKey,\n    message: $json.prompt\n  },\n  _openclaw: { agentId: $json.agentForModel }\n}) }}",
+        "options": {}
+      },
+      "id": "route-to-agent",
+      "name": "Send to Selected Agent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 380]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build callback response with routing info\nconst agentResponse = $json.result || $json;\nconst complexity = $input.all()[1].json.complexity;\nconst chosenModel = $input.all()[1].json.chosenModel;\n\nreturn [{\n  json: {\n    result: agentResponse,\n    summary: `Routed to ${chosenModel} (${complexity})`,\n    routingDecision: {\n      complexity,\n      model: chosenModel,\n      agent: $input.all()[1].json.agentForModel\n    }\n  }\n}];"
+      },
+      "id": "format-response",
+      "name": "Format Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1100, 380]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [\n          { "node": "Acknowledge Immediately", "type": "main", "index": 0 },
+          { "node": "Classify Prompt Complexity", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Classify Prompt Complexity": {
+      "main": [[{ "node": "Extract Routing Decision", "type": "main", "index": 0 }]]
+    },
+    "Extract Routing Decision": {
+      "main": [[{ "node": "Route to Agent", "type": "main", "index": 0 }]]
+    },
+    "Route to Agent": {
+      "main": [[{ "node": "Format Response", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "meta": {
+    "description": "Smart model router: classifies prompt complexity using local Ollama, routes to Haiku (cheap) or Sonnet (powerful), then sends result back.",
+    "tags": ["routing", "cost-optimization", "ollama"]
+  }
+}

@@ -854,6 +854,21 @@ async function handleAPI(pathname, method, body, res, rawUrl, rawBuf) {
     } catch (e) { return sendErr(res, e.message); }
   }
 
+  // POST /api/classify — classify prompt complexity using local Ollama, returns model to use
+  if (pathname === "/api/classify" && method === "POST") {
+    try {
+      const { prompt } = JSON.parse(body);
+      if (!prompt) return res.end(JSON.stringify({ ok: false, error: "prompt required" }));
+      const classifierScript = path.join(__dirname, "data", "classifier.js");
+      const result = execSync(`/usr/local/bin/node "${classifierScript}" ${JSON.stringify(prompt.slice(0, 500))}`, { encoding: "utf8", timeout: 8000 }).trim();
+      const model = result === "simple" ? "anthropic/claude-haiku-4-5" : "anthropic/claude-sonnet-4-6";
+      return res.end(JSON.stringify({ ok: true, complexity: result, model, prompt: prompt.slice(0, 100) }));
+    } catch (e) {
+      // Default to sonnet on any error
+      return res.end(JSON.stringify({ ok: true, complexity: "complex", model: "anthropic/claude-sonnet-4-6", error: e.message }));
+    }
+  }
+
   // GET /api/n8n/status — check if n8n is running
   if (pathname === "/api/n8n/status" && method === "GET") {
     try {
