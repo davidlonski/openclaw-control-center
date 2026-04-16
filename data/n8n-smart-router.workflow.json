@@ -45,7 +45,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Extract the complexity and chosen model from classifier\nconst classifyResult = $json;\nconst complexity = classifyResult.complexity || 'complex';\nconst chosenModel = classifyResult.model || 'anthropic/claude-sonnet-4-6';\nconst agentForModel = chosenModel.includes('haiku') ? 'automation' : 'fredrick';\n\nreturn [{\n  json: {\n    complexity,\n    chosenModel,\n    agentForModel,\n    prompt: $json.prompt || $input.all()[0].json.message || '',\n    sessionKey: $input.all()[0].json._openclaw?.sessionKey || $input.all()[0].json.sessionKey || ''\n  }\n}];"
+        "jsCode": "const classifyResult = $json; const complexity = classifyResult.complexity || 'complex'; const chosenModel = classifyResult.model || 'anthropic/claude-sonnet-4-6'; const agentForModel = chosenModel.includes('haiku') ? 'automation' : 'fredrick'; return [{ json: { complexity, chosenModel, agentForModel, prompt: $json.prompt || $input.all()[0].json.message || '', sessionKey: $input.all()[0].json._openclaw?.sessionKey || $input.all()[0].json.sessionKey || '' } }];"
       },
       "id": "extract-routing",
       "name": "Extract Routing Decision",
@@ -61,7 +61,7 @@
         "genericAuthType": "bearerToken",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({\n  tool: 'sessions_send',\n  args: {\n    sessionKey: $json.sessionKey,\n    message: $json.prompt\n  },\n  _openclaw: { agentId: $json.agentForModel }\n}) }}",
+        "jsonBody": "={{ JSON.stringify({ tool: 'sessions_send', args: { sessionKey: $json.sessionKey, message: $json.prompt }, _openclaw: { agentId: $json.agentForModel } }) }}",
         "options": {}
       },
       "id": "route-to-agent",
@@ -72,7 +72,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Build callback response with routing info\nconst agentResponse = $json.result || $json;\nconst complexity = $input.all()[1].json.complexity;\nconst chosenModel = $input.all()[1].json.chosenModel;\n\nreturn [{\n  json: {\n    result: agentResponse,\n    summary: `Routed to ${chosenModel} (${complexity})`,\n    routingDecision: {\n      complexity,\n      model: chosenModel,\n      agent: $input.all()[1].json.agentForModel\n    }\n  }\n}];"
+        "jsCode": "const agentResponse = $json.result || $json; const complexity = $input.all()[1].json.complexity; const chosenModel = $input.all()[1].json.chosenModel; return [{ json: { result: agentResponse, summary: 'Routed to ' + chosenModel + ' (' + complexity + ')', routingDecision: { complexity, model: chosenModel, agent: $input.all()[1].json.agentForModel } } }];"
       },
       "id": "format-response",
       "name": "Format Response",
@@ -84,7 +84,8 @@
   "connections": {
     "Webhook Trigger": {
       "main": [
-        [\n          { "node": "Acknowledge Immediately", "type": "main", "index": 0 },
+        [
+          { "node": "Acknowledge Immediately", "type": "main", "index": 0 },
           { "node": "Classify Prompt Complexity", "type": "main", "index": 0 }
         ]
       ]
